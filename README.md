@@ -106,5 +106,5 @@ DELETE  chats/{chat_id}/messages/{message_id}
 | :---         |     :---:      |    :---:      |
 | 1 | JamolMeyliyev | 2 |
 | 2 | azizaskarow | 1 |
-
+| 3 | Sardorbekakhmedov | 3 |
 ***
