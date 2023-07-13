@@ -1,6 +1,8 @@
 # school-management-system
 School management system
-> Note! Install [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) extension to vscode to open `*.vuerd.json` file.
+> Note!
+- Install [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) extension to vscode to open `*.vuerd.json` file.
+- Install [Draw.io](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) extension to vscode to open `*.drawio` file.
 ***
 > Gateways
 
