@@ -10,4 +10,5 @@ public class Topic
     public DateTime? Date { get; set; }
     public required Science Science { get; set; }
     public required Guid ScienceId { get; set; }
+    public List<TopicTask> Tasks { get; set; }
 }
