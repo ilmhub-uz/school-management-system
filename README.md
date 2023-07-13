@@ -17,8 +17,8 @@ PUT	students/{username}
 GET	students/{username}
 DELETE  students/{username}
 GET	students/{username}/attendance
-POST	students/{username}/attendance
-PUT	students/{username}/attendance
+POST	students/{username}/sciences/{scienceId}/attendance
+PUT	students/{username}/sciences/{scienceId}/attendance
 
 Sciences - Fanlar, Kunlik o'tilgan mavzular, Mavzular bo'yicha berilgan vazifalar
 GET	sciences
