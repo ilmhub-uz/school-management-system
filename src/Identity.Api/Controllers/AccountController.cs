@@ -1,9 +1,11 @@
 ﻿using System.Security.Claims;
+using FluentValidation;
 using Identity.Api.Context;
 using Identity.Api.Models;
 using Identity.Api.Services;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +30,12 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> SignUp([FromBody] CreateUserModel createUserModel)
+    public async Task<IActionResult> SignUp([FromBody] CreateUserModel createUserModel,
+        [FromServices] IValidator<CreateUserModel> userModelValidator)
     {
-        if (!ModelState.IsValid)
+        var result = await userModelValidator.ValidateAsync(createUserModel);
+
+        if (result.IsValid)
         {
             return BadRequest(ModelState);
         }
