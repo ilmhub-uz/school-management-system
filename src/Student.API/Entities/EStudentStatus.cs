@@ -1,6 +1,10 @@
 ﻿namespace Student.API.Entities
 {
-    public class EStudentStatus
+    public enum EStudentStatus
     {
+        Created,
+        Active,
+        Blocked,
+        Deleted
     }
 }
