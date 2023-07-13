@@ -1,6 +1,8 @@
 # school-management-system
 School management system
-> Note!
+
+***
+# Setup
 - Install [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) extension to vscode to open `*.vuerd.json` file.
 - Install [Draw.io](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) extension to vscode to open `*.drawio` file.
 ***
@@ -14,15 +16,16 @@ School management system
 - PR title should follow the rule: `changes small summary`. *ex: `Setup new repo`*
 - Write a small description explaining what this PR does. *ex: Created a new repo for microservices solution*
 
-> Gateways
+***
 
-### Admin
-### Students
+## Gateways
+
+- Admin
+- Students
 
 ***
-> Service APIs
 
-## End points
+## Service APIs
 
 ### Identity.API
 ```C#
@@ -77,7 +80,7 @@ DELETE  students/{username}/task-results/{task_id}
 
 ```
 
-### Students.API
+### Chats.API
 ```C#
 Chats - Foydalanuvchilar mavzuga yoki vazifaga izoh qoldirishi uchun. Foydalanuvchilar bir biri bilan va fan bo'yicha ochilgan guruhda suhbatlashishi mumkin
 
@@ -92,3 +95,16 @@ PUT	chats/{chat_id}/messages/{message_id}
 DELETE  chats/{chat_id}/messages/{message_id}
 
 ```
+
+***
+
+# Points
+
+> ### Contribute to get points
+
+| No | User | Point |
+| :---         |     :---:      |    :---:      |
+| 1 | JamolMeyliyev | 2 |
+| 2 | azizaskarow | 1 |
+
+***
