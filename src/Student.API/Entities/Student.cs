@@ -9,7 +9,7 @@ public class Student
     public string PhoneNumber { get; set; }
     public string Username { get; set; }
     public string? PhotoUrl { get; set; }
-    public DateTime Created_At { get; set; }
-    public DateTime Updated_At { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
     public Status Status { get; set; }
 }
