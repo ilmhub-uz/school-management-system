@@ -11,9 +11,10 @@ public static class ServiceCollectionExtensions
         services.AddControllers();
         services.AddEndpointsApiExplorer();
 
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("FreeAspHost"));
+            options.UseNpgsql(configuration.GetConnectionString("IdentityDb"));
         });
 
         services.AddJwtValidation(configuration);
