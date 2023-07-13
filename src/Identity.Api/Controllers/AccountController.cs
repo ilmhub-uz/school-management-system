@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using FluentValidation;
 using Identity.Api.Context;
+using Identity.Api.Entities;
 using Identity.Api.Models;
 using Identity.Api.Services;
 using Mapster;
