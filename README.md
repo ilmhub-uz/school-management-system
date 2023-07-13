@@ -4,6 +4,16 @@ School management system
 - Install [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) extension to vscode to open `*.vuerd.json` file.
 - Install [Draw.io](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio) extension to vscode to open `*.drawio` file.
 ***
+
+### Branch Rules
+- always rebase from `master` branch
+- your new feature branch name should follow the rule `your_name/changes-summary`. *ex: `ali/identity-setup`*
+- always create a PR to `master` branch
+
+### PR Rules
+- PR title should follow the rule: `changes small summary`. *ex: `Setup new repo`*
+- Write a small description explaining what this PR does. *ex: Created a new repo for microservices solution*
+
 > Gateways
 
 ### Admin
