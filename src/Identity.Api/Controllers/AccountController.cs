@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using FluentValidation;
 using Identity.Api.Context;
 using Identity.Api.Models;
 using Identity.Api.Services;
@@ -28,11 +29,14 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> SignUp([FromBody] CreateUserModel createUserModel)
+    public async Task<IActionResult> SignUp([FromBody] CreateUserModel createUserModel,
+        [FromServices] IValidator<CreateUserModel> userModelValidator)
     {
-        if (!ModelState.IsValid)
+        var result = await userModelValidator.ValidateAsync(createUserModel);
+
+        if (result.IsValid)
         {
-            return BadRequest(ModelState);
+            return BadRequest();
         }
 
         if (await _dbContext.Users.AnyAsync(u => u.UserName == createUserModel.UserName))
@@ -47,6 +51,7 @@ public class AccountController : ControllerBase
 
         return Ok();
     }
+
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserModel loginUserModel)
