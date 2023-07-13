@@ -39,7 +39,7 @@ DELETE  sciences/{science_id}/topics/{date}/tasks/{task_id}
 
 ```
 
-### Admin.API
+### Students.API
 ```C#
 Students - O'quvchilar, O'quvchilarning darsga qatnashishi
 GET	students
