@@ -1,8 +1,6 @@
 # school-management-system
 School management system
-
-## End points
-
+> Note! Install [ERD Editor](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) extension to vscode to open `*.vuerd.json` file.
 ***
 > Gateways
 
@@ -11,6 +9,8 @@ School management system
 
 ***
 > Service APIs
+
+## End points
 
 ### Identity.API
 ```C#
