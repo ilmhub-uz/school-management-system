@@ -66,3 +66,19 @@ PUT	students/{username}/task-results/{task_id}
 DELETE  students/{username}/task-results/{task_id}
 
 ```
+
+### Students.API
+```C#
+Chats - Foydalanuvchilar mavzuga yoki vazifaga izoh qoldirishi uchun. Foydalanuvchilar bir biri bilan va fan bo'yicha ochilgan guruhda suhbatlashishi mumkin
+
+GET	chats
+POST	chats
+GET	chats/{chat_id}
+PUT	chats/{chat_id}
+DELETE  chats/{chat_id}
+GET	chats/{chat_id}/messages
+POST	chats/{chat_id}/messages
+PUT	chats/{chat_id}/messages/{message_id}
+DELETE  chats/{chat_id}/messages/{message_id}
+
+```
