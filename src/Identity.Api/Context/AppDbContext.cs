@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Identity.Api.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Api.Context;
 
