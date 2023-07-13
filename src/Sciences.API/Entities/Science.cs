@@ -1,6 +1,11 @@
-﻿namespace Sciences.API.Entities
+﻿namespace Sciences.API.Entities;
+
+public class Science
 {
-    public class Science
-    {
-    }
+    public Guid? Id { get; set; }
+    public required DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt {get; set; }
+    public required string Name { get; set; }
+    public required string Title { get; set; }
+    public string? Description { get; set; }
 }
