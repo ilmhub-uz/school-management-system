@@ -1,0 +1,50 @@
+version: '3.7'
+
+networks:
+  school-management-system:
+    driver: bridge
+
+services:
+  identity_db:
+    image: postgres:latest
+    container_name: identity_container
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    networks:
+      - school-management-system
+    volumes:
+      - identity_db_data:/var/lib/postgresql/data/
+
+  science_db:
+    image: postgres:latest
+    container_name: science_container
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    networks:
+      - school-management-system
+    volumes:
+      - science_db_data:/var/lib/postgresql/data/
+
+  student_db:
+    image: postgres:latest
+    container_name: student_container
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    networks:
+      - school-management-system
+    volumes:
+      - student_db_data:/var/lib/postgresql/data/
+
+volumes:
+  identity_db_data:
+  science_db_data:
+  student_db_data:
