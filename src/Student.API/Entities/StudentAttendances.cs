@@ -7,4 +7,3 @@ public class StudentAttendances
     public bool Attend { get; set; }
 }
 
-}
