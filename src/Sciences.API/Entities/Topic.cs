@@ -8,6 +8,6 @@ public class Topic
     public required string Name { get; set; }
     public required string Title { get; set; }
     public DateTime? Date { get; set; }
-    public required Science Science { get; set; }
+    public Science? Science { get; set; }
     public required Guid ScienceId { get; set; }
 }
