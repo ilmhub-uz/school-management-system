@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Identity.Api.Context;
+using Identity.Api.Managers;
 using Identity.Api.Models;
 using Identity.Api.Services;
 using Mapster;
@@ -13,18 +14,20 @@ namespace Identity.Api.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
+    private readonly AccountManager _accountManager;
     private readonly AppDbContext _dbContext;
     private ILogger<AccountController> _logger;
     private readonly TokenService _tokenService;
 
     public AccountController(
-        AppDbContext dbContext, 
+        AppDbContext dbContext,
         ILogger<AccountController> logger,
-        TokenService tokenService)
+        TokenService tokenService, AccountManager accountManager)
     {
         _dbContext = dbContext;
         _logger = logger;
         _tokenService = tokenService;
+        _accountManager = accountManager;
     }
 
     [HttpPost("register")]
@@ -35,16 +38,7 @@ public class AccountController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        if (await _dbContext.Users.AnyAsync(u => u.UserName == createUserModel.UserName))
-        {
-            return BadRequest();
-        }
-
-        var user = createUserModel.Adapt<User>();
-
-        _dbContext.Users.Add(user);
-        await _dbContext.SaveChangesAsync();
-
+        await _accountManager.SignUp(createUserModel);
         return Ok();
     }
 
@@ -56,16 +50,8 @@ public class AccountController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == loginUserModel.UserName);
-
-        if (user == null || user.Password != loginUserModel.Password)
-        {
-            return NotFound();
-        }
-
-        var token = _tokenService.GenerateToken(user);
-
-        return Ok(token);
+        var token = await _accountManager.Login(loginUserModel);
+        return Ok(new { Token = token });
     }
 
     [HttpGet]

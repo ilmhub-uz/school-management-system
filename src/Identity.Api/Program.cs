@@ -1,5 +1,6 @@
 using Identity.Api.Context;
 using Identity.Api.Extensions;
+using Identity.Api.Managers;
 using Identity.Api.Middlewares;
 using Identity.Api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<AccountManager>();
 builder.Services.AddJwt(builder.Configuration);
 
 var app = builder.Build();
