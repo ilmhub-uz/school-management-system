@@ -64,7 +64,7 @@ public class AccountController : ControllerBase
 
         var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == loginUserModel.UserName);
 
-        if (user == null || user.Password != loginUserModel.Password)
+        if (user == null || user.PasswordHash != loginUserModel.Password)
         {
             return NotFound();
         }
