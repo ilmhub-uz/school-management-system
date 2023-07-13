@@ -15,18 +15,14 @@ namespace Identity.Api.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly AccountManager _accountManager;
-    private readonly AppDbContext _dbContext;
     private ILogger<AccountController> _logger;
-    private readonly TokenService _tokenService;
 
     public AccountController(
         AppDbContext dbContext,
         ILogger<AccountController> logger,
         TokenService tokenService, AccountManager accountManager)
     {
-        _dbContext = dbContext;
         _logger = logger;
-        _tokenService = tokenService;
         _accountManager = accountManager;
     }
 
@@ -49,7 +45,8 @@ public class AccountController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-
+        
+        
         var token = await _accountManager.Login(loginUserModel);
         return Ok(new { Token = token });
     }
@@ -58,9 +55,7 @@ public class AccountController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Profile()
     {
-        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        var user = await _accountManager.Profile();
 
         return Ok(user);
     }

@@ -52,6 +52,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<AccountManager>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddJwt(builder.Configuration);
 
 var app = builder.Build();
