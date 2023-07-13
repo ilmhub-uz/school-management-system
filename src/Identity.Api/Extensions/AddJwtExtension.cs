@@ -6,7 +6,7 @@ namespace Identity.Api.Extensions;
 
 public static class AddJwtExtension
 {
-    public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    public static void AddJwtValidation(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JwtOption>(configuration.GetSection("JwtBearer"));
 
