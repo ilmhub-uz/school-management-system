@@ -1,11 +1,11 @@
-﻿namespace Identity.Api.Middlewares;
+﻿namespace Identity.Api.MiddleWares;
 
-public class ErrorHandlerMiddleware
+public class IdentityErrorHandlerMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<ErrorHandlerMiddleware> _logger;
+    private readonly ILogger<IdentityErrorHandlerMiddleware> _logger;
 
-    public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
+    public IdentityErrorHandlerMiddleware(RequestDelegate next, ILogger<IdentityErrorHandlerMiddleware> logger)
     {
         _next = next;
         _logger = logger;
@@ -19,7 +19,7 @@ public class ErrorHandlerMiddleware
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "InternalError");
+            _logger.LogError(e, "Identity internal server error!");
 
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await httpContext.Response.WriteAsJsonAsync(new
@@ -32,8 +32,8 @@ public class ErrorHandlerMiddleware
 
 public static class ErrorHandlerMiddlewareExtensions
 {
-    public static IApplicationBuilder UseErrorHandlerMiddleware(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseIdentityErrorHandlerMiddleware(this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<ErrorHandlerMiddleware>();
+        return builder.UseMiddleware<IdentityErrorHandlerMiddleware>();
     }
 }

@@ -1,5 +1,5 @@
 using Identity.Api.Extensions;
-using Identity.Api.Middlewares;
+using Identity.Api.MiddleWares;
 using Serilog;
 using Serilog.Events;
 
@@ -33,7 +33,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseErrorHandlerMiddleware();
+app.UseIdentityErrorHandlerMiddleware();
 
 app.MapControllers();
 

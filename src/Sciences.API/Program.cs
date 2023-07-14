@@ -1,3 +1,5 @@
+using Sciences.API.MiddleWares;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +19,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseScienceErrorHandlerMiddleware();
 
 app.UseAuthorization();
 
