@@ -1,7 +1,14 @@
+using Serilog;
+using Serilog.Events;
 using Student.API.Extension;
 using Student.API.MiddleWares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration().WriteTo
+    .File("StudentLogFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day).CreateLogger();
+
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddStudentServices(builder.Configuration);
 
