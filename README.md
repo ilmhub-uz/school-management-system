@@ -99,6 +99,10 @@ DELETE  chats/{chat_id}/messages/{message_id}
 ```
 
 ***
+### Tables
+![Diagram](/school-management-db-diagram.png?raw=true)
+
+***
 
 # Points
 
