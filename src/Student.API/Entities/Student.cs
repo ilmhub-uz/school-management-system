@@ -12,5 +12,5 @@ public class Student
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; set; }
     public Status Status { get; set; }
-    public List<StudentSciences> StudentSciences { get; set; } = null!;
+    public List<StudentScience> StudentSciences { get; set; } = null!;
 }
