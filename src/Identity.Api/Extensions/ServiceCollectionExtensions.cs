@@ -1,4 +1,7 @@
-﻿using Identity.Api.Context;
+﻿using FluentValidation;
+using Identity.Api.Context;
+using Identity.Api.FluentValidators;
+using Identity.Api.Models;
 using Identity.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,5 +24,6 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerWithToken();
 
         services.AddScoped<TokenService>();
+        services.AddScoped<IValidator<CreateUserModel>, CreateUserModelValidator>();
     }
 }
