@@ -13,6 +13,6 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen();
 
         services.AddScienceDbContext(configuration);
-        services.AddScoped<IValidator< CreateScienceModel>, CreateScienceModelValidator>();
+        services.AddScoped<IValidator<CreateScienceModel>, CreateScienceModelValidator>();
     }
 }

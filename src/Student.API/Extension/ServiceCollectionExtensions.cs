@@ -1,4 +1,8 @@
-﻿namespace Student.API.Extension;
+﻿using FluentValidation;
+using Student.API.FluentValidators;
+using Student.API.Models.StudentModels;
+
+namespace Student.API.Extension;
 
 public static class ServiceCollectionExtensions
 {
@@ -9,5 +13,6 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen();
 
         services.AddStudentDbContext(configuration);
+        services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
     }
 }
