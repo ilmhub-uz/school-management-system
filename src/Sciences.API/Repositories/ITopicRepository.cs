@@ -10,5 +10,5 @@ public interface ITopicRepository
     Task AddTopic(CreateTopicModel model);
     Task UpdateTopic(Guid topicId, UpdateTopicModel model);
     Task DeleteTopic(Guid topicId);
-    Task<Science> GetTopicById(Guid topicId);
+    Task<Topic> GetTopicById(Guid topicId);
 }
