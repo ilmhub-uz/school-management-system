@@ -64,7 +64,7 @@ GET	students/{username}
 DELETE  students/{username}
 GET	students/{username}/attendances
 POST	students/{username}/attendances
-PUT	students/{username}/attendances
+PUT	students/{username}/attendances/{attendanceId}
 
 GET	students/{username}/sciences
 POST	students/{username}/sciences
