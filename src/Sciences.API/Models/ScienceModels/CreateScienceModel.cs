@@ -1,6 +1,4 @@
-﻿using Sciences.API.Entities;
-
-namespace Sciences.API.Models.ScienceModels;
+﻿namespace Sciences.API.Models.ScienceModels;
 
 public class CreateScienceModel
 {
