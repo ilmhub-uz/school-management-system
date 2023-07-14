@@ -1,4 +1,6 @@
-﻿using Sciences.API.FluentValidators;
+﻿using FluentValidation;
+using Sciences.API.FluentValidators;
+using Sciences.API.Models.ScienceModels;
 
 namespace Sciences.API.Extension;
 
@@ -11,6 +13,6 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen();
 
         services.AddScienceDbContext(configuration);
-        services.AddScoped<CreateScienceModelValidator>();
+        services.AddScoped<IValidator< CreateScienceModel>, CreateScienceModelValidator>();
     }
 }
