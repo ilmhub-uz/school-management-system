@@ -1,0 +1,64 @@
+﻿//for not_deleted students
+
+CREATE MATERIALIZED VIEW not_deleted_students AS 
+SELECT * FROM students WHERE "Status" IN (0, 1, 2);
+
+//for deleted students
+
+CREATE MATERIALIZED VIEW deleted_students AS 
+SELECT * FROM students WHERE "Status" = 3;
+
+//FUNCTION for REFRESH MATERIALIZED VIEW
+
+CREATE or REPLACE FUNCTION on_update_student()
+RETURNS TRIGGER
+LANGUAGE PLPGSQL
+AS
+$$
+BEGIN
+    REFRESH MATERIALIZED VIEW not_deleted_students;
+    REFRESH MATERIALIZED VIEW deleted_students;
+    RETURN NEW ;
+END
+$$;
+
+//TRIGGER for when students table updates, on_update_student will work
+
+CREATE TRIGGER on_update_student_trigger
+AFTER UPDATE ON students
+FOR EACH ROW
+EXECUTE FUNCTION on_update_student();
+
+
+
+
+
+
+
+
+!!! DeletedStudent class must be added
+
+    public class DeletedStudent :Student{}
+
+
+!!! NotDeletedStudent class must be added
+
+    public class NotDeletedStudent must be added
+
+!!! Needed added actions in StudentDbContext
+
+    public DbSet<DeletedStudent> DeletedStudents {get;set;}
+
+    public DbSet<NotDeletedStudent> NotDeletedStudents {get;set;}
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //This action is to need for get deleted students without not creating deleted_students in database
+        modelBuilder.Entity<DeletedStudent>().ToView("deleted_students");
+
+        // This action is to need for get not deleted students without not creating not_deleted_students in database
+        modelBuilder.Entity<NotDeletedStudents>().ToView("not_deleted_students");
+    }
+
+
+    

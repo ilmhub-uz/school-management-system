@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Identity.Api.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Api.Context;
 
@@ -25,7 +26,7 @@ public class AppDbContext : DbContext
             entity.HasIndex(e => e.UserName)
                 .IsUnique();
 
-            entity.Property(e => e.Name)
+            entity.Property(e => e.UserName)
                 .IsRequired();
         });
 

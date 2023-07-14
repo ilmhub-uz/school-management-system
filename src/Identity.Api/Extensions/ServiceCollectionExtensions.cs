@@ -1,31 +1,25 @@
-﻿using Identity.Api.Options;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using Identity.Api.Context;
+using Identity.Api.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
-	{
-		services.Configure<JwtOption>(configuration.GetSection("JwtBearer"));
+	public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddControllers();
+        services.AddEndpointsApiExplorer();
 
-		services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-			.AddJwtBearer(options =>
-			{
-				var signingKey = System.Text.Encoding.UTF32.GetBytes(configuration["JwtBearer:SigningKey"]!);
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("IdentityDb"));
+        });
 
-				options.TokenValidationParameters = new TokenValidationParameters()
-				{
-					ValidIssuer = configuration["JwtBearer:ValidIssuer"],
-					ValidAudience = configuration["JwtBearer:ValidAudience"],
-					ValidateIssuer = true,
-					ValidateAudience = true,
-					IssuerSigningKey = new SymmetricSecurityKey(signingKey),
-					ValidateIssuerSigningKey = true,
-					ValidateLifetime = true,
-					ClockSkew = TimeSpan.Zero
-				};
-			});
-	}
+        services.AddJwtValidation(configuration);
+        services.AddSwaggerWithToken();
+
+        services.AddScoped<TokenService>();
+    }
 }

@@ -1,28 +1,28 @@
-using Sciences.API.Extension;
-using Sciences.API.MiddleWares;
 using Serilog;
 using Serilog.Events;
+using Student.API.Extension;
+using Student.API.MiddleWares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var logger = new LoggerConfiguration().WriteTo
-    .File("ScienceLoggerFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day)
-    .CreateLogger();
+    .File("StudentLogFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day).CreateLogger();
 
 builder.Logging.AddSerilog(logger);
 
-builder.Services.AddScienceServices(builder.Configuration);
+builder.Services.AddStudentServices(builder.Configuration);
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-app.UseScienceErrorHandlerMiddleware();
+
+app.UseStudentErrorHandlerMiddleware();
 
 app.UseAuthorization();
 
