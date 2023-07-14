@@ -1,49 +1,66 @@
 version: '3.7'
 
-networks:
-  school-management-system:
-    driver: bridge
-
 services:
+  identity:
+    image: identity
+    container_name: identity
+    depends_on:
+        - identity_db
+    build:
+        context: .
+        dockerfile: Dockerfile.IdentityApi
+    ports:
+        - '3030:80'
   identity_db:
     image: postgres:latest
-    container_name: identity_container
-    ports:
-      - "5433:5432"
+    container_name: identity_db
     environment:
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
     restart: always
-    networks:
-      - school-management-system
     volumes:
       - identity_db_data:/var/lib/postgresql/data/
-
+  science:
+    image: science
+    container_name: science
+    depends_on:
+        - science_db
+    build:
+        context: .
+        dockerfile: Dockerfile.ScienceApi
+    ports:
+        - '3031:80'
   science_db:
     image: postgres:latest
-    container_name: science_container
-    ports:
-      - "5434:5432"
+    container_name: science_db
     environment:
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
     restart: always
-    networks:
-      - school-management-system
     volumes:
       - science_db_data:/var/lib/postgresql/data/
-
+  student:
+    image: student
+    container_name: student
+    depends_on:
+        - student_db
+    build:
+        context: .
+        dockerfile: Dockerfile.StudentApi
+    ports:
+        - '3032:80'
   student_db:
     image: postgres:latest
-    container_name: student_container
-    ports:
-      - "5435:5432"
+    container_name: student_db
     environment:
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5434:5432"
     restart: always
-    networks:
-      - school-management-system
     volumes:
       - student_db_data:/var/lib/postgresql/data/
-
 volumes:
   identity_db_data:
   science_db_data:
