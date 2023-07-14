@@ -13,7 +13,7 @@ public class StudentAttendanceController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddAttendance()
+    public async Task<IActionResult> AddAttendance(string username)
     {
         return Ok();
     }
