@@ -4,9 +4,9 @@ using Student.API.Entities;
 
 namespace Student.API.Context.StudentConfigurations;
 
-public class StudentScienceConfiguration : IEntityTypeConfiguration<StudentSciences>
+public class StudentScienceConfiguration : IEntityTypeConfiguration<StudentScience>
 {
-    public void Configure(EntityTypeBuilder<StudentSciences> builder)
+    public void Configure(EntityTypeBuilder<StudentScience> builder)
     {
         //This action will change name of table in database in order to use easily in query works.
         builder.ToTable("student_sciences");
