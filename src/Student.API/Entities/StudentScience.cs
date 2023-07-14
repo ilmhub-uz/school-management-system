@@ -1,6 +1,6 @@
 ﻿namespace Student.API.Entities;
 
-public class StudentSciences
+public class StudentScience
 {
     public required int ScienceId { get; set; }
     public required Guid StudentId { get; set; }
