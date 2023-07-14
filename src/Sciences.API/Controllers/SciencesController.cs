@@ -20,20 +20,20 @@ public class SciencesController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{science_id}")]
+    [HttpGet("{scienceId}")]
     public async Task<IActionResult> GetScienceById(Guid scienceId)
     {
         return Ok();
     }
 
-    [HttpPut("{science_id}")]
+    [HttpPut("{scienceId}")]
     public async Task<IActionResult> UpdateScience(Guid scienceId, UpdateScienceModel model)
     {
         return Ok();
     }
 
-    [HttpDelete("{science_id}")]
-    public async Task<IActionResult> DeleteScience(Guid science_id)
+    [HttpDelete("{scienceId}")]
+    public async Task<IActionResult> DeleteScience(Guid scienceId)
     {
         return Ok();
     }
