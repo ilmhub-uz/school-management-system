@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sciences.API.Entities;
 
-namespace Sciences.API.Context.Congiguration
-{
-    public class TopicConfiguration
-    {
+namespace Sciences.API.Context.Congiguration;
+ public class TopicConfiguration
+ {
         public static void Configure(EntityTypeBuilder<Topic> builder)
         {
-            builder.ToTable("science");
+            builder.ToTable("topics");
             builder.HasKey(x => x.Id);
             builder.Property(s => s.Name)
                 .IsRequired()
@@ -22,5 +21,5 @@ namespace Sciences.API.Context.Congiguration
 
 
         }
-    }
-}
+ }
+
