@@ -21,6 +21,22 @@ public class ScienceDbContext:DbContext
             entity.ToTable("topics");
 
             entity.HasKey(t => t.Id);
+            
+            entity.Property(t => t.ScienceId)
+                .IsRequired();
+
+            entity.Property(t => t.Name)
+                .IsRequired()
+                .HasMaxLength(30);
+
+            entity.HasIndex(t => t.Name)
+                .IsUnique();
+
+            entity.Property(t => t.Title)
+                .IsRequired();
+
+            entity.Property(t => t.CreatedAt)
+                .IsRequired();
 
         });
     }
