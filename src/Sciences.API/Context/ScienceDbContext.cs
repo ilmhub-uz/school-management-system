@@ -33,8 +33,11 @@ public class ScienceDbContext:DbContext
                 .IsRequired()
                 .HasMaxLength(30);
 
-            entity.HasIndex(e => e.Title)
-                .IsUnique();
+            entity.Property(e => e.Description)
+                .HasMaxLength(500);
+
+            entity.Property(e => e.CreatedAt)
+                .IsRequired();
 
         });
     }
