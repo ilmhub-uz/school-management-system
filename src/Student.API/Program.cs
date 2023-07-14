@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using Student.API.Context;
 using Student.API.Extension;
 using Student.API.MiddleWares;
 
@@ -12,7 +14,8 @@ builder.Logging.AddSerilog(logger);
 
 builder.Services.AddStudentServices(builder.Configuration);
 
-var app = builder.Build();
+
+    var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {

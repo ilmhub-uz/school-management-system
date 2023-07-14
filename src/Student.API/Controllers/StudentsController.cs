@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Student.API.Context;
 
 namespace Student.API.Controllers;
 
@@ -6,10 +7,19 @@ namespace Student.API.Controllers;
 [ApiController]
 public class StudentsController : ControllerBase
 {
+    private readonly StudentDbContext _dbContext;
+
+    public StudentsController(StudentDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetStudents()
     {
-        return Ok();
+        var students = await _dbContext.Students;
+
+        return Ok(students);
     }
 
     [HttpPost]
