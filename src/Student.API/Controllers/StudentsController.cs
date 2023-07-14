@@ -36,21 +36,4 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{username}/attendance")]
-    public async Task<IActionResult> GetAttendances(string username)
-    {
-        return Ok();
-    }
-
-    [HttpPost("{username}/attendance")]
-    public async Task<IActionResult> AddAttendance()
-    {
-        return Ok();
-    }
-
-    [HttpPut("{username}/attendance/{attendanceId}")]
-    public async Task<IActionResult> UpdateAttendance(string username, Guid attendanceId)
-    {
-        return Ok();
-    }
 }
