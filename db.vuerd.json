@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -427.7777607794161,
-    "scrollLeft": -311.6666542821464,
+    "scrollTop": -236.11110172889764,
+    "scrollLeft": -299.9999880790715,
     "zoomLevel": 0.8,
     "show": {
       "tableComment": false,
@@ -252,9 +252,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 992.667,
-          "top": 73.8891,
-          "zIndex": 3,
+          "left": 1020.7927,
+          "top": 77.014,
+          "zIndex": 24,
           "widthName": 60,
           "widthComment": 60
         },
@@ -278,9 +278,9 @@
             },
             "ui": {
               "active": false,
-              "pk": false,
+              "pk": true,
               "fk": false,
-              "pfk": true,
+              "pfk": false,
               "widthName": 60,
               "widthComment": 60,
               "widthDataType": 60,
@@ -310,13 +310,36 @@
               "widthDefault": 60
             },
             "id": "b8b0aa21-9a65-46b0-bc4a-feda19aa5c2b"
+          },
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INTEGER",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "17a07e80-4ac5-4f5d-a848-45d347dd79b8"
           }
         ],
         "ui": {
           "active": false,
           "left": 646,
           "top": 74,
-          "zIndex": 2,
+          "zIndex": 22,
           "widthName": 62.6962890625,
           "widthComment": 60
         },
@@ -1965,33 +1988,7 @@
     "relationships": [
       {
         "identification": true,
-        "relationshipType": "OneOnly",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "ce3c0afa-725e-44e6-ad2d-7a2359afcc7a",
-          "columnIds": [
-            "ff4873fc-9e59-43c1-9421-deaa90adfabf"
-          ],
-          "x": 992.667,
-          "y": 128.88909999999998,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "8717c0a5-ba28-4622-83c6-dc69051e406d",
-          "columnIds": [
-            "769f22b7-e61b-4968-9f9f-a6b3289729f2"
-          ],
-          "x": 890,
-          "y": 129,
-          "direction": "right"
-        },
-        "constraintName": "fk_roles_to_user_roles",
-        "visible": true,
-        "id": "d5dcf1e5-1c95-46da-97a2-30f3edebb6ad"
-      },
-      {
-        "identification": true,
-        "relationshipType": "OneOnly",
+        "relationshipType": "OneN",
         "startRelationshipType": "Dash",
         "start": {
           "tableId": "cd938a92-2856-4926-a485-1f3a8994b7cc",
@@ -2008,7 +2005,7 @@
             "b8b0aa21-9a65-46b0-bc4a-feda19aa5c2b"
           ],
           "x": 646,
-          "y": 129,
+          "y": 139.25,
           "direction": "left"
         },
         "constraintName": "fk_users_to_user_roles",
@@ -2196,6 +2193,32 @@
         "constraintName": "fk_chats_to_message",
         "visible": true,
         "id": "787dbdc6-3876-466a-b053-634e9ae4a52a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "ce3c0afa-725e-44e6-ad2d-7a2359afcc7a",
+          "columnIds": [
+            "ff4873fc-9e59-43c1-9421-deaa90adfabf"
+          ],
+          "x": 1020.7927,
+          "y": 132.014,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "8717c0a5-ba28-4622-83c6-dc69051e406d",
+          "columnIds": [
+            "17a07e80-4ac5-4f5d-a848-45d347dd79b8"
+          ],
+          "x": 890,
+          "y": 139.25,
+          "direction": "right"
+        },
+        "constraintName": "fk_roles_to_user_roles",
+        "visible": true,
+        "id": "e036b955-885c-4565-99ec-cc09e69444ca"
       }
     ]
   }
