@@ -6,9 +6,9 @@ namespace Sciences.API.Repositories;
 
 public interface ITopicRepository
 {
-    Task<List<Topic>> GetTopics();
+    Task<List<TopicModel>> GetTopics();
     Task <TopicModel> AddTopic(Guid scienceId,CreateTopicModel model);
     Task UpdateTopic(Guid scienceId, Guid topicId, UpdateTopicModel model);
     Task DeleteTopic(Guid scienceId,Guid topicId);
-    Task<Topic> GetTopicById(Guid scienceId,Guid topicId);
+    Task<TopicModel> GetTopicById(Guid scienceId,Guid topicId);
 }
