@@ -7,6 +7,6 @@ public class StudentSciences
     public Student? Student { get; set; }
     public required DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public EUserStatus Status { get; set; }
+    public EStudentStatus Status { get; set; }
 }
 

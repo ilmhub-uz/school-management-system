@@ -11,6 +11,6 @@ public class Student
     public string? PhotoUrl { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; set; }
-    public EUserStatus Status { get; set; }
+    public EStudentStatus Status { get; set; }
     public List<StudentSciences> StudentSciences { get; set; } = null!;
 }
