@@ -29,6 +29,12 @@ public class ScienceDbContext:DbContext
             entity.HasIndex(e => e.Name)
                 .IsUnique();
 
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(30);
+
+            entity.HasIndex(e => e.Title)
+                .IsUnique();
 
         });
     }
