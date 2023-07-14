@@ -44,9 +44,11 @@ POST	sciences
 PUT	sciences/{science_id}
 GET	sciences/{science_id}
 DELETE  sciences/{science_id}
+
 GET	sciences/{science_id}/topics
 POST    sciences/{science_id}/topics
 PUT	sciences/{science_id}/topics/{date}
+
 POST    sciences/{science_id}/topics/{date}/tasks
 GET	sciences/{science_id}/topics/{date}/tasks
 PUT	sciences/{science_id}/topics/{date}/tasks/{task_id}
