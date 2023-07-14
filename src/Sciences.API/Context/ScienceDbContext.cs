@@ -14,4 +14,22 @@ public class ScienceDbContext:DbContext
 
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Science>(entity =>
+        {
+            entity.ToTable("sciences");
+
+            entity.HasKey(e  => e.Id);
+
+            entity.Property(e => e.Name)
+            .IsRequired()
+            .HasMaxLength(30);
+
+            entity.HasIndex(e => e.Name)
+                .IsUnique();
+
+
+        });
+    }
 }
