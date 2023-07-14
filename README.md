@@ -62,9 +62,10 @@ POST	students
 PUT	students/{username}
 GET	students/{username}
 DELETE  students/{username}
+
 GET	students/{username}/attendances
 POST	students/{username}/attendances
-PUT	students/{username}/attendances
+PUT	students/{username}/attendances/{attendanceId}
 
 GET	students/{username}/sciences
 POST	students/{username}/sciences
@@ -89,12 +90,17 @@ POST	chats
 GET	chats/{chat_id}
 PUT	chats/{chat_id}
 DELETE  chats/{chat_id}
+
 GET	chats/{chat_id}/messages
 POST	chats/{chat_id}/messages
 PUT	chats/{chat_id}/messages/{message_id}
 DELETE  chats/{chat_id}/messages/{message_id}
 
 ```
+
+***
+### Tables
+![Diagram](/school-management-db-diagram.png?raw=true)
 
 ***
 
