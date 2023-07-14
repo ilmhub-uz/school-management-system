@@ -1,11 +1,11 @@
-﻿namespace Sciences.API.MiddleWares;
+namespace Sciences.API.MiddleWares;
 
-public class ScienceErrorHandleMiddleware
+public class ScienceErrorHandlerMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<ScienceErrorHandleMiddleware> _logger;
+    private readonly ILogger<ScienceErrorHandlerMiddleware> _logger;
 
-    public ScienceErrorHandleMiddleware(RequestDelegate next, ILogger<ScienceErrorHandleMiddleware> logger)
+    public ScienceErrorHandlerMiddleware(RequestDelegate next, ILogger<ScienceErrorHandlerMiddleware> logger)
     {
         _next = next;
         _logger = logger;
@@ -30,8 +30,8 @@ public class ScienceErrorHandleMiddleware
 
 public static class MiddlewareExtensions
 {
-    public static IApplicationBuilder UseScienceErrorHandleMiddleware(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseScienceErrorHandlerMiddleware(this IApplicationBuilder builder)
     {
-        return builder.UseMiddleware<ScienceErrorHandleMiddleware>();
+        return builder.UseMiddleware<ScienceErrorHandlerMiddleware>();
     }
 }
