@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sciences.API.Models.ScienceModels;
 
 namespace Sciences.API.Controllers;
 
@@ -14,25 +15,25 @@ public class SciencesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddScience()
+    public async Task<IActionResult> AddScience(CreateScienceModel model)
     {
         return Ok();
     }
 
-    [HttpGet("{science_id}")]
-    public async Task<IActionResult> GetScienceById(Guid science_id)
+    [HttpGet("{scienceId}")]
+    public async Task<IActionResult> GetScienceById(Guid scienceId)
     {
         return Ok();
     }
 
-    [HttpPut("{science_id}")]
-    public async Task<IActionResult> UpdateScience(Guid science_id)
+    [HttpPut("{scienceId}")]
+    public async Task<IActionResult> UpdateScience(Guid scienceId, UpdateScienceModel model)
     {
         return Ok();
     }
 
-    [HttpDelete("{science_id}")]
-    public async Task<IActionResult> DeleteScience(Guid science_id)
+    [HttpDelete("{scienceId}")]
+    public async Task<IActionResult> DeleteScience(Guid scienceId)
     {
         return Ok();
     }
