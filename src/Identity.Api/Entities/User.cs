@@ -9,4 +9,5 @@ public class User
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdateAt { get; set; }
     public Status Status { get; set; }
+    public UserRole? UserRole { get; set; }
 }
