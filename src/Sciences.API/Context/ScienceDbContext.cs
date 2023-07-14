@@ -14,4 +14,14 @@ public class ScienceDbContext:DbContext
 
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Topic>(entity =>
+        {
+            entity.ToTable("topics");
+
+            entity.HasKey(t => t.Id);
+
+        });
+    }
 }
