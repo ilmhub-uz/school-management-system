@@ -16,6 +16,11 @@ public class ScienceDbContext:DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ScienceDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
+
+
         modelBuilder.Entity<Science>(entity =>
         {
             entity.ToTable("sciences");
