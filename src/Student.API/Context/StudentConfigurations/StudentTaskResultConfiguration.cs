@@ -10,8 +10,8 @@ namespace Student.API.Context.StudentConfigurations
         public void Configure(EntityTypeBuilder<StudentTaskResult> builder)
         {
             builder.ToTable("student_task_results");
+            builder.HasKey(s => new { s.StudentId, s.TaskId });
 
-            
             builder.Property(s=>s.Content).IsRequired(true);
             builder.Property(s => s.CreateDate).IsRequired(true);
 
