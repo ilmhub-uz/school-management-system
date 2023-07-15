@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sciences.API.Context;
 using Sciences.API.Entities;
+using Sciences.API.Exceptions;
 using Sciences.API.Repositories.Interfaces;
 
 namespace Sciences.API.Repositories;
@@ -41,7 +42,9 @@ public class ScienceRepository: IScienceRepository
     {
         var science = await _context.Sciences.FirstOrDefaultAsync(s => s.Id == scienceId);
         if (science == null)
-            throw new Exception("Science Not Found");
+        {
+            throw new ScienceNotFoundException(scienceId.ToString());
+        }
         return science;
     }
 }
