@@ -1,7 +1,6 @@
 ﻿using Sciences.API.Entities;
-using Sciences.API.Models.ScienceModels;
 
-namespace Sciences.API.Repositories;
+namespace Sciences.API.Repositories.Interfaces;
 
 public interface IScienceRepository
 {
