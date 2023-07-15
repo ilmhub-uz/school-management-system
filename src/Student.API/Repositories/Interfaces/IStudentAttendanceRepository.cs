@@ -4,9 +4,9 @@ namespace Student.API.Repositories.Interfaces
 {
     public interface IStudentAttendanceRepository
     {
-        Task<List<StudentAttendance>> GetStudentAttendance(string studentUsername);
-        Task AddStudentAttendance(StudentAttendance studentAttendance, string studentUsername);
-        Task UpdateStudentAttendance(StudentAttendance studentAttendance, string studentUsername);
+        Task<List<StudentAttendance>> GetStudentAttendance();
+        Task AddStudentAttendance(StudentAttendance studentAttendance);
+        Task UpdateStudentAttendance(StudentAttendance studentAttendance);
         
     }
 }
