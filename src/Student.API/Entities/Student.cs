@@ -13,4 +13,5 @@ public class Student
     public DateTime? UpdatedAt { get; set; }
     public Status Status { get; set; }
     public List<StudentScience> StudentSciences { get; set; } = null!;
+    public List<StudentTaskResult> StudentTaskResults { get; set;} = null!;
 }
