@@ -8,5 +8,5 @@ public class Science
     public required string Name { get; set; }
     public required string Title { get; set; }
     public string? Description { get; set; }
-    public List<Topic>? Topics { get; set; }
+    public virtual List<Topic>? Topics { get; set; }
 }
