@@ -1,4 +1,5 @@
 ﻿using Sciences.API.Entities;
+using Sciences.API.Models.TopicModels;
 
 namespace Sciences.API.Models.TopicTaskModels;
 
@@ -10,6 +11,6 @@ public class TopicTaskModel
     public required string Title { get; set; }
     public string? Content { get; set; }
     public string? Description { get; set; }
-    public Topic? Topic { get; set; }
+    public TopicModel? Topic { get; set; }
     public required Guid TopicId { get; set; }
 }
