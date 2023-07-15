@@ -6,8 +6,8 @@ namespace Sciences.API.Repositories;
 public interface IScienceRepository
 {
     Task<List<Science>> GetSciences();
-    Task AddScience(CreateScienceModel model);
-    Task UpdateScience(Guid scienceId,UpdateScienceModel model);
-    Task DeleteScience(Guid scienceId);
-    Task<Science> GetScienceById(Guid scienceId);
+    Task AddScience(Science science);
+    Task UpdateScience(Science science);
+    Task DeleteScience(Science science);
+    Task<Science> GetScienceById(Guid id);
 }
