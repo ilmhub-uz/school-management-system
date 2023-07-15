@@ -2,8 +2,8 @@
 
 public class StudentAttendance
 {
-    public Guid TopicId { get; set; }
-    public Guid StudentId { get; set; }
+    public required Guid TopicId { get; set; }
+    public required Guid StudentId { get; set; }
     public bool Attend { get; set; }
 }
 
