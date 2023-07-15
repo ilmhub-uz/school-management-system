@@ -2,10 +2,10 @@
 
 public class Chat
 {
-    public required int Id { get; set; }
-    public string? Name { get; set; }    
-    public string? Description { get; set; }
-    public EChatTypes ChatTypes { get; set; }
+    public int Id { get; set; }
+    public string? Identifier { get; set; }
+    public string? Name { get; set; }
+    public EChatType ChatType { get; set; }
     public List<Message> Messages { get; set; } = null!;
 
 }
