@@ -1,7 +1,7 @@
 ﻿//using FluentValidation;
 //using Sciences.API.Models.TopicModels;
 
-//namespace Sciences.API.FluentValidators;
+namespace Sciences.API.FluentValidators;
 
 
 
