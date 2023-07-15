@@ -41,6 +41,7 @@ public class ScienceRepository: IScienceRepository
     public async Task<Science> GetScienceById(Guid scienceId)
     {
         var science = await _context.Sciences.FirstOrDefaultAsync(s => s.Id == scienceId);
+        
         if (science == null)
         {
             throw new ScienceNotFoundException(scienceId.ToString());
