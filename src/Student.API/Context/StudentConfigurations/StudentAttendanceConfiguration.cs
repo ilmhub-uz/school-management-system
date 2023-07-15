@@ -9,8 +9,12 @@ namespace Student.API.Context.StudentConfigurations
         public void Configure(EntityTypeBuilder<StudentAttendance> builder)
         {
             builder.ToTable("student_attendance");
+
+            builder.HasKey(k => new {k.StudentId,k.TopicId});
+
             builder.Property(s=> s.StudentId).IsRequired(true);
             builder.Property(s => s.TopicId).IsRequired(true);  
+
         }
     }
 }
