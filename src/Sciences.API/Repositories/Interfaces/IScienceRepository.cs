@@ -8,5 +8,5 @@ public interface IScienceRepository
     Task AddScience(Science science);
     Task UpdateScience(Science science);
     Task DeleteScience(Science science);
-    Task<Science> GetScienceById(Guid id);
+    Task<Science> GetScienceById(Guid scienceId);
 }

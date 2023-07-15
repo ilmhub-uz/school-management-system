@@ -37,9 +37,9 @@ public class ScienceRepository: IScienceRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Science> GetScienceById(Guid id)
+    public async Task<Science> GetScienceById(Guid scienceId)
     {
-        var science = await _context.Sciences.FirstOrDefaultAsync(s => s.Id == id);
+        var science = await _context.Sciences.FirstOrDefaultAsync(s => s.Id == scienceId);
         if (science == null)
             throw new Exception("Science Not Found");
         return science;
