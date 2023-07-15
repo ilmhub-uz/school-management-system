@@ -14,6 +14,6 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
         builder.Property(s => s.UserName).IsRequired(true);
         builder.Property(s => s.PhoneNumber).IsRequired(true);
         builder.Property(s => s.CreateAt).IsRequired(true);
-        builder.Property(s => s.Status).IsRequired(true);
+        
     }
 }
