@@ -10,4 +10,5 @@ public class StudentDbContext:DbContext
     }
     public DbSet<Entities.Student> Students { get; set; }
     public DbSet<StudentAttendance> StudentAttendances { get; set; }
+
 }
