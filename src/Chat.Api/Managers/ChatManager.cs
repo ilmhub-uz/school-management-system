@@ -41,9 +41,10 @@ public class ChatManager : IChatManager
         return chats.Adapt<List<ChatModel>>();
     }
 
-    public async Task UpdateChat(int chatId)
+    public async Task UpdateChat(UpdateChatModel updateChat, int chatId)
     {
         var chat = await _chatRepository.GetChatById(chatId);
+        chat.Name = updateChat.Name;
         await _chatRepository.UpdateChat(chat);
     }
 }
