@@ -32,8 +32,9 @@ public class ScienceRepository: IScienceRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteScience(Science science)
+    public async Task DeleteScience(Guid scienceId)
     {
+        var science = await GetScienceById(scienceId);
         _context.Sciences.Remove(science);
         await _context.SaveChangesAsync();
     }

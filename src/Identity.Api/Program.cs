@@ -11,16 +11,13 @@ var logger = new LoggerConfiguration()
 
 builder.Logging.AddSerilog(logger);
 builder.Services.AddIdentityServices(builder.Configuration);
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.UseCors(c => 
     c.AllowAnyOrigin()

@@ -1,4 +1,7 @@
-﻿using Identity.Api.Context;
+﻿using FluentValidation;
+using Identity.Api.Context;
+using Identity.Api.FluentValidators;
+using Identity.Api.Models;
 using Identity.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,16 +13,14 @@ public static class ServiceCollectionExtensions
     {
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddDbContext<AppDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("IdentityDb"));
         });
-
         services.AddJwtValidation(configuration);
         services.AddSwaggerWithToken();
-
+        services.AddScoped<IValidator<CreateUserModel>,CreateUserModelValidator>();
         services.AddScoped<TokenService>();
     }
 }

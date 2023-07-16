@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sciences.API.Managers;
 using Sciences.API.Models.ScienceModels;
 
 namespace Sciences.API.Controllers;
@@ -7,35 +8,48 @@ namespace Sciences.API.Controllers;
 [ApiController]
 public class SciencesController : ControllerBase
 {
+    private readonly ScienceManager _scienceManager;
+
+    public SciencesController(ScienceManager scienceManager)
+    {
+        _scienceManager = scienceManager;
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetSciences()
     {
-        return Ok();
+        var sciences = await _scienceManager.GetSciencesAsync();
+        return Ok(sciences);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddScience(CreateScienceModel model)
     {
-        return Ok();
+        var science = await _scienceManager.AddScienceAsync(model);
+        return Ok(science);
     }
 
     [HttpGet("{scienceId}")]
     public async Task<IActionResult> GetScienceById(Guid scienceId)
     {
-        return Ok();
+        var science = await _scienceManager.GetScienceByIdAsync(scienceId);
+        return Ok(science);
     }
 
+    
     [HttpPut("{scienceId}")]
     public async Task<IActionResult> UpdateScience(Guid scienceId, UpdateScienceModel model)
     {
-        return Ok();
+        var science = await _scienceManager.UpdateScienceAsync(scienceId, model);
+        return Ok(science);
     }
-
+    
     [HttpDelete("{scienceId}")]
     public async Task<IActionResult> DeleteScience(Guid scienceId)
-    {
+    {   
+        await _scienceManager.DeleteScienceAsync(scienceId);
         return Ok();
     }
+    
 }
 
