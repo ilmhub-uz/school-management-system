@@ -1,4 +1,6 @@
-﻿using Chat.Api.Repositories;
+﻿using Chat.Api.Managers;
+using Chat.Api.Managers.Interfaces;
+using Chat.Api.Repositories;
 using Chat.Api.Repositories.Interfaces;
 
 namespace Chat.Api.Extensions;
@@ -10,5 +12,6 @@ public static class ServiceCollectionExtensions
         services.AddChatDbContext(configuration);
         services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddScoped<IChatRepository, ChatRepository>();
+        services.AddScoped<IChatManager, ChatManager>();
     }
 }
