@@ -31,11 +31,6 @@ public class ChatRepository : IChatRepository
         return chat;
     }
     
-    public async Task<Entities.Chat?> GetChatByIdWithmessages(int chatId)
-    {
-        var chat = await _context.Chats.Include(c => c.Messages).FirstOrDefaultAsync(c => c.Id == chatId);
-        return chat;
-    }
 
     public async Task<List<Entities.Chat>?> GetChats()
     {

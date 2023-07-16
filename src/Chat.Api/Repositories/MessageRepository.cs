@@ -39,11 +39,6 @@ public class MessageRepository : IMessageRepository
         return messages;
     }
 
-    public async Task<List<Message>?> GetMessagesByUserId(Guid userId)
-    {
-        var messages = await _context.Messages.Where(m => m.UserId == userId).ToListAsync();
-        return messages;
-    }
 
     public async Task UpdateMessage(Message message)
     {
