@@ -2,5 +2,5 @@
 
 public class UpdateMessageModel
 {
-    public required string Content { get; set; }
+    public string Content { get; set; }
 }
