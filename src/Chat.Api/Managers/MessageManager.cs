@@ -43,14 +43,6 @@ public class MessageManager : IMessageManager
         return messagesModel;
     }
 
-    public async Task<List<MessageModel>> GetMessagesByUserId(Guid userId)
-    {
-        var messages = await _messageRepository.GetMessagesByUserId(userId);
-        var messagesModel = messages.Adapt<List<MessageModel>>();
-
-        return messagesModel;
-    }
-
     public async Task UpdateMessage(UpdateMessageModel updateMessage, int id)
     {
         var message = await _messageRepository.GetMessageById(id);
