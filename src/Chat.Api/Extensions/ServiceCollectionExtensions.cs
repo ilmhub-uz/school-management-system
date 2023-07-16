@@ -13,5 +13,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddScoped<IChatRepository, ChatRepository>();
         services.AddScoped<IChatManager, ChatManager>();
+        services.AddScoped<IMessageManager, MessageManager>();
     }
 }
