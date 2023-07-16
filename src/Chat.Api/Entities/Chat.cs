@@ -6,6 +6,5 @@ public class Chat
     public string? Identifier { get; set; }
     public string? Name { get; set; }
     public EChatType ChatType { get; set; }
-    public List<Message> Messages { get; set; } = null!;
-
+    public List<Message>? Messages { get; set; }
 }
