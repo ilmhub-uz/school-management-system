@@ -17,7 +17,7 @@ public class ScienceErrorHandlerMiddleware
         {
             await _next(httpContext);
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             _logger.LogError(e, "Science internal server error!");
 
