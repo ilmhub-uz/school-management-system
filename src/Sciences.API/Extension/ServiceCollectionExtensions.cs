@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using Sciences.API.FluentValidators;
 using Sciences.API.Models.ScienceModels;
+using Sciences.API.Repositories;
+using Sciences.API.Repositories.Interfaces;
 
 namespace Sciences.API.Extension;
 
@@ -14,5 +16,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScienceDbContext(configuration);
         services.AddScoped<IValidator<CreateScienceModel>, CreateScienceModelValidator>();
+        services.AddScoped<IScienceRepository, ScienceRepository>();
     }
 }
