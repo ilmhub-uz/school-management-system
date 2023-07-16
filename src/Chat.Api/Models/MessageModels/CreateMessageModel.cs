@@ -4,5 +4,5 @@ public class CreateMessageModel
 {
     public Guid UserId { get; set; }
     public Guid ChatId { get; set; }
-    public required string Content { get; set; }
+    public string Content { get; set; }
 }
