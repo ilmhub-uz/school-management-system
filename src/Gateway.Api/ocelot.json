@@ -1,0 +1,29 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "route_1",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host_1",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/route_1/{everything}"
+    },
+
+    {
+      "UpstreamPathTemplate": "route_2",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host_2",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/route_2/{everything}"
+    }
+  ]
+}
