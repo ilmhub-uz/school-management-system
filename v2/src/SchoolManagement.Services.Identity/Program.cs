@@ -1,15 +1,25 @@
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Services.Identity.Context;
+using SchoolManagement.Services.Identity.Models;
+using SchoolManagement.Services.Identity.Validators;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<IdentityDbContext>(options =>
+{
+	options.UseSnakeCaseNamingConvention()
+		.UseNpgsql(builder.Configuration.GetConnectionString("identity_db"));
+});
+
+builder.Services.AddScoped<IValidator<CreateUserModel>, CreateUserValidator>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
