@@ -6,6 +6,8 @@ using Chat.Api.Models.MessageModels;
 using Chat.Api.Repositories;
 using Chat.Api.Repositories.Interfaces;
 using FluentValidation;
+using Serilog;
+using Serilog.Events;
 
 namespace Chat.Api.Extensions;
 
