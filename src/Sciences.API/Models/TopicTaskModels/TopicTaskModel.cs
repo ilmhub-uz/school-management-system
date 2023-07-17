@@ -10,6 +10,5 @@ public class TopicTaskModel
     public required string Title { get; set; }
     public string? Content { get; set; }
     public string? Description { get; set; }
-    public  TopicModel? Topic { get; set; }
     public required Guid TopicId { get; set; }
 }
