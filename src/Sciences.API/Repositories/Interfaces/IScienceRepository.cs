@@ -1,7 +1,6 @@
 ﻿using Sciences.API.Entities;
-using Sciences.API.Models.ScienceModels;
 
-namespace Sciences.API.Repositories;
+namespace Sciences.API.Repositories.Interfaces;
 
 public interface IScienceRepository
 {
@@ -9,5 +8,5 @@ public interface IScienceRepository
     Task AddScience(Science science);
     Task UpdateScience(Science science);
     Task DeleteScience(Science science);
-    Task<Science> GetScienceById(Guid id);
+    Task<Science> GetScienceById(Guid scienceId);
 }
