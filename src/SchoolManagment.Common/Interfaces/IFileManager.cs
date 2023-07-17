@@ -1,5 +1,9 @@
-﻿namespace SchoolManagement.Common.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
 
-internal interface IFileManager
+namespace SchoolManagement.Common.Interfaces;
+
+public interface IFileManager
 {
+    Task<string> SaveFileAsync(IFormFile iFormFile, string folderName);
+    void DeleteFile(string filePath);
 }
