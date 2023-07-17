@@ -26,6 +26,8 @@ public class MessagesController : ControllerBase
             throw new Exception("Chat is not found");
 
         var messages = await _messageManager.GetMessagesByChatId(chatId);
+        if (messages == null)
+            return NotFound("Message is not found");
 
         return Ok(messages);
     }
