@@ -1,8 +1,7 @@
-﻿namespace Student.API.Models.StudentAttendanceModels
+﻿namespace Student.API.Models.StudentAttendanceModels;
+
+public class AddStudentAttendanceModel
 {
-    public class AddStudentAttendanceModel
-    {
-        public required Guid TopicId { get; set; }
-        public required Guid StudentId { get; set; }
-    }
+    public required Guid TopicId { get; set; }
+    public required Guid StudentId { get; set; }
 }
