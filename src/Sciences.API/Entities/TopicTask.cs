@@ -8,6 +8,6 @@ public class TopicTask
     public required string Title { get; set; }
     public string? Content { get; set; }
     public string? Description { get; set; }
-    public Topic? Topic { get; set; }
+    public virtual Topic? Topic { get; set; }
     public required Guid TopicId { get; set; }
 }
