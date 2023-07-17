@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddLog();
 
+builder.Services.AddChatDbContext(builder.Configuration);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

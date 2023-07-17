@@ -28,6 +28,9 @@ public class ChatsController : ControllerBase
     public async Task<IActionResult> GetChat(int chatId)
     {
         var chatModel = await _chatManager.GetChat(chatId);
+        if (chatModel == null) 
+            return BadRequest("Chat is not found");
+
         return Ok(chatModel);
     }
 
@@ -39,7 +42,7 @@ public class ChatsController : ControllerBase
         return Ok(chats);
     }
 
-    [HttpPut("chatId")]
+    [HttpPut("{chatId}")]
     public async Task<IActionResult> UpdateChats(int chatId, UpdateChatModel updateChat)
     {
         //davomi bor
@@ -47,7 +50,7 @@ public class ChatsController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("chatId")]
+    [HttpDelete("{chatId}")]
     public async Task<IActionResult> DeleteChat(int chatId)
     {
         await _chatManager.DeleteChat(chatId);
