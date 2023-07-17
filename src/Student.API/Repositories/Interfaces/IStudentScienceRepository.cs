@@ -7,7 +7,6 @@ public interface IStudentScienceRepository
 	Task<List<StudentScience>> GetStudentSciencesAsync();
 	Task AddStudentScienceAsync(StudentScience science);
 	Task<StudentScience> GetStudentScienceByScienceIdAsync(Guid scienceId,Guid studentId);
-	Task UpdateStudentScienceByScienceIdAsync(StudentScience studentScience);
-	Task DeleteStudentScienceByScienceIdAsync(StudentScience studentScience);
+	Task UpdateStudentScienceAsync(StudentScience studentScience);
 
 }
