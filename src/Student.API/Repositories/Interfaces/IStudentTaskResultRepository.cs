@@ -8,7 +8,7 @@ public interface IStudentTaskResultRepository
 {
     Task<List<StudentTaskResult>> GetTaskResultsAsync();
     Task AddTaskResultAsync(StudentTaskResult result);
-    Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid TaskId);
+    Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid taskId,Guid studentId);
     Task UpdateTaskResultByTaskIdAsync(StudentTaskResult result);
     Task DeleteTaskResultByTaskIdAsync(StudentTaskResult result);
 
