@@ -1,6 +1,7 @@
 ﻿using Sciences.API.Context;
 using Sciences.API.Entities;
 using Sciences.API.Repositories.Interfaces;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sciences.API.Repositories;
 
@@ -19,24 +20,39 @@ public class TopicTaskRepository: ITopicTaskRepository
 
     public async Task<List<TopicTask>> GetTopicTasks(Guid scienceId, DateTime date)
     {
-        var science = await _scienceRepository.GetScienceById(scienceId);
-        var topic = science.Topics.FirstOrDefault(t => t.Date == date);
-        if (topic == null) throw new System.Exception("Topic Not Found");
-        return 
+        var topic = await GetTopicByDate(scienceId,date);
+        return topic.Tasks.ToList();
     }
 
-    public async Task AddTopicTask(Guid scienceId, DateTime date)
+    public async Task AddTopicTask(Guid scienceId, DateTime date,TopicTask task)
     {
-        throw new NotImplementedException();
+        var topic = await GetTopicByDate(scienceId, date);
+        topic.Tasks.Add(task);
+        await _context.SaveChangesAsync();
+
     }
 
-    public async Task UpdateTopicTask(Guid scienceId, DateTime date, Guid taskId)
+    public async Task UpdateTopicTask(Guid scienceId, DateTime date, TopicTask task)
     {
-        throw new NotImplementedException();
+        var topic = await GetTopicByDate(scienceId, date);
+        _context.TopicTasks.Update(task);
+        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteTopicTask(Guid scienceId, DateTime date, Guid taskId)
     {
-        throw new NotImplementedException();
+        var topic = await GetTopicByDate(scienceId, date);
+        var task = topic.Tasks.FirstOrDefault(t => t.Id == taskId);
+        if (task == null) throw new System.Exception("Topic task Not Found");
+        _context.TopicTasks.Remove(task);
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task<Topic> GetTopicByDate(Guid scienceId, DateTime date)
+    {
+        var science = await _scienceRepository.GetScienceById(scienceId);
+        var topic = science.Topics.FirstOrDefault(t => t.Date == date);
+        if (topic == null) throw new System.Exception("Topic Not Found");
+        return topic;
     }
 }
