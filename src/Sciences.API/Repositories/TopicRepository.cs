@@ -26,18 +26,24 @@ public class TopicRepository:ITopicRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task UpdateTopic(Topic topic)
+    public async Task UpdateTopic(Topic topic)
     {
-        throw new NotImplementedException();
+         _context.Topics.Update(topic);
+         await _context.SaveChangesAsync();
     }
 
-    public Task DeleteTopic(Topic topic)
+    public async Task DeleteTopic(Topic topic)
     {
-        throw new NotImplementedException();
+        _context.Topics.Remove(topic);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<Topic> GetTopicById(Guid topicId)
+    public async Task<Topic> GetTopicById(Guid topicId)
     {
-        throw new NotImplementedException();
+        var topic = await _context.Topics.FirstOrDefaultAsync(t=>t.Id == topicId);
+        if (topic == null)
+        {
+
+        }
     }
 }
