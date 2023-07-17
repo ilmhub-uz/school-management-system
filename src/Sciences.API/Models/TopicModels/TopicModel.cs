@@ -1,4 +1,6 @@
-﻿namespace Sciences.API.Models.TopicModels;
+﻿using Sciences.API.Models.TopicTaskModels;
+
+namespace Sciences.API.Models.TopicModels;
 
 public class TopicModel
 {
@@ -10,4 +12,5 @@ public class TopicModel
     public  string Title { get; set; }
     public DateTime? Date { get; set; }
     public  Guid ScienceId { get; set; }
+    public List<TopicTaskModel> Tasks { get; set; }
 }
