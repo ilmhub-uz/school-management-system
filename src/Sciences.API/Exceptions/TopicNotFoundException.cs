@@ -1,6 +1,9 @@
-﻿namespace Sciences.API.Exceptions
+﻿namespace Sciences.API.Exceptions;
+
+public class TopicNotFoundException:System.Exception
 {
-    public class TopicNotFoundException
+    public TopicNotFoundException(string message) : base($"Topic Not FOUND with id: {message}")
     {
+
     }
 }
