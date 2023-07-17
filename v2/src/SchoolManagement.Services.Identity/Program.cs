@@ -1,7 +1,10 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Identity.Context;
+using SchoolManagement.Services.Identity.Extensions;
+using SchoolManagement.Services.Identity.Managers;
 using SchoolManagement.Services.Identity.Models;
+using SchoolManagement.Services.Identity.Producers;
 using SchoolManagement.Services.Identity.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +19,14 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 		.UseNpgsql(builder.Configuration.GetConnectionString("identity_db"));
 });
 
+builder.Services.AddJwt(builder.Configuration);
+
 builder.Services.AddScoped<IValidator<CreateUserModel>, CreateUserValidator>();
+builder.Services.AddScoped<IUserProvider, UserProvider>();
+builder.Services.AddScoped<IUserProducer, UserProducer>();
+builder.Services.AddScoped<ISignInManager, SignInManager>();
+builder.Services.AddScoped<IUserManager, UserManager>();
+
 
 var app = builder.Build();
 
@@ -27,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
