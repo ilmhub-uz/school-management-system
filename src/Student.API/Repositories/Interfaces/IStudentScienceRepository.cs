@@ -6,9 +6,9 @@ namespace Student.API.Repositories.Interfaces
     {
         Task<List<StudentScience>> GetStudentSciencesAsync();
         Task AddStudentScienceAsync(StudentScience science);
-        Task<StudentScience> GetStudentScienceByScienceIdAsync(StudentScience science);
-        Task UpdateStudentScienceByScienceIdAsync(StudentScience science);
-        Task DeleteStudentScienceByScienceIdAsync(StudentScience science);
+        Task<StudentScience> GetStudentScienceByScienceIdAsync(Guid scienceId,Guid studentId);
+        Task UpdateStudentScienceByScienceIdAsync(StudentScience studentScience);
+        Task DeleteStudentScienceByScienceIdAsync(StudentScience studentScience);
 
     }
 }
