@@ -3,24 +3,25 @@ using Student.API.Exceptions;
 using Student.API.FluentValidators;
 using Student.API.Models.StudentAttendanceModels;
 using Student.API.Repositories;
+using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Managers;
 
 public class StudentAttendanceManager
 {
-    private readonly StudentAttendanceRepository _studentAttendanceRepos;
-    public StudentAttendanceManager(StudentAttendanceRepository studentAttendanceRepos)
+    private readonly IStudentAttendanceRepository _studentAttendanceRepos;
+    public StudentAttendanceManager(IStudentAttendanceRepository studentAttendanceRepos)
     {
         _studentAttendanceRepos = studentAttendanceRepos;
     }
 
-    public async Task<List<StudentAttendanceModel>> GetStudentAttendances()
+    public async Task<List<StudentAttendanceModel>> GetStudentAttendancesAsync()
     {
-        var studentAttendances = await _studentAttendanceRepos.GetStudentAttendanceAsync();
+        var studentAttendances = await _studentAttendanceRepos.GetStudentAttendancesAsync();
 
         return ToStudentAttendanceModels(studentAttendances);
     }
-    public async Task<StudentAttendanceModel> AddStudentAttendance(AddStudentAttendanceModel model)
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(AddStudentAttendanceModel model)
     {
         var validator = new AddStudentAttendanceValidator();
         var result = validator.Validate(model);
@@ -41,7 +42,7 @@ public class StudentAttendanceManager
 
     }
 
-    public async Task<StudentAttendanceModel> UpdateStudentAttendance(UpdateStudentAttendanceModel model)
+    public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(UpdateStudentAttendanceModel model)
     {
         var validator = new UpdateStudentAttendanceValidator();
         var result = validator.Validate(model);
