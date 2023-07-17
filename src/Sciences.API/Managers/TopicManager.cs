@@ -22,7 +22,7 @@ public class TopicManager
         return ParseService.ParseToTopicList(topics);
     }
 
-    public async Task<TopicModel> AddTopicAsync(CreateTopicModel topic,Guid scienceId)
+    public async Task<TopicModel> AddTopicAsync(Guid scienceId,CreateTopicModel topic)
     {
         var model=new Topic()
         {
