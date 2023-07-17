@@ -9,6 +9,7 @@ namespace Sciences.API.Controllers;
 public class SciencesController : ControllerBase
 {
     private readonly ScienceManager _scienceManager;
+    // BU shunchaki birinchi versiya xato va kamchiliklari keyingi versiyada jamoamiz bilan to'grilanadi
 
     public SciencesController(ScienceManager scienceManager)
     {
