@@ -23,12 +23,6 @@ namespace Student.API.Repositories
             await _studentDbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteStudentScienceByScienceIdAsync(StudentScience studentScience)
-        {
-            _studentDbContext.StudentSciences.Remove(studentScience);
-            await _studentDbContext.SaveChangesAsync();
-        }
-
         public async Task<StudentScience> GetStudentScienceByScienceIdAsync(Guid scienceId, Guid studentId)
         {
           var studentScience = await _studentDbContext.StudentSciences.FirstOrDefaultAsync(s => s.ScienceId == scienceId&& s.StudentId == studentId);
@@ -40,9 +34,7 @@ namespace Student.API.Repositories
 
         }
 
-        
-
-        public async Task UpdateStudentScienceByScienceIdAsync(StudentScience studentScience)
+        public async Task UpdateStudentScienceAsync(StudentScience studentScience)
         {
             _studentDbContext.StudentSciences.Update(studentScience);
             await _studentDbContext.SaveChangesAsync();
