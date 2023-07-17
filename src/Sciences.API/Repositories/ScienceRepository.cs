@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sciences.API.Context;
 using Sciences.API.Entities;
-using Sciences.API.Exceptions;
+using Sciences.API.Exception;
 using Sciences.API.Repositories.Interfaces;
 
 namespace Sciences.API.Repositories;
