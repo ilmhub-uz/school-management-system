@@ -1,6 +1,5 @@
 using Sciences.API.Extension;
 using Sciences.API.MiddleWares;
-using Sciences.API.Repositories;
 using Serilog;
 using Serilog.Events;
 
