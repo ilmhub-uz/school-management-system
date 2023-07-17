@@ -1,6 +1,5 @@
 using Sciences.API.Extension;
 using Sciences.API.MiddleWares;
-using Sciences.API.Repositories;
 using Serilog;
 using Serilog.Events;
 
@@ -15,12 +14,12 @@ builder.Services.AddScienceServices(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseSwagger();
 
-	app.UseSwagger();
-	app.UseSwaggerUI();
-
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
 app.UseScienceErrorHandlerMiddleware();
 
 app.UseAuthorization();

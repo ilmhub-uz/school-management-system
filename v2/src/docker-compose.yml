@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  admin-api:
+    image: admin-api
+    container_name: admin-api
+    build:
+      context: .
+      dockerfile: Dockerfile.AdminApi
+
+  chats:
+    image: chats
+    container_name: chats
+    build:
+      context: .
+      dockerfile: Dockerfile.Chats
+
+  identity:
+    image: identity
+    container_name: identity
+    build:
+      context: .
+      dockerfile: Dockerfile.Identity
+
+  sciences:
+    image: sciences
+    container_name: sciences
+    build:
+      context: .
+      dockerfile: Dockerfile.Sciences
+
+  student-api:
+    image: student-api
+    container_name: student-api
+    build:
+      context: .
+      dockerfile: Dockerfile.StudentApi
+
+  students:
+    image: students
+    container_name: students
+    build:
+      context: .
+      dockerfile: Dockerfile.Sciences

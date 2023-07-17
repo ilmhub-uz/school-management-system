@@ -3,7 +3,7 @@ using Student.API.Context;
 
 namespace Student.API.Extension;
 
-public static class AddStudentDbContextExtension
+public static partial class ServiceCollectionExtensions
 {
     public static void AddStudentDbContext(this IServiceCollection services, IConfiguration configuration)
     {

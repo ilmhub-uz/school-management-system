@@ -4,15 +4,10 @@ using Student.API.Models.StudentModels;
 
 namespace Student.API.Extension;
 
-public static class ServiceCollectionExtensions
+public static partial class ServiceCollectionExtensions
 {
-    public static void AddStudentServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddModelValidators(this IServiceCollection services)
     {
-        services.AddControllers();
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
-
-        services.AddStudentDbContext(configuration);
-        services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
+	    services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
     }
 }

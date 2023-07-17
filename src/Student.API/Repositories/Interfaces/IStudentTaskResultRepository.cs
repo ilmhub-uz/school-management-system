@@ -6,6 +6,7 @@ namespace Student.API.Repositories.Interfaces;
 
 public interface IStudentTaskResultRepository
 {
+
     Task<List<StudentTaskResult>> GetTaskResultsAsync();
     Task AddTaskResultAsync(StudentTaskResult result);
     Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid taskId,Guid studentId);
@@ -18,3 +19,4 @@ public interface IStudentTaskResultRepository
  //GET students/{username}/ task - results /{ task_id}
  //PUT students/{username}/ task - results /{ task_id}
  //DELETE students/{username}/ task - results /{ task_id}
+

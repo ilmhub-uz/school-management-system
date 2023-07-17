@@ -17,9 +17,14 @@ public static class ServiceCollectionExtensions
         services.AddSwaggerGen();
 
         services.AddScienceDbContext(configuration);
+
         services.AddScoped<IValidator<CreateScienceModel>, CreateScienceModelValidator>();
+
         services.AddScoped<IScienceRepository, ScienceRepository>();
+
         services.AddScoped<ScienceManager>();
         services.AddScoped<ParseService>();
+
+        services.AddScoped<ITopicTaskRepository, TopicTaskRepository>();
     }
 }
