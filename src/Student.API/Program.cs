@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Events;
 using Student.API.Extension;
@@ -9,8 +10,11 @@ var logger = new LoggerConfiguration().WriteTo
     .File("StudentLogFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day).CreateLogger();
 
 builder.Logging.AddSerilog(logger);
-
-builder.Services.AddStudentServices(builder.Configuration);
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddStudentDbContext(builder.Configuration);
+builder.Services.AddModelValidators();
 
 var app = builder.Build();
 

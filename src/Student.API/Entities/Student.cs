@@ -9,7 +9,7 @@ public class Student
     public required string PhoneNumber { get; set; }
     public required string Username { get; set; }
     public string? PhotoUrl { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
     public Status Status { get; set; }
     public List<StudentScience>? StudentSciences { get; set; }
