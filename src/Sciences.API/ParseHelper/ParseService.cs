@@ -1,6 +1,7 @@
 ﻿using Sciences.API.Entities;
 using Sciences.API.Models.ScienceModels;
 using Sciences.API.Models.TopicModels;
+using Sciences.API.Models.TopicTaskModels;
 
 namespace Sciences.API.ParseHelper;
 
@@ -48,7 +49,9 @@ public class ParseService
             Date = topic.Date,
             ScienceId = topic.ScienceId,
             Title = topic.Title,
-            UpdatedAt = topic.UpdatedAt
+            UpdatedAt = topic.UpdatedAt,
+            Tasks = ParseToTopicTaskList(topic.Tasks)
+
         };
         return model;
     }
@@ -70,5 +73,31 @@ public class ParseService
         }
         
     }
+
+    public static List<TopicTaskModel> ParseToTopicTaskList(List<TopicTask> list)
+    {
+        var models = new List<TopicTaskModel>();
+        foreach (var item in list)
+        {
+            models.Add(ParseToTopicTaskModel(item));
+        }
+        return models;
+    }
+
+    public static TopicTaskModel ParseToTopicTaskModel(TopicTask task)
+    {
+        var model = new TopicTaskModel
+        {
+            Id = task.Id,
+            CreatedAt = task.CreatedAt,
+            Title = task.Title,
+            TopicId = task.TopicId,
+            UpdatedAt = task.UpdatedAt,
+            Content = task.Content,
+            Description = task.Description
+        };
+        return model;
+    }
+
 
 }
