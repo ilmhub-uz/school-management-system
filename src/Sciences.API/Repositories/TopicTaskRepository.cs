@@ -1,7 +1,6 @@
 ﻿using Sciences.API.Context;
 using Sciences.API.Entities;
 using Sciences.API.Repositories.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sciences.API.Repositories;
 
@@ -32,9 +31,16 @@ public class TopicTaskRepository: ITopicTaskRepository
 
     }
 
-    public async Task UpdateTopicTask(Guid scienceId, DateTime date, TopicTask task)
+    public async Task<TopicTask> GetTopicTaskById(Guid scienceId, DateTime date, Guid taskId)
     {
         var topic = await GetTopicByDate(scienceId, date);
+        var task = topic.Tasks.FirstOrDefault(t => t.Id  == taskId);
+        if (task == null) throw new System.Exception("Task Not Found");
+        return task;
+    }
+
+    public async Task UpdateTopicTask(TopicTask task)
+    {
         _context.TopicTasks.Update(task);
         await _context.SaveChangesAsync();
     }

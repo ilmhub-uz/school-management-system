@@ -8,7 +8,9 @@ public interface ITopicTaskRepository
 
     Task AddTopicTask(Guid scienceId, DateTime date, TopicTask task);
 
-    Task UpdateTopicTask(Guid scienceId, DateTime date, TopicTask task);
+    Task UpdateTopicTask(TopicTask task);
 
     Task DeleteTopicTask(Guid scienceId,DateTime date,Guid taskId);
+
+    Task<TopicTask> GetTopicTaskById(Guid scienceId, DateTime date, Guid taskId);
 }
