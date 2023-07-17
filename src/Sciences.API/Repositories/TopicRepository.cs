@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sciences.API.Context;
 using Sciences.API.Entities;
+using Sciences.API.Exceptions;
 using Sciences.API.Repositories.Interfaces;
 
 namespace Sciences.API.Repositories;
@@ -43,7 +44,8 @@ public class TopicRepository:ITopicRepository
         var topic = await _context.Topics.FirstOrDefaultAsync(t=>t.Id == topicId);
         if (topic == null)
         {
-
+            throw new TopicNotFoundException(topicId.ToString());
         }
+        return topic;
     }
 }
