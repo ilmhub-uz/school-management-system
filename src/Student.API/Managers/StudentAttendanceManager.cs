@@ -49,18 +49,16 @@ public class StudentAttendanceManager
         {
             throw new UpdateStudentAttendanceValidationInValid("Invalid update input try again");
         }
-        var studentAttendance = new StudentAttendance()
-        {
-            StudentId = model.StudentId,
-            TopicId = model.TopicId,
-            Attend = model.Attend
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceAsync(model.StudentId, model.TopicId);
 
-        };
+        studentAttendance.Attend = model.Attend;
+
         await _studentAttendanceRepos.UpdateStudentAttendanceAsync(studentAttendance);
+
         return ToStudentAttendanceModel(studentAttendance);
     }
 
-    private StudentAttendanceModel ToStudentAttendanceModel(StudentAttendance studentAttendance)
+    private StudentAttendanceModel ToStudentAttendanceModel(StudentAttendance? studentAttendance)
     {
         StudentAttendanceModel studentAttendanceModel = new StudentAttendanceModel()
         {
