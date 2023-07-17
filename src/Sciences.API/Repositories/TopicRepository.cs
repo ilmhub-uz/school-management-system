@@ -20,9 +20,10 @@ public class TopicRepository:ITopicRepository
         return await _context.Topics.ToListAsync();
     }
 
-    public Task AddTopic(Topic topic)
+    public async Task AddTopic(Topic topic)
     {
-        throw new NotImplementedException();
+        _context.Topics.Add(topic);
+        await _context.SaveChangesAsync();
     }
 
     public Task UpdateTopic(Topic topic)
