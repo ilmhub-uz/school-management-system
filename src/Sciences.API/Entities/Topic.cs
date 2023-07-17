@@ -10,6 +10,5 @@ public class Topic
     public DateTime? Date { get; set; }
     public virtual Science? Science { get; set; }
     public required Guid ScienceId { get; set; }
-
-    public virtual ICollection<TopicTask>? Tasks { get; set; }
+    public virtual List<TopicTask>? Tasks { get; set; }
 }
