@@ -26,7 +26,7 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
         await _studentDbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteTaskResultByTaskIdAsync(StudentTaskResult result)
+    public async Task DeleteTaskResultAsync(StudentTaskResult result)
     {
         _studentDbContext.TaskResults.Remove(result);
         await _studentDbContext.SaveChangesAsync();
@@ -34,17 +34,18 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
 
     public async Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid taskId, Guid studentId)
     {
-        var result = _studentDbContext.TaskResults.FirstOrDefaultAsync(r => r.TaskId == taskId && r.StudentId == studentId);
+        var result = await _studentDbContext.TaskResults.FirstOrDefaultAsync(r => r.TaskId == taskId && r.StudentId == studentId);
         if(result == null)
         {
             throw new StudentTaskResultNotFoundException();
         }
+
         return result;
     }
 
     
 
-    public async Task UpdateTaskResultByTaskIdAsync(StudentTaskResult result)
+    public async Task UpdateTaskResultAsync(StudentTaskResult result)
     {
          _studentDbContext.TaskResults.Update(result);
          await _studentDbContext.SaveChangesAsync();
