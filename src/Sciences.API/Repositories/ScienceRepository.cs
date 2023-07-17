@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Sciences.API.Context;
 using Sciences.API.Entities;
 using Sciences.API.Exceptions;
@@ -46,6 +46,7 @@ public class ScienceRepository: IScienceRepository
         {
             throw new ScienceNotFoundException(scienceId.ToString());
         }
+
         return science;
     }
 }
