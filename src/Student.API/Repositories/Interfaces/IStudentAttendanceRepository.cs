@@ -5,7 +5,8 @@ namespace Student.API.Repositories.Interfaces;
 public interface IStudentAttendanceRepository
 {
 
-    Task<List<StudentAttendance>> GetStudentAttendanceAsync();
+    Task<List<StudentAttendance>> GetStudentAttendancesAsync();
+    Task<StudentAttendance> GetStudentAttendanceAsync(Guid studentId, Guid topicId);
     Task AddStudentAttendanceAsync(StudentAttendance studentAttendance);
     Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance);
     

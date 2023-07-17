@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Student.API.Context;
 using Student.API.Entities;
+using Student.API.Exceptions;
 using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Repositories;
@@ -13,9 +14,18 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
         _studentDbContext = studentDbContext;
     }
 
-    public async Task<List<StudentAttendance>> GetStudentAttendanceAsync()
+    public async Task<List<StudentAttendance>> GetStudentAttendancesAsync()
     {
         return await _studentDbContext.StudentAttendances.ToListAsync();
+    }
+    public async Task<StudentAttendance> GetStudentAttendanceAsync(Guid studentId,Guid topicId)
+    {
+        var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId== topicId && s.StudentId == studentId);
+        if(studentAttendance== null)
+        {
+            throw new StudentAttendanceNotFoundException("Student Attendance not found");
+        }
+        return studentAttendance;
     }
 
     public async Task AddStudentAttendanceAsync(StudentAttendance studentAttendance)
@@ -29,4 +39,5 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
         _studentDbContext.StudentAttendances.Update(studentAttendance);
         await _studentDbContext.SaveChangesAsync();
     }
+
 }
