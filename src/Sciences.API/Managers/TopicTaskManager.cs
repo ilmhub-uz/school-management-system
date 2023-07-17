@@ -24,14 +24,14 @@ public class TopicTaskManager:ITopicTaskManager
         return ParseService.ParseToTopicTaskList(topicTasks);
     }
 
-    public async Task <TopicTaskModel>AddTopicTaskAsync(CreateTopicTaskModel task)
+    public async Task <TopicTaskModel>AddTopicTaskAsync(Guid topicId, CreateTopicTaskModel task)
     {
         var topicTask = new TopicTask
         {
             Id = Guid.NewGuid(),
             CreatedAt = DateTime.UtcNow,
             Title = task.Title,
-            TopicId = task.TopicId,
+            TopicId = topicId,
             Content = task.Content,
             Description = task.Description,
 
@@ -42,9 +42,9 @@ public class TopicTaskManager:ITopicTaskManager
 
     }
 
-    public async Task<TopicTaskModel> UpdateTopicTaskAsync(CreateTopicTaskModel task)
+    public async Task<TopicTaskModel> UpdateTopicTaskAsync(Guid topicId, CreateTopicTaskModel task)
     {
-        var topicTask = IsExists(task.TopicId);
+        var topicTask = IsExists(topicId);
         topicTask.Title = task.Title;
         topicTask.Content = task.Content;
         topicTask.Description = task.Description;
