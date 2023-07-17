@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using Student.API.Models.StudentAttendanceModels;
 
-namespace Student.API.FluentValidators
+namespace Student.API.FluentValidators;
+
+public class UpdateStudentAttendanceValidator:AbstractValidator<UpdateStudentAttendanceModel>
 {
-    public class UpdateStudentAttendanceValidator:AbstractValidator<UpdateStudentAttendanceModel>
+    public UpdateStudentAttendanceValidator()
     {
-        public UpdateStudentAttendanceValidator()
-        {
-            RuleFor(s => s.TopicId).NotNull();
-            RuleFor(s => s.StudentId).NotNull();
-        }
+        RuleFor(s => s.TopicId).NotNull();
+        RuleFor(s => s.StudentId).NotNull();
     }
 }
