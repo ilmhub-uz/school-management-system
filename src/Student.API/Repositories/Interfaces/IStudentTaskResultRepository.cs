@@ -6,11 +6,11 @@ namespace Student.API.Repositories.Interfaces
 {
     public interface IStudentTaskResultRepository
     {
-        Task<List<StudentTaskResult>> GetTaskResultsAsync(string studenUsername);
-        Task AddTaskResultAsync(string studentUsername,StudentTaskResult result);
-        Task GetTaskResultByTaskIdAsync(string studentUsername, Guid TaskId);
-        Task UpdateTaskResultByTaskIdAsync(string studentUsername, Guid TaskId);
-        Task DeleteTaskResultByTaskIdAsync(string studentUsername, Guid TaskId);
+        Task<List<StudentTaskResult>> GetTaskResultsAsync();
+        Task AddTaskResultAsync(StudentTaskResult result);
+        Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid TaskId);
+        Task UpdateTaskResultByTaskIdAsync(Guid TaskId);
+        Task DeleteTaskResultByTaskIdAsync(Guid TaskId);
 
     }
      //GET students/{username}/ task - results
