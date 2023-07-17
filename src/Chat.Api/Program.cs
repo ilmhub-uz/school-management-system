@@ -23,6 +23,7 @@ app.UseHttpsRedirection();
 
 app.UseChatErrorHandlerMiddleware();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
