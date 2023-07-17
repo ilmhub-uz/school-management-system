@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  admin-api:
+    image: admin-api
+    container_name: admin-api
+    build:
+      context: .
+      dockerfile: Dockerfile.AdminApi
+
+  chats:
+    image: chats
+    container_name: chats
+    build:
+      context: .
+      dockerfile: Dockerfile.Chats
+
+  identity:
+    image: identity
+    container_name: identity
+    build:
+      context: .
+      dockerfile: Dockerfile.Identity

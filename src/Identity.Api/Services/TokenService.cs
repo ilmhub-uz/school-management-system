@@ -29,7 +29,7 @@ public class TokenService
 			issuer: _jwtOption.ValidIssuer,
 			audience: _jwtOption.ValidAudience,
 			claims: claims,
-			expires: DateTime.Now.AddSeconds(_jwtOption.ExpiresInSeconds),
+			expires: DateTime.UtcNow.AddSeconds(_jwtOption.ExpiresInSeconds),
 			signingCredentials: new SigningCredentials(new SymmetricSecurityKey(signingKey), SecurityAlgorithms.HmacSha256)
 		);
 

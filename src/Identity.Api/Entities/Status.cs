@@ -1,10 +1,9 @@
-﻿namespace Identity.Api.Entities
+﻿namespace Identity.Api.Entities;
+
+public enum Status
 {
-    public enum Status
-    {
-        Created,
-        Active,
-        Blocked,
-        Deleted
-    }
+	Created,
+	Active,
+	Blocked,
+	Deleted
 }

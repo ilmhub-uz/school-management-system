@@ -1,12 +1,11 @@
 ﻿using Student.API.Entities;
 
-namespace Student.API.Repositories.Interfaces
+namespace Student.API.Repositories.Interfaces;
+
+public interface IStudentAttendanceRepository
 {
-    public interface IStudentAttendanceRepository
-    {
-        Task<List<StudentAttendance>> GetStudentAttendanceAsync();
-        Task AddStudentAttendanceAsync(StudentAttendance studentAttendance);
-        Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance);
+	Task<List<StudentAttendance>> GetStudentAttendanceAsync();
+	Task AddStudentAttendanceAsync(StudentAttendance studentAttendance);
+	Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance);
         
-    }
 }
