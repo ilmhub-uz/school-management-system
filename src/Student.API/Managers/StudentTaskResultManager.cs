@@ -29,19 +29,14 @@ public class StudentTaskResultManager:IStudentTaskResultManager
         return ToStudentTaskResultModel(studentTask);
     }
 
-    public async Task<StudentTaskResultModel> AddStudentTaskResultAsync(Guid studentId,AddStudentTaskResultModel model)
+    public async Task<StudentTaskResultModel> AddStudentTaskResultAsync(Guid studentId,Guid taskId,string content)
     {
-        var validator = new AddStudentTaskResultValidator();
-        var result = validator.Validate(model);
-        if(!result.IsValid)
-        {
-            throw new AddStudentTaskResultValidationIsNotValid("Add Student Task Result model is not valid");
-        }
+        
         var studentTask = new StudentTaskResult()
         {
             StudentId = studentId,
-            TaskId = Guid.NewGuid(),
-            Content = model.Content,
+            TaskId = taskId,
+            Content = content,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = null,
         };
@@ -49,16 +44,11 @@ public class StudentTaskResultManager:IStudentTaskResultManager
         return ToStudentTaskResultModel(studentTask);
     }
 
-    public async Task UpdateStudentTaskResultAsync(Guid studentId,Guid taskId,UpdateStudentTaskResultModel model)
+    public async Task UpdateStudentTaskResultAsync(Guid studentId,Guid taskId,string content)
     {
-        var validator =  new UpdateStudentTaskResultValidator();
-        var result = validator.Validate(model);
-        if(!result.IsValid)
-        {
-            throw new UpdateStudentTaskResultValidationIsNotValid("Update Student Task Result model is not valid");
-        }
+
         var studentTask = await _studentTaskResultRepos.GetTaskResultAsync(taskId,studentId);
-        studentTask.Content = model.Content;
+        studentTask.Content = content;
         studentTask.UpdatedAt = DateTime.UtcNow;
         await _studentTaskResultRepos.UpdateTaskResultAsync(studentTask);
         
