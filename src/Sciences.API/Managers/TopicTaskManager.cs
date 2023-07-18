@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sciences.API.Context;
 using Sciences.API.Entities;
+using Sciences.API.Exceptions;
 using Sciences.API.Models.TopicTaskModels;
 using Sciences.API.ParseHelper;
 
@@ -65,7 +66,7 @@ public class TopicTaskManager:ITopicTaskManager
     {
         var topicTask = _context.TopicTasks.FirstOrDefault(t => t.TopicId == topicId);
         if (topicTask == null)
-            throw new System.Exception("NOT FOUND");
+            throw new TopicTaskNotFoundException(topicId.ToString());
         return topicTask;
 
     }
