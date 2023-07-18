@@ -34,8 +34,4 @@
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
 </Project>

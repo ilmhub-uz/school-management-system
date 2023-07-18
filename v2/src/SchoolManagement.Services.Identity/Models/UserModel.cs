@@ -8,7 +8,7 @@ public static class UserExtensions
 {
 	public static UserModel ToModel(this User user)
 	{
-		var roles = user.Roles?.Select(r => r.Role?.Name).ToList();
+		var roles = user.Roles?.Select(r => r.Role.Name).ToList() ?? new List<string>();
 		return new UserModel(user.Id, user.Username, roles);
 	}
 }

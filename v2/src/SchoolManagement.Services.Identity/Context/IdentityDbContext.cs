@@ -27,7 +27,9 @@ public class IdentityDbContext : DbContext
 				.WithOne(e => e.User)
 				.HasForeignKey(e => e.UserId)
 				.OnDelete(DeleteBehavior.Cascade);
-		});
+            entity.Navigation(e => e.Roles)
+                .AutoInclude();
+        });
 
 		modelBuilder.Entity<UserRole>(entity =>
 		{
@@ -35,7 +37,9 @@ public class IdentityDbContext : DbContext
 			entity.HasOne(e => e.Role)
 				.WithMany()
 				.HasForeignKey(e => e.RoleId);
-		});
+            entity.Navigation(e => e.Role)
+                .AutoInclude();
+        });
 
 		modelBuilder.Entity<Role>(entity =>
 		{

@@ -1,6 +1,3 @@
 ﻿namespace SchoolManagement.Services.Identity.Models;
 
-public class TokenResultModel
-{
-	public required string Token { get; set; }
-}
+public record TokenResultModel(string Token, double Expires, DateTime Date);

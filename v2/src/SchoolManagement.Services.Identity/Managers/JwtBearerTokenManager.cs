@@ -16,7 +16,12 @@ public class JwtBearerTokenManager : ITokenManager
 		_jwtOption = jwtOption.Value;
 	}
 
-	public string GenerateToken(User user)
+    /// <summary>
+    /// Returns a jwt token for the specified user.
+    /// </summary>
+    /// <param name="user">User entity</param>
+    /// <returns>a jwt token for the specified user and validity period</returns>
+    public (string, double) GenerateToken(User user)
 	{
 		var claims = new List<Claim>()
 		{
@@ -44,6 +49,8 @@ public class JwtBearerTokenManager : ITokenManager
 			signingCredentials: new SigningCredentials(new SymmetricSecurityKey(signingKey), SecurityAlgorithms.HmacSha256)
 		);
 
-		return new JwtSecurityTokenHandler().WriteToken(security);
+        var token = new JwtSecurityTokenHandler().WriteToken(security);
+
+        return new (token, TimeSpan.FromSeconds(_jwtOption.ExpiresInSeconds).TotalMinutes);
 	}
 }
