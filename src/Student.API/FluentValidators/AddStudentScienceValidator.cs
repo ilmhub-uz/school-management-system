@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using Student.API.Models.StudentScienceModels;
 
-namespace Student.API.FluentValidators
+namespace Student.API.FluentValidators;
+
+public class AddStudentScienceValidator:AbstractValidator<AddStudentScienceModel>
 {
-    public class AddStudentScienceValidator:AbstractValidator<AddStudentScienceModel>
+    public AddStudentScienceValidator()
     {
-        public AddStudentScienceValidator()
-        {
-            RuleFor(r => r.ScienceId).NotNull();
-            RuleFor(r => r.StudentId).NotNull();
-        }
+        RuleFor(r => r.ScienceId).NotNull();
+        RuleFor(r => r.StudentId).NotNull();
     }
 }

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Student.API.HelperEntities.PaginationEntities;
+using Student.API.Managers.Interfaces;
+using Student.API.Models.StudentModels;
 
 namespace Student.API.Controllers;
 
@@ -6,33 +10,66 @@ namespace Student.API.Controllers;
 [ApiController]
 public class StudentsController : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> GetStudents()
+    private readonly IStudentManager _studentManager;
+
+    public StudentsController(IStudentManager studentManager)
     {
-        return Ok();
+        _studentManager = studentManager;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetStudents([FromQuery] StudentFilterPagination filterPagination)    
+    {
+        var students = await _studentManager.GetStudentsAsync(filterPagination);
+
+        return Ok(students);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddStudent()
+    public async Task<IActionResult> AddStudent(CreateStudentModel model,
+        [FromServices] IValidator<CreateStudentModel> validator)
     {
+        var result = await validator.ValidateAsync(model);
+
+        if (!result.IsValid)
+            return BadRequest();
+        
+
+        await _studentManager.CreateStudentAsync(model);
         return Ok();
     }
 
-    [HttpPut("{username}")]
-    public async Task<IActionResult> UpdateStudent(string username)
+    [HttpPut("{studentId}")]
+    public async Task<IActionResult> UpdateStudent(Guid studentId, UpdateStudentModel model,
+        [FromServices] IValidator<UpdateStudentModel> validator)
     {
+        var result = await validator.ValidateAsync(model);
+            
+        if (!result.IsValid)
+            return BadRequest();
+
+        await _studentManager.UpdateStudentAsync(studentId, model);
         return Ok();
+    }
+
+    [HttpGet("{studentId}")]
+    public async Task<IActionResult> GetStudentById(Guid studentId)
+    {
+        var student = await _studentManager.GetStudentByIdAsync(studentId);
+        return Ok(student);
     }
 
     [HttpGet("{username}")]
     public async Task<IActionResult> GetStudentByUsername(string username)
     {
-        return Ok();
+        var student = await _studentManager.GetStudentByUserNameAsync(username);
+        return Ok(student);
     }
 
-    [HttpDelete("{username}")]
-    public async Task<IActionResult> DeleteStudent(string username)
+    [HttpDelete("{studentId}")]
+    public async Task<IActionResult> DeleteStudent(Guid studentId)
     {
+        await _studentManager.DeleteStudentAsync(studentId);
         return Ok();
     }
 

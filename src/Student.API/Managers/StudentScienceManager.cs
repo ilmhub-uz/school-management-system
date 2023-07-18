@@ -49,8 +49,8 @@ namespace Student.API.Managers
 
         public async Task<StudentScienceModel> UpdateStudentScienceAsync(UpdateStudentScienceModel model)
         {
-            var validator = new UpdateStudentScienceValidor();
-            var result = validator.Validate(model);
+            var validator = new UpdateStudentScienceValidator();
+            var result = await validator.ValidateAsync(model);
             if (!result.IsValid)
             {
                 throw new UpdateStudentScienceValidationIsNotValid("Invalid update input try again");
