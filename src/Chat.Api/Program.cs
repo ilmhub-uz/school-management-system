@@ -20,7 +20,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-
+app.UseCors(c =>
+{
+    c.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+});
 app.UseHttpsRedirection();
 
 app.UseChatErrorHandlerMiddleware();
