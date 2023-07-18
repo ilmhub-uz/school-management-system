@@ -6,10 +6,10 @@ namespace Student.API.Controllers;
 
 [Route("api/students/{username}/attendances")]
 [ApiController]
-public class StudentAttendanceController : ControllerBase
+public class StudentAttendancesController : ControllerBase
 {
     private readonly IStudentAttendanceManager _studentAttendanceManager;
-    public StudentAttendanceController(IStudentAttendanceManager studentAttendanceManager)
+    public StudentAttendancesController(IStudentAttendanceManager studentAttendanceManager)
     {
         _studentAttendanceManager = studentAttendanceManager;
     }
