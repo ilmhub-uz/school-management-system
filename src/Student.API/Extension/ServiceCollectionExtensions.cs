@@ -6,6 +6,8 @@ using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
 using Student.API.Models.StudentModels;
 using Student.API.Models.StudentScienceModels;
+using Student.API.Repositories;
+using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Extension;
 
@@ -25,5 +27,13 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<HttpContextHelper>();
         services.AddScoped<IStudentManager, StudentManager>();
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
+        services.AddScoped<IStudentScienceRepository, StudentScienceRepository>();
+        services.AddScoped<IStudentTaskResultRepository, StudentTaskResultRepository>();
     }
 }

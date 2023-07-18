@@ -26,7 +26,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddStudent(CreateStudentModel model,
+    public async Task<IActionResult> AddStudent([FromForm] CreateStudentModel model,
         [FromServices] IValidator<CreateStudentModel> validator)
     {
         var result = await validator.ValidateAsync(model);
@@ -52,7 +52,7 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{studentId}")]
+    [HttpGet("{studentId}/update")]
     public async Task<IActionResult> GetStudentById(Guid studentId)
     {
         var student = await _studentManager.GetStudentByIdAsync(studentId);

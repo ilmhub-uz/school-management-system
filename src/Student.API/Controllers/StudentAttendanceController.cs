@@ -8,6 +8,7 @@ namespace Student.API.Controllers;
 [ApiController]
 public class StudentAttendanceController : ControllerBase
 {
+
     private readonly IStudentAttendanceManager _studentAttendanceManager;
     public StudentAttendanceController(IStudentAttendanceManager studentAttendanceManager)
     {
@@ -36,8 +37,4 @@ public class StudentAttendanceController : ControllerBase
         return Ok();
     }
 
-
-
-
-    
 }
