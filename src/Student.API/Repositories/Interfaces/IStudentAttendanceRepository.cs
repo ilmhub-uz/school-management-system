@@ -9,6 +9,6 @@ public interface IStudentAttendanceRepository
     Task<StudentAttendance> GetStudentAttendanceAsync(Guid studentId, Guid topicId);
     Task AddStudentAttendanceAsync(StudentAttendance studentAttendance);
     Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance);
-    
+    Task DeleteStudentAttendanceAsync(Guid studentId, Guid topicId);
 }
 

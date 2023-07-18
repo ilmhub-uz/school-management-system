@@ -6,5 +6,6 @@ public interface IStudentAttendanceManager
 {
     Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId, Guid topicId);
     Task<List<StudentAttendanceModel>> GetStudentAttendancesAsync();
-    Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId, Guid topicId, UpdateStudentAttendanceModel model);
+    Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId, UpdateStudentAttendanceModel model);
+    Task DeleteStudentAttendancesAsync(Guid studentId, Guid topicId);
 }

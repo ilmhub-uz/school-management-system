@@ -25,7 +25,7 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<HttpContextHelper>();
         services.AddScoped<IStudentManager, StudentManager>();
-        services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
+        services.AddScoped<IStudentAttendanceManager, StudentAttendanceManager>();
         services.AddScoped<IStudentScienceManager, StudentScienceManager>();
         services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
     }

@@ -41,4 +41,17 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
         await _studentDbContext.SaveChangesAsync();
     }
 
+    public async Task DeleteStudentAttendanceAsync(Guid studentId, Guid topicId)
+    {
+        var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId == topicId && s.StudentId == studentId);
+        
+        if (studentAttendance == null)
+        {
+            throw new StudentAttendanceNotFoundException("Student Attendance not found");
+        }
+
+        _studentDbContext.StudentAttendances.Remove(studentAttendance);
+        await _studentDbContext.SaveChangesAsync();
+    }
+
 }

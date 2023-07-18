@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Student.API.Exceptions;
+using Student.API.FluentValidators;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
 
@@ -9,9 +11,13 @@ namespace Student.API.Controllers;
 public class StudentAttendanceController : ControllerBase
 {
     private readonly IStudentAttendanceManager _studentAttendanceManager;
-    public StudentAttendanceController(IStudentAttendanceManager studentAttendanceManager)
+    private readonly IStudentManager _studentManager;
+
+    public StudentAttendanceController(IStudentAttendanceManager studentAttendanceManager,
+        IStudentManager studentManager)
     {
         _studentAttendanceManager = studentAttendanceManager;
+        _studentManager = studentManager;
     }
 
     [HttpGet]
@@ -21,22 +27,40 @@ public class StudentAttendanceController : ControllerBase
         return Ok(studentAttendance);
     }
 
-    [HttpPost("{studentId}/{topicId}")]
-    public async Task<IActionResult> AddStudentAttendance(Guid studentId, Guid topicId)
+    [HttpPost("{topicId}")]
+    public async Task<IActionResult> AddStudentAttendance(string username, Guid topicId)
     {
-        var studentAttendance = await _studentAttendanceManager.AddStudentAttendanceAsync(studentId,topicId);
-        if (studentAttendance == null)
-        {
-            return BadRequest();
-        }
+        var student = await _studentManager.GetStudentByUserNameAsync(username);
+
+        var studentAttendance = await _studentAttendanceManager.AddStudentAttendanceAsync(student.Id, topicId);
 
         return Ok(studentAttendance);
     }
 
-    [HttpPut("{studentId}/{topicId}")]
-    public async Task<IActionResult> UpdateStudentAttendance(Guid studentId,Guid topicId, UpdateStudentAttendanceModel model)
+    [HttpPut]
+    public async Task<IActionResult> UpdateStudentAttendance(string username,
+        [FromForm] UpdateStudentAttendanceModel model)
     {
-        await _studentAttendanceManager.UpdateStudentAttendanceAsync(studentId,topicId,model);
+        var validator = new UpdateStudentAttendanceValidator();
+        var result = await validator.ValidateAsync(model);
+
+        if (!result.IsValid)
+        {
+            throw new UpdateStudentAttendanceValidationInValid("Invalid update input try again");
+        }
+
+        var student = await _studentManager.GetStudentByUserNameAsync(username);
+
+        var studentAttendance = await _studentAttendanceManager.UpdateStudentAttendanceAsync(student.Id, model);
+        return Ok(studentAttendance);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteStudentAttendance(string username, Guid topicId)
+    {
+        var student = await _studentManager.GetStudentByUserNameAsync(username);
+        await _studentAttendanceManager.DeleteStudentAttendancesAsync(student.Id, topicId);
+
         return Ok();
     }
 }
