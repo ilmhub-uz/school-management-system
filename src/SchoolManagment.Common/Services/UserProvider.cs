@@ -16,7 +16,7 @@ public class UserProvider : IUserProvider
 
     private HttpContext? Context => _contextAccessor.HttpContext;
 
-    public Guid GetUserIdAsync()
+    public Guid GetUserId()
     {
         if (Context is null)
             throw new HttpContextNullException(Context);
@@ -32,7 +32,7 @@ public class UserProvider : IUserProvider
         return userId;
     }
 
-    public string GetUsernameAsync()
+    public string GetUsername()
     {
         if (Context is null)
             throw new HttpContextNullException(Context);

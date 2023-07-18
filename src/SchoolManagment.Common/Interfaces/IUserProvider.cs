@@ -2,6 +2,6 @@
 
 public interface IUserProvider
 {
-    Guid GetUserIdAsync();
-    string GetUsernameAsync();
+    Guid GetUserId();
+    string GetUsername();
 }
