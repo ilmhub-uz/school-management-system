@@ -8,7 +8,7 @@ namespace Student.API.Managers.Interfaces;
 public interface IStudentAttendanceManager
 {
     Task<List<StudentAttendanceModel>> GetStudentAttendancesAsync();
-    Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId);
+    Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId,Guid topicId);
     Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId, Guid topicId, UpdateStudentAttendanceModel model);
     
 }
