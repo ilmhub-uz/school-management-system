@@ -40,7 +40,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPut("{studentId}")]
-    public async Task<IActionResult> UpdateStudent(Guid studentId, UpdateStudentModel model,
+    public async Task<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model,
         [FromServices] IValidator<UpdateStudentModel> validator)
     {
         var result = await validator.ValidateAsync(model);

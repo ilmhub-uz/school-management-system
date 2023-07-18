@@ -15,9 +15,7 @@ public static partial class ServiceCollectionExtensions
 {
     public static void AddModelValidators(this IServiceCollection services)
     {
-	    services.AddScoped<IValidator<AddStudentAttendanceModel>, AddStudentAttendanceValidator>();
-	    services.AddScoped<IValidator<AddStudentScienceModel>, AddStudentScienceValidator>();
-	    services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
+        services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
 	    services.AddScoped<IValidator<UpdateStudentAttendanceModel>, UpdateStudentAttendanceValidator>();
 	    services.AddScoped<IValidator<UpdateStudentModel>, UpdateStudentModelValidator>();
 	    services.AddScoped<IValidator<UpdateStudentScienceModel>, UpdateStudentScienceValidator>();
@@ -27,6 +25,9 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<HttpContextHelper>();
         services.AddScoped<IStudentManager, StudentManager>();
+        services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
+        services.AddScoped<IStudentScienceManager, StudentScienceManager>();
+        services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
     }
 
     public static void AddRepositories(this IServiceCollection services)

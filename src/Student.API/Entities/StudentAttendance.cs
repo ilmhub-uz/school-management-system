@@ -6,5 +6,4 @@ public class StudentAttendance
     public required Guid StudentId { get; set; }
     public Student? Student { get; set; }
     public bool Attend { get; set; }
-
 }
