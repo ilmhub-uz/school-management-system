@@ -22,13 +22,13 @@ public class StudentAttendanceManager:IStudentAttendanceManager
 
         return ToStudentAttendanceModels(studentAttendances);
     }
-    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId)
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId,Guid topicId)
     {
         
         var studentAttendance = new StudentAttendance()
         {
             StudentId = studentId,
-            TopicId = Guid.NewGuid(),
+            TopicId = topicId,
             Attend = true
         };
 

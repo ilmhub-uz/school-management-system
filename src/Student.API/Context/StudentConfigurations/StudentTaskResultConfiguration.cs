@@ -13,7 +13,7 @@ public class StudentTaskResultConfiguration : IEntityTypeConfiguration<StudentTa
 		builder.HasKey(s => new { s.StudentId, s.TaskId });
 
 		builder.Property(s=>s.Content).IsRequired(true);
-		builder.Property(s => s.CreateDate).IsRequired(true);
+		builder.Property(s => s.CreatedAt).IsRequired(true);
 
 	}
 }
