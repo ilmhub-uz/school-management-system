@@ -1,5 +1,6 @@
 ﻿using Sciences.API.Context;
 using Sciences.API.Entities;
+using Sciences.API.Exceptions;
 using Sciences.API.Repositories.Interfaces;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -34,7 +35,7 @@ public class TopicTaskRepository: ITopicTaskRepository
 
     public async Task UpdateTopicTask(Guid scienceId, DateTime date, TopicTask task)
     {
-        var topic = await GetTopicByDate(scienceId, date);
+        await GetTopicByDate(scienceId, date);
         _context.TopicTasks.Update(task);
         await _context.SaveChangesAsync();
     }
@@ -43,7 +44,8 @@ public class TopicTaskRepository: ITopicTaskRepository
     {
         var topic = await GetTopicByDate(scienceId, date);
         var task = topic.Tasks.FirstOrDefault(t => t.Id == taskId);
-        if (task == null) throw new System.Exception("Topic task Not Found");
+        if (task == null) 
+            throw new TopicNotFoundException(task.Id.ToString());
         _context.TopicTasks.Remove(task);
         await _context.SaveChangesAsync();
     }
@@ -51,8 +53,9 @@ public class TopicTaskRepository: ITopicTaskRepository
     private async Task<Topic> GetTopicByDate(Guid scienceId, DateTime date)
     {
         var science = await _scienceRepository.GetScienceById(scienceId);
-        var topic = science.Topics.FirstOrDefault(t => t.Date == date);
-        if (topic == null) throw new System.Exception("Topic Not Found");
+        var topic = science.Topics!.FirstOrDefault(t => t.Date == date);
+        if (topic == null)
+            throw new TopicNotFoundException(topic.Id.ToString());
         return topic;
     }
 }
