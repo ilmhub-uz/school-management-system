@@ -2,12 +2,14 @@
 using Student.API.Entities;
 using Student.API.Exceptions;
 using Student.API.FluentValidators;
+using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentTaskResults;
 using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Managers;
 
 public class StudentTaskResultManager:IStudentTaskResultManager
+    
 {
     private readonly IStudentTaskResultRepository _studentTaskResultRepos;
     public StudentTaskResultManager(IStudentTaskResultRepository studentTaskResultRepository)
