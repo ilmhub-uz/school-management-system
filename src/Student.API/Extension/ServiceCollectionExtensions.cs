@@ -3,7 +3,9 @@ using Student.API.FluentValidators;
 using Student.API.HelperEntities.PaginationEntities;
 using Student.API.Managers;
 using Student.API.Managers.Interfaces;
+using Student.API.Models.StudentAttendanceModels;
 using Student.API.Models.StudentModels;
+using Student.API.Models.StudentScienceModels;
 
 namespace Student.API.Extension;
 
@@ -11,7 +13,12 @@ public static partial class ServiceCollectionExtensions
 {
     public static void AddModelValidators(this IServiceCollection services)
     {
+	    services.AddScoped<IValidator<AddStudentAttendanceModel>, AddStudentAttendanceValidator>();
+	    services.AddScoped<IValidator<AddStudentScienceModel>, AddStudentScienceValidator>();
 	    services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
+	    services.AddScoped<IValidator<UpdateStudentAttendanceModel>, UpdateStudentAttendanceValidator>();
+	    services.AddScoped<IValidator<UpdateStudentModel>, UpdateStudentModelValidator>();
+	    services.AddScoped<IValidator<UpdateStudentScienceModel>, UpdateStudentScienceValidator>();
     }
 
     public static void AddManagers(this IServiceCollection services)
