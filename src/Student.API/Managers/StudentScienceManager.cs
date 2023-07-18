@@ -15,10 +15,11 @@ public class StudentScienceManager : IStudentScienceManager
 
     public async Task<List<StudentScienceModel>> GetStudentSciencesAsync()
     {
-        var studentScience = await _studentScienceRepos.GetStudentSciencesAsync();
+        var studentSciences = await _studentScienceRepos.GetStudentSciencesAsync();
 
-        return ToStudentScienceModels(studentScience);
+        return studentSciences.Select(MapToStudentScienceModel).ToList();
     }
+
     public async Task<StudentScienceModel> AddStudentScienceAsync(Guid studentId, Guid scienceId)
     {
 
@@ -29,14 +30,14 @@ public class StudentScienceManager : IStudentScienceManager
             CreatedAt = DateTime.UtcNow
         };
         await _studentScienceRepos.AddStudentScienceAsync(studentScience);
-        return ToStudentScienceModel(studentScience);
+        return MapToStudentScienceModel(studentScience);
     }
 
     public async Task<StudentScienceModel> GetStudentScienceByScienceIdAsync(Guid studentId, Guid scienceId)
     {
         var studentScience = await _studentScienceRepos.GetStudentScienceByScienceIdAsync(scienceId, studentId);
 
-        return ToStudentScienceModel(studentScience);
+        return MapToStudentScienceModel(studentScience);
     }
 
     public async Task UpdateStudentScienceAsync(Guid studentId, Guid scienceId, Status? status)
@@ -50,36 +51,15 @@ public class StudentScienceManager : IStudentScienceManager
         await _studentScienceRepos.UpdateStudentScienceAsync(studentScience);
     }
 
-    private StudentScienceModel ToStudentScienceModel(StudentScience studentScience)
+    private StudentScienceModel MapToStudentScienceModel(StudentScience studentScience)
     {
-        var model = new StudentScienceModel()
+        return new StudentScienceModel()
         {
             ScienceId = studentScience.ScienceId,
             StudentId = studentScience.StudentId,
             CreatedAt = studentScience.CreatedAt,
+            UpdatedAt = studentScience.UpdatedAt,
+            Status = studentScience.Status
         };
-        if (studentScience.Status == Status.Created)
-        {
-            model.UpdatedAt = null;
-        }
-        else
-        {
-            model.UpdatedAt = studentScience.UpdatedAt;
-        }
-        return model;
     }
-    private List<StudentScienceModel> ToStudentScienceModels(List<StudentScience> studentSciences)
-    {
-        if (studentSciences == null || studentSciences.Count == 0)
-        {
-            return new List<StudentScienceModel>();
-        }
-        var models = new List<StudentScienceModel>();
-        foreach (var studentScience in studentSciences)
-        {
-            models.Add(ToStudentScienceModel(studentScience));
-        }
-        return models;
-    }
-
 }
