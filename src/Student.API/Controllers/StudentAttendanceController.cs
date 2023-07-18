@@ -8,12 +8,12 @@ namespace Student.API.Controllers;
 
 [Route("api/students/{username}/attendances")]
 [ApiController]
-public class StudentAttendanceController : ControllerBase
+public class StudentAttendancesController : ControllerBase
 {
     private readonly IStudentAttendanceManager _studentAttendanceManager;
     private readonly IStudentManager _studentManager;
 
-    public StudentAttendanceController(IStudentAttendanceManager studentAttendanceManager,
+    public StudentAttendancesController(IStudentAttendanceManager studentAttendanceManager,
         IStudentManager studentManager)
     {
         _studentAttendanceManager = studentAttendanceManager;
