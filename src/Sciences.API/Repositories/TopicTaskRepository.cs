@@ -45,7 +45,7 @@ public class TopicTaskRepository: ITopicTaskRepository
         var topic = await GetTopicByDate(scienceId, date);
         var task = topic.Tasks.FirstOrDefault(t => t.Id == taskId);
         if (task == null) 
-            throw new TopicNotFoundException(task.Id.ToString());
+            throw new TopicNotFoundException(taskId.ToString());
         _context.TopicTasks.Remove(task);
         await _context.SaveChangesAsync();
     }
@@ -55,7 +55,7 @@ public class TopicTaskRepository: ITopicTaskRepository
         var science = await _scienceRepository.GetScienceById(scienceId);
         var topic = science.Topics!.FirstOrDefault(t => t.Date == date);
         if (topic == null)
-            throw new TopicNotFoundException(topic.Id.ToString());
+            throw new TopicNotFoundInDateException(date.ToString("M"));
         return topic;
     }
 }
