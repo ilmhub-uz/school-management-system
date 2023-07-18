@@ -3,8 +3,6 @@ using Student.API.Context;
 using Student.API.Entities;
 using Student.API.Exceptions;
 using Student.API.Repositories.Interfaces;
-using System.Collections;
-using System.Runtime.CompilerServices;
 
 namespace Student.API.Repositories;
 
@@ -24,6 +22,11 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
     {
         _studentDbContext.TaskResults.Add(result);
         await _studentDbContext.SaveChangesAsync();
+    }
+
+    public Task<StudentTaskResult> GetTaskResultAsync(Guid taskId, Guid studentId)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task DeleteTaskResultAsync(StudentTaskResult result)

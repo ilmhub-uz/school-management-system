@@ -1,16 +1,16 @@
 version: '3.7'
 
 services:
-  identity:
-    image: identity
-    container_name: identity
-    depends_on:
-        - identity_db
-    build:
-        context: .
-        dockerfile: Dockerfile.IdentityApi
-    ports:
-        - '3030:80'
+  #identity:
+  #  image: identity
+  #  container_name: identity
+  #  depends_on:
+  #      - identity_db
+  #  build:
+  #      context: .
+  #      dockerfile: Dockerfile.IdentityApi
+  #  ports:
+  #      - '3030:80'
   identity_db:
     image: postgres:latest
     container_name: identity_db
@@ -21,16 +21,16 @@ services:
     restart: always
     volumes:
       - identity_db_data:/var/lib/postgresql/data/
-  science:
-    image: science
-    container_name: science
-    depends_on:
-        - science_db
-    build:
-        context: .
-        dockerfile: Dockerfile.ScienceApi
-    ports:
-        - '3031:80'
+  #science:
+  #  image: science
+  #  container_name: science
+  #  depends_on:
+  #      - science_db
+  #  build:
+  #      context: .
+  #      dockerfile: Dockerfile.ScienceApi
+  #  ports:
+  #      - '3031:80'
   science_db:
     image: postgres:latest
     container_name: science_db
@@ -41,16 +41,16 @@ services:
     restart: always
     volumes:
       - science_db_data:/var/lib/postgresql/data/
-  student:
-    image: student
-    container_name: student
-    depends_on:
-        - student_db
-    build:
-        context: .
-        dockerfile: Dockerfile.StudentApi
-    ports:
-        - '3032:80'
+  #student:
+  #  image: student
+  #  container_name: student
+  #  depends_on:
+  #      - student_db
+  #  build:
+  #      context: .
+  #      dockerfile: Dockerfile.StudentApi
+  #  ports:
+  #      - '3032:80'
   student_db:
     image: postgres:latest
     container_name: student_db
@@ -62,16 +62,16 @@ services:
     volumes:
       - student_db_data:/var/lib/postgresql/data/
 
-  chat:
-    image: chat
-    container_name: chat
-    depends_on:
-        - chat_db
-    build:
-        context: .
-        dockerfile: Dockerfile.ChatApi
-    ports:
-        - '3033:80'
+  #chat:
+  #  image: chat
+  #  container_name: chat
+  #  depends_on:
+  #      - chat_db
+  #  build:
+  #      context: .
+  #      dockerfile: Dockerfile.ChatApi
+  #  ports:
+  #      - '3033:80'
   chat_db:
     image: postgres:latest
     container_name: chat_db

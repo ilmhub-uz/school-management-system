@@ -1,8 +1,8 @@
-using Microsoft.Extensions.Configuration;
+using SchoolManagement.Common.Interfaces;
+using SchoolManagement.Common.Services;
 using Serilog;
 using Serilog.Events;
 using Student.API.Extension;
-using Student.API.HelperEntities.PaginationEntities;
 using Student.API.MiddleWares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,15 +17,22 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddStudentDbContext(builder.Configuration);
 builder.Services.AddModelValidators();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IFileManager, FileManager>();
+builder.Services.AddScoped<IUserProvider, UserProvider>();
 builder.Services.AddManagers();
+builder.Services.AddRepositories();
 
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseSwagger();
+//app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
