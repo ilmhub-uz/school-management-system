@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
 	options.UseSnakeCaseNamingConvention()
-		.UseNpgsql(builder.Configuration.GetConnectionString("identity_db"));
+		.UseNpgsql(builder.Configuration.GetConnectionString("IdentityDb"));
 });
 
 builder.Services.AddJwt(builder.Configuration);
