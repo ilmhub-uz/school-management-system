@@ -18,6 +18,7 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
     {
         return await _studentDbContext.StudentAttendances.ToListAsync();
     }
+
     public async Task<StudentAttendance> GetStudentAttendanceAsync(Guid studentId,Guid topicId)
     {
         var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId== topicId && s.StudentId == studentId);

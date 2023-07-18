@@ -14,6 +14,5 @@ public class StudentTaskResultConfiguration : IEntityTypeConfiguration<StudentTa
 
 		builder.Property(s=>s.Content).IsRequired(true);
 		builder.Property(s => s.CreatedAt).IsRequired(true);
-
-	}
+    }
 }

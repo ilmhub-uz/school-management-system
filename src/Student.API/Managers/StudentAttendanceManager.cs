@@ -3,12 +3,11 @@ using Student.API.Exceptions;
 using Student.API.FluentValidators;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
-using Student.API.Repositories;
 using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Managers;
 
-public class StudentAttendanceManager:IStudentAttendanceManager
+public class StudentAttendanceManager : IStudentAttendanceManager
 {
     private readonly IStudentAttendanceRepository _studentAttendanceRepos;
     public StudentAttendanceManager(IStudentAttendanceRepository studentAttendanceRepos)
