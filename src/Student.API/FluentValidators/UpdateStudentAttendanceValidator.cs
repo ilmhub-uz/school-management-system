@@ -7,7 +7,7 @@ public class UpdateStudentAttendanceValidator:AbstractValidator<UpdateStudentAtt
 {
     public UpdateStudentAttendanceValidator()
     {
-        RuleFor(s => s.TopicId).NotNull();
-        RuleFor(s => s.StudentId).NotNull();
+        RuleFor(s => s.Attend).NotNull();
+        
     }
 }
