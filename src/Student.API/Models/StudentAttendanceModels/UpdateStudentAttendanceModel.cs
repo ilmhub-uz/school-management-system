@@ -2,7 +2,5 @@
 
 public class UpdateStudentAttendanceModel
 {
-    public required Guid TopicId { get; set; }
-    public required Guid StudentId { get; set; }
     public bool Attend { get; set; }
 }
