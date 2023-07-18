@@ -32,7 +32,7 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
         await _studentDbContext.SaveChangesAsync();
     }
 
-    public async Task<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid taskId, Guid studentId)
+    public async Task<StudentTaskResult> GetTaskResultAsync(Guid taskId, Guid studentId)
     {
         var result = await _studentDbContext.TaskResults.FirstOrDefaultAsync(r => r.TaskId == taskId && r.StudentId == studentId);
         if(result == null)
@@ -43,7 +43,6 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
         return result;
     }
 
-    
 
     public async Task UpdateTaskResultAsync(StudentTaskResult result)
     {
