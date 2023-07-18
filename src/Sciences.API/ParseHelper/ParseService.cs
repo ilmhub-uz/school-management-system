@@ -74,18 +74,27 @@ public class ParseService
         
     }
 
-    public static List<TopicTaskModel> ParseToTopicTaskList(List<TopicTask> list)
+    public static List<TopicTaskModel> ParseToTopicTaskList(List<TopicTask>? list)
     {
-        var models = new List<TopicTaskModel>();
-        foreach (var item in list)
+        if (list == null || list.Count == 0)
         {
-            models.Add(ParseToTopicTaskModel(item));
+            return new List<TopicTaskModel>();
         }
-        return models;
+        else
+        {
+            var models = new List<TopicTaskModel>();
+            foreach (var item in list)
+            {
+                models.Add(ParseToTopicTaskModel(item));
+            }
+
+            return models;
+        }
     }
 
     public static TopicTaskModel ParseToTopicTaskModel(TopicTask task)
     {
+        
         var model = new TopicTaskModel
         {
             Id = task.Id,
