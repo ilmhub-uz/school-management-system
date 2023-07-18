@@ -25,9 +25,28 @@ services:
   sciences:
     image: sciences
     container_name: sciences
+    environment:
+      - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
     build:
       context: .
       dockerfile: Dockerfile.Sciences
+    depends_on:
+      - sciences_db
+    networks:
+      - main
+
+  sciences_db:
+    image: postgres:latest
+    container_name: sciences_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - sciences_db_data:/var/lib/postgresql/data/
+    networks:
+      - main
 
   student-api:
     image: student-api
@@ -42,3 +61,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.Sciences
+
+volumes:
+  sciences_db_data:
+
+networks:
+  main:
