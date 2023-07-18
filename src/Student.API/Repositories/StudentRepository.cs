@@ -23,7 +23,8 @@ public class StudentRepository : IStudentRepository
 
     public async Task<IEnumerable<Student>> GetStudentsAsync(StudentFilterPagination pageFilter)
     {
-        return await _studentDbContext.Students.ToPagedListAsync(_contextHelper, pageFilter);
+        var students = await _studentDbContext.Students.ToPagedListAsync(_contextHelper, pageFilter);
+        return students;
     }
 
     public async Task AddStudentAsync(Student student)
