@@ -18,7 +18,6 @@ public static partial class ServiceCollectionExtensions
         services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidator>();
 	    services.AddScoped<IValidator<UpdateStudentAttendanceModel>, UpdateStudentAttendanceValidator>();
 	    services.AddScoped<IValidator<UpdateStudentModel>, UpdateStudentModelValidator>();
-	    services.AddScoped<IValidator<UpdateStudentScienceModel>, UpdateStudentScienceValidator>();
     }
 
     public static void AddManagers(this IServiceCollection services)
