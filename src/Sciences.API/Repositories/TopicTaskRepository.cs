@@ -2,7 +2,6 @@
 using Sciences.API.Entities;
 using Sciences.API.Exceptions;
 using Sciences.API.Repositories.Interfaces;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Sciences.API.Repositories;
 

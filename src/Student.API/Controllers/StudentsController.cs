@@ -52,14 +52,14 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{studentId}/update")]
+    [HttpGet("{studentId}")]
     public async Task<IActionResult> GetStudentById(Guid studentId)
     {
         var student = await _studentManager.GetStudentByIdAsync(studentId);
         return Ok(student);
     }
 
-    [HttpGet("{username}")]
+    [HttpGet("{username}/Username")]
     public async Task<IActionResult> GetStudentByUsername(string username)
     {
         var student = await _studentManager.GetStudentByUserNameAsync(username);

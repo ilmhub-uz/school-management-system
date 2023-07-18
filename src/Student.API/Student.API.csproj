@@ -32,4 +32,8 @@
     <ProjectReference Include="..\SchoolManagment.Common\SchoolManagement.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\StudentImages\" />
+  </ItemGroup>
+
 </Project>
