@@ -1,14 +1,14 @@
-﻿using Microsoft.OpenApi.Models;
+﻿
 using Student.API.Entities;
 using Student.API.Exceptions;
 using Student.API.FluentValidators;
+using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentScienceModels;
-using Student.API.Repositories;
 using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Managers
 {
-    public class StudentScienceManager
+    public class StudentScienceManager:IStudentScienceManager
     {
         private readonly IStudentScienceRepository _studentScienceRepos;
         public StudentScienceManager(IStudentScienceRepository studentScienceRepos)
@@ -22,18 +22,13 @@ namespace Student.API.Managers
 
             return  ToStudentScienceModels(studentScience);
         }
-        public async Task<StudentScienceModel> AddStudentScienceAsync(AddStudentScienceModel model)
+        public async Task<StudentScienceModel> AddStudentScienceAsync(Guid studentId)
         {
-            var validator = new AddStudentScienceValidator();
-            var result = validator.Validate(model);
-            if (!result.IsValid)
-            {
-                throw new AddStudentAttendanceValiadtionIsNotValid("Invalid input try again");
-            }
+            
             var studentScience = new StudentScience()
             {
-                ScienceId = model.ScienceId,
-                StudentId = model.StudentId,
+                ScienceId = Guid.NewGuid(),
+                StudentId = studentId,
                 CreatedAt = DateTime.UtcNow
             };
             await _studentScienceRepos.AddStudentScienceAsync(studentScience);
@@ -47,7 +42,7 @@ namespace Student.API.Managers
             return ToStudentScienceModel(studentScience);
         }
 
-        public async Task<StudentScienceModel> UpdateStudentScienceAsync(UpdateStudentScienceModel model)
+        public async Task UpdateStudentScienceAsync(Guid studentId, Guid scienceId,UpdateStudentScienceModel model)
         {
             var validator = new UpdateStudentScienceValidator();
             var result = await validator.ValidateAsync(model);
@@ -55,16 +50,12 @@ namespace Student.API.Managers
             {
                 throw new UpdateStudentScienceValidationIsNotValid("Invalid update input try again");
             };
-            var studentScience = new StudentScience()
-            {
-                ScienceId = model.ScienceId,
-                StudentId = model.StudentId,
-                CreatedAt = model.CreateAt,
-                UpdatedAt = DateTime.UtcNow,
-                Status = model.Status 
-            };
+            var studentScience = await _studentScienceRepos.GetStudentScienceByScienceIdAsync(scienceId, studentId);
+
+            studentScience.Status = model.Status;
+            studentScience.UpdatedAt = DateTime.UtcNow;
+
             await _studentScienceRepos.UpdateStudentScienceAsync(studentScience);
-            return ToStudentScienceModel(studentScience);
         }
 
         private StudentScienceModel ToStudentScienceModel(StudentScience studentScience)

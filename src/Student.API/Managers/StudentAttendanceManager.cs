@@ -1,13 +1,14 @@
 ﻿using Student.API.Entities;
 using Student.API.Exceptions;
 using Student.API.FluentValidators;
+using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
 using Student.API.Repositories;
 using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Managers;
 
-public class StudentAttendanceManager
+public class StudentAttendanceManager:IStudentAttendanceManager
 {
     private readonly IStudentAttendanceRepository _studentAttendanceRepos;
     public StudentAttendanceManager(IStudentAttendanceRepository studentAttendanceRepos)
@@ -21,18 +22,13 @@ public class StudentAttendanceManager
 
         return ToStudentAttendanceModels(studentAttendances);
     }
-    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(AddStudentAttendanceModel model)
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId)
     {
-        var validator = new AddStudentAttendanceValidator();
-        var result = validator.Validate(model);
-        if (!result.IsValid)
-        {
-            throw new AddStudentAttendanceValiadtionIsNotValid("Invalid input try again");
-        }
+        
         var studentAttendance = new StudentAttendance()
         {
-            StudentId = model.StudentId,
-            TopicId = model.TopicId,
+            StudentId = studentId,
+            TopicId = Guid.NewGuid(),
             Attend = true
         };
 
@@ -42,7 +38,7 @@ public class StudentAttendanceManager
 
     }
 
-    public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(UpdateStudentAttendanceModel model)
+    public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId,Guid topicId,UpdateStudentAttendanceModel model)
     {
         var validator = new UpdateStudentAttendanceValidator();
         var result = validator.Validate(model);
@@ -50,7 +46,7 @@ public class StudentAttendanceManager
         {
             throw new UpdateStudentAttendanceValidationInValid("Invalid update input try again");
         }
-        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceAsync(model.StudentId, model.TopicId);
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceAsync(studentId, topicId);
 
         studentAttendance.Attend = model.Attend;
 
@@ -59,7 +55,7 @@ public class StudentAttendanceManager
         return ToStudentAttendanceModel(studentAttendance);
     }
 
-    private StudentAttendanceModel ToStudentAttendanceModel(StudentAttendance? studentAttendance)
+    private StudentAttendanceModel ToStudentAttendanceModel(StudentAttendance studentAttendance)
     {
         StudentAttendanceModel studentAttendanceModel = new StudentAttendanceModel()
         {
