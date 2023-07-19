@@ -26,7 +26,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddStudent([FromForm] CreateStudentModel model,
+    public async Task<IActionResult> AddStudent([FromBody] CreateStudentModel model,
         [FromServices] IValidator<CreateStudentModel> validator)
     {
         var result = await validator.ValidateAsync(model);
@@ -39,7 +39,7 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-    [HttpPut("{studentId}")]
+    [HttpPut("{studentId:guid}")]
     public async Task<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model,
         [FromServices] IValidator<UpdateStudentModel> validator)
     {
@@ -52,21 +52,21 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{studentId}")]
+    [HttpGet("{studentId:guid}", Name = "GetStudentById")]
     public async Task<IActionResult> GetStudentById(Guid studentId)
     {
         var student = await _studentManager.GetStudentByIdAsync(studentId);
         return Ok(student);
     }
 
-    [HttpGet("{username}/Username")]
+    [HttpGet("{username:alpha}", Name = "GetStudentByUsername")]
     public async Task<IActionResult> GetStudentByUsername(string username)
     {
         var student = await _studentManager.GetStudentByUserNameAsync(username);
         return Ok(student);
     }
 
-    [HttpDelete("{studentId}")]
+    [HttpDelete("{studentId:guid}", Name = "DeleteStudent")]
     public async Task<IActionResult> DeleteStudent(Guid studentId)
     {
         await _studentManager.DeleteStudentAsync(studentId);
