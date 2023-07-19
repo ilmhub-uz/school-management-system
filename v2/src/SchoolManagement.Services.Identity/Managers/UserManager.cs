@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Identity.Context;
+using SchoolManagement.Services.Identity.Entities;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Helpers;
 using SchoolManagement.Services.Identity.Models;
@@ -18,7 +19,7 @@ public class UserManager : IUserManager
 
 	public async ValueTask<IEnumerable<UserModel>> GetUsersAsync(UserFilter filter)
     {
-        var query = _identityDbContext.Users.AsQueryable();
+        var query = _identityDbContext.Users.AsQueryable().Where(u => u.Status != UserStatus.Deleted);
 
         if (!string.IsNullOrWhiteSpace(filter.UserName)) 
             query = query.Where(u => u.Username.Contains(filter.UserName));

@@ -12,7 +12,7 @@ using SchoolManagement.Services.Identity.Context;
 namespace SchoolManagement.Services.Identity.Context.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20230719125855_InitDb")]
+    [Migration("20230719144144_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace SchoolManagement.Services.Identity.Context.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("PasswordHash")
@@ -64,8 +64,12 @@ namespace SchoolManagement.Services.Identity.Context.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_at");
 
                     b.Property<string>("Username")
@@ -108,14 +112,14 @@ namespace SchoolManagement.Services.Identity.Context.Migrations
                     b.HasOne("SchoolManagement.Services.Identity.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("fk_user_roles_roles_role_id");
 
                     b.HasOne("SchoolManagement.Services.Identity.Entities.User", "User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("fk_user_roles_users_user_id");
 

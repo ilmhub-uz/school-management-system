@@ -20,15 +20,21 @@ public class SciencesDbContext : DbContext
         modelBuilder.Entity<Science>(entity =>
         {
             entity.HasKey(e => e.Id);
+
             entity.HasMany(e => e.Topics)
                 .WithOne(e => e.Science)
-                .HasForeignKey(e => e.ScienceId);
+                .HasForeignKey(e => e.ScienceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             entity.HasIndex(e => e.Name)
                 .IsUnique();
+
             entity.Property(e => e.Name)
                 .HasMaxLength(50);
+
             entity.Property(e => e.Title)
                 .HasMaxLength(60);
+
             entity.Property(e => e.Description)
                 .HasMaxLength(255);
         });
@@ -36,15 +42,21 @@ public class SciencesDbContext : DbContext
         modelBuilder.Entity<Topic>(entity =>
         {
             entity.HasKey(e => e.Id);
+
             entity.HasMany(e => e.Tasks)
                 .WithOne(e => e.Topic)
-                .HasForeignKey(e => e.TopicId);
+                .HasForeignKey(e => e.TopicId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             entity.HasIndex(e => e.Name)
                 .IsUnique();
+
             entity.Property(e => e.Name)
                 .HasMaxLength(50);
+
             entity.Property(e => e.Title)
                 .HasMaxLength(60);
+
             entity.Property(e => e.Description)
                 .HasMaxLength(255);
         });
@@ -52,10 +64,17 @@ public class SciencesDbContext : DbContext
         modelBuilder.Entity<TopicTask>(entity =>
         {
             entity.HasKey(e => e.Id);
+
             entity.Property(e => e.Title)
                 .HasMaxLength(60);
+
             entity.Property(e => e.Description)
                 .HasMaxLength(255);
+
+            entity.HasOne(e => e.Topic)
+	            .WithMany(e => e.Tasks)
+	            .HasForeignKey(e => e.TopicId)
+	            .OnDelete(DeleteBehavior.NoAction);
         });
     }
 

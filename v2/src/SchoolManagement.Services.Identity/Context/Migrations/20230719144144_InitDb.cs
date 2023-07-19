@@ -30,8 +30,9 @@ namespace SchoolManagement.Services.Identity.Context.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     username = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     password_hash = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,14 +53,12 @@ namespace SchoolManagement.Services.Identity.Context.Migrations
                         name: "fk_user_roles_roles_role_id",
                         column: x => x.role_id,
                         principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_user_roles_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(

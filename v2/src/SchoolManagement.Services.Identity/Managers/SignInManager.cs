@@ -18,7 +18,8 @@ public class SignInManager : ISignInManager
 	public SignInManager(
 		ITokenManager tokenManager, 
 		IUserProvider userProvider, 
-		IUserProducer userProducer, IdentityDbContext identityDbContext)
+		IUserProducer userProducer,
+		IdentityDbContext identityDbContext)
 	{
 		_tokenManager = tokenManager;
 		_userProvider = userProvider;
@@ -49,7 +50,6 @@ public class SignInManager : ISignInManager
         var user = new User()
         {
             Username = createUserModel.Username,
-            PasswordHash = createUserModel.Password,
             CreatedAt = DateTime.UtcNow,
             Roles = new List<UserRole>()
         };
@@ -84,7 +84,14 @@ public class SignInManager : ISignInManager
     {
         var user = await _identityDbContext.Users.FirstOrDefaultAsync(u => u.Username == loginUserModel.Username);
 
-        if (user == null || user.PasswordHash != loginUserModel.Password)
+        if (user == null)
+        {
+	        throw new LoginValidationException();
+        }
+
+		var result = new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, loginUserModel.Password);
+
+        if (result != PasswordVerificationResult.Success)
         {
             throw new LoginValidationException();
         }

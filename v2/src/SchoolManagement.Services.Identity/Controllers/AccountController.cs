@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Managers;
@@ -12,7 +13,8 @@ public class AccountController : ControllerBase
 {
 	private readonly ISignInManager _signInManager;
 
-	public AccountController(ISignInManager signInManager)
+	public AccountController(
+		ISignInManager signInManager)
 	{
 		_signInManager = signInManager;
 	}
@@ -35,8 +37,16 @@ public class AccountController : ControllerBase
 
     [HttpPost("register")]
     [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
-    public async ValueTask<IActionResult> RegisterAsync([FromBody] CreateUserModel createUserModel)
+    public async ValueTask<IActionResult> RegisterAsync(
+	    [FromBody] CreateUserModel createUserModel,
+        [FromServices] IValidator<CreateUserModel> validator)
     {
+	    var validationResult = await validator.ValidateAsync(createUserModel);
+	    if (!validationResult.IsValid)
+	    {
+		    return BadRequest(validationResult.Errors);
+	    }
+
         try
         {
             var user = await _signInManager.RegisterAsync(createUserModel);
