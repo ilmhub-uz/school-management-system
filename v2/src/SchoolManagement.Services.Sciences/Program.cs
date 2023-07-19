@@ -1,5 +1,9 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Services.Sciences.Behaviors;
+using SchoolManagement.Services.Sciences.Commands;
 using SchoolManagement.Services.Sciences.Context;
+using SchoolManagement.Services.Sciences.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +13,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SciencesDbContext>(options =>
 {
-    options.UseSnakeCaseNamingConvention()
-        .UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
+	options.UseSnakeCaseNamingConvention()
+		.UseInMemoryDatabase("sciences_db");
+		//.UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
 });
+
+builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
+//builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IPipelineBehavior<CreateScienceCommand, ScienceModel>, CreateScienceCommandBehavior>();
 
 var app = builder.Build();
 
