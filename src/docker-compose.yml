@@ -37,7 +37,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5433:5432"
+      - "5436:5432"
     restart: always
     volumes:
       - science_db_data:/var/lib/postgresql/data/

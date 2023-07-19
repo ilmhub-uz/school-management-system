@@ -12,7 +12,7 @@ using Sciences.API.Context;
 namespace Sciences.API.Migrations
 {
     [DbContext(typeof(ScienceDbContext))]
-    [Migration("20230715131721_Init")]
+    [Migration("20230719213523_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -21,6 +21,9 @@ namespace Sciences.API.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -144,7 +147,7 @@ namespace Sciences.API.Migrations
             modelBuilder.Entity("Sciences.API.Entities.TopicTask", b =>
                 {
                     b.HasOne("Sciences.API.Entities.Topic", "Topic")
-                        .WithMany()
+                        .WithMany("Tasks")
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,6 +158,11 @@ namespace Sciences.API.Migrations
             modelBuilder.Entity("Sciences.API.Entities.Science", b =>
                 {
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("Sciences.API.Entities.Topic", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

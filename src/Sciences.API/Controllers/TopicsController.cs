@@ -22,7 +22,7 @@ namespace Sciences.API.Controllers
             return Ok(topics);
         }
 
-        [HttpPost("{scienceId}")]
+        [HttpPost]
         public async Task<IActionResult> AddTopic(Guid scienceId, CreateTopicModel model)
         {
             var topic = await _topicManager.AddTopicAsync(scienceId, model);
