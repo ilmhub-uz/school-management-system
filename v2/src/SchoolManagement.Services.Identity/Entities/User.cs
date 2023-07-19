@@ -9,5 +9,5 @@ public class User : Entity, IAuditable
 	public DateTime CreatedAt { get; set; }
 	public DateTime? UpdatedAt { get; set; }
 
-	public virtual ICollection<UserRole>? Roles { get; set; }
+    public virtual ICollection<UserRole> Roles { get; set; } = null!;
 }

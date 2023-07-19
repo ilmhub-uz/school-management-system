@@ -32,7 +32,7 @@ public class SignInManager : ISignInManager
 
         if (user == null)
         {
-            throw new NotFoundException();
+            throw new NotFoundException("User");
         }
 
         return user.ToModel();
@@ -46,16 +46,31 @@ public class SignInManager : ISignInManager
             throw new UsernameExistsException();
         }
 
-        // TODO: validate roles exists in database, add roles to user
-
         var user = new User()
         {
             Username = createUserModel.Username,
             PasswordHash = createUserModel.Password,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            Roles = new List<UserRole>()
         };
 
         user.PasswordHash = new PasswordHasher<User>().HashPassword(user, createUserModel.Password);
+
+        if (createUserModel.Roles?.Count() > 0)
+        {
+            if (!await _identityDbContext.Roles.AllAsync(r => createUserModel.Roles.Any(cr => cr == r.Id)))
+            {
+                throw new NotFoundException("Role");
+            }
+
+            foreach (var role in createUserModel.Roles)
+            {
+                user.Roles.Add(new UserRole()
+                {
+                    RoleId = role
+                });
+            }
+        }
 
         _identityDbContext.Users.Add(user);
         await _identityDbContext.SaveChangesAsync();
