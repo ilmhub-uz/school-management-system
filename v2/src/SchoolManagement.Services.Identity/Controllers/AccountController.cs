@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Managers;
 using SchoolManagement.Services.Identity.Models;
@@ -17,6 +18,7 @@ public class AccountController : ControllerBase
 	}
 
     [HttpGet]
+    [Authorize]
     [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
     public async ValueTask<IActionResult> GetUserAsync()
     {
