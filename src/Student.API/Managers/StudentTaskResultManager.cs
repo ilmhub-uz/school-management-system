@@ -1,7 +1,4 @@
-﻿using Student.API.Context;
-using Student.API.Entities;
-using Student.API.Exceptions;
-using Student.API.FluentValidators;
+﻿using Student.API.Entities;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentTaskResults;
 using Student.API.Repositories.Interfaces;

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Student.API.Context;
 using Student.API.Entities;
 using Student.API.Exceptions;
@@ -32,7 +31,6 @@ public class StudentRepository : IStudentRepository
     {
         _studentDbContext.Students.Add(student);
         await _studentDbContext.SaveChangesAsync();
-
     }
 
     public async Task DeleteStudentAsync(Guid studentId)

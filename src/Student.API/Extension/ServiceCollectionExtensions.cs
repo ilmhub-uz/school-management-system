@@ -5,7 +5,6 @@ using Student.API.Managers;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
 using Student.API.Models.StudentModels;
-using Student.API.Models.StudentScienceModels;
 using Student.API.Repositories;
 using Student.API.Repositories.Interfaces;
 
