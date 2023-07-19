@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Common", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudentApi", "StudentApi", "{A793159C-FF52-4824-A0AB-B6E8533C29D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student.Api_xUnitTests", "Student.Api_xUnitTests\Student.Api_xUnitTests.csproj", "{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student.Api_xUnitTests", "Student.Api_xUnitTests\Student.Api_xUnitTests.csproj", "{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
