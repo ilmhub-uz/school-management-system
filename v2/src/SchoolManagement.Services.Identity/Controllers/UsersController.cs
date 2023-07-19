@@ -24,7 +24,7 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{username:string}", Name = "GetUserByUsername")]
+    [HttpGet("{username:alpha}", Name = "GetUserByUsername")]
     [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
     public async ValueTask<IActionResult> GetUserAsync(string username)
     {
