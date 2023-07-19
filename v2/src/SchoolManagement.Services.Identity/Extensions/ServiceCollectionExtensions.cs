@@ -45,7 +45,7 @@ public static class ServiceCollectionExtensions
         {
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
-                Description = @"JWT Bearer. : \Authorization: Bearer {token}\",
+                Description = @"JWT Bearer. : Authorization: Bearer {token}",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey
