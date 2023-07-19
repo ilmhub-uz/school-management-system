@@ -1,7 +1,6 @@
-﻿namespace Student.API.Exceptions
+﻿namespace Student.API.Exceptions;
+
+public class StudentAttendanceNotFoundException:Exception
 {
-    public class StudentAttendanceNotFoundException:Exception
-    {
-        public StudentAttendanceNotFoundException(string message) : base(message) { }
-    }
+    public StudentAttendanceNotFoundException(string message) : base(message) { }
 }

@@ -16,7 +16,5 @@ public class StudentConfiguration : IEntityTypeConfiguration<Entities.Student>
         builder.Property(s => s.CreatedAt).IsRequired(true);
         builder.HasIndex(s => s.Username).IsUnique();
         builder.HasIndex(s => s.PhoneNumber).IsUnique();
-
-
     }
 }

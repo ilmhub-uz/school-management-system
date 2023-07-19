@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Student.API.Entities;
-using System.Threading.Tasks;
+﻿using Student.API.Entities;
 
 namespace Student.API.Repositories.Interfaces;
 
