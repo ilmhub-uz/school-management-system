@@ -8,7 +8,7 @@ using Student.API.MiddleWares;
 var builder = WebApplication.CreateBuilder(args);
 
 var logger = new LoggerConfiguration().WriteTo
-    .File("StudentLogFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day).CreateLogger();
+    .File("Loggers/StudentLogFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day).CreateLogger();
 
 builder.Logging.AddSerilog(logger);
 builder.Services.AddControllers();

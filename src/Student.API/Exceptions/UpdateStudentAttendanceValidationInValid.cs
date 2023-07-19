@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Student.API.Exceptions;
+﻿namespace Student.API.Exceptions;
 
 public class UpdateStudentAttendanceValidationInValid:Exception
 {
