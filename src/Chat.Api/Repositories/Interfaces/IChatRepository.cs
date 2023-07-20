@@ -1,6 +1,4 @@
-﻿using Chat.Api.Entities;
-
-namespace Chat.Api.Repositories.Interfaces;
+﻿namespace Chat.Api.Repositories.Interfaces;
 
 public interface IChatRepository
 {

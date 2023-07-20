@@ -29,7 +29,7 @@ public class MessageRepository : IMessageRepository
     public async Task<Message?> GetMessageById(int id)
     {
         var message = await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
-        
+
         return message;
     }
 

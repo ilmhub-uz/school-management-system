@@ -71,7 +71,7 @@ public class ParseService
             }
             return list;
         }
-        
+
     }
 
     public static List<TopicTaskModel> ParseToTopicTaskList(List<TopicTask>? list)
@@ -94,7 +94,7 @@ public class ParseService
 
     public static TopicTaskModel ParseToTopicTaskModel(TopicTask task)
     {
-        
+
         var model = new TopicTaskModel
         {
             Id = task.Id,

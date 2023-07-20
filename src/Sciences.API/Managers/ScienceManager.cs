@@ -15,7 +15,7 @@ public class ScienceManager
     {
         _scienceRepository = scienceRepository;
     }
-    
+
     public async Task<List<ScienceModel>> GetSciencesAsync()
     {
         var sciences = await _scienceRepository.GetSciences();
@@ -36,11 +36,11 @@ public class ScienceManager
             Name = science.Name,
             Title = science.Title
         };
-        await  _scienceRepository.AddScience(model);
+        await _scienceRepository.AddScience(model);
         return ParseService.ParseToScienceModel(model);
     }
 
-    public async Task<ScienceModel> UpdateScienceAsync(Guid scienceId,UpdateScienceModel science)
+    public async Task<ScienceModel> UpdateScienceAsync(Guid scienceId, UpdateScienceModel science)
     {
         var model = await _scienceRepository.GetScienceById(scienceId);
         model.Description = science.Description;

@@ -30,7 +30,7 @@ public class ChatRepository : IChatRepository
         var chat = await _context.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
         return chat;
     }
-    
+
 
     public async Task<List<Entities.Chat>?> GetChats()
     {

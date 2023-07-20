@@ -8,8 +8,6 @@ using Chat.Api.Repositories;
 using Chat.Api.Repositories.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
-using Serilog.Events;
 
 namespace Chat.Api.Extensions;
 

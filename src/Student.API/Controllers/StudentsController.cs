@@ -4,7 +4,6 @@ using Student.API.Exceptions;
 using Student.API.HelperEntities.PaginationEntities;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentModels;
-using System;
 
 namespace Student.API.Controllers;
 
@@ -20,7 +19,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetStudents([FromQuery] StudentFilterPagination filterPagination)    
+    public async Task<IActionResult> GetStudents([FromQuery] StudentFilterPagination filterPagination)
     {
         try
         {

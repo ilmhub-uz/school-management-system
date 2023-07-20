@@ -74,7 +74,7 @@ public class StudentManager : IStudentManager
 
         if (model.StudentImage is not null)
         {
-            if(student.PhotoUrl is not null)
+            if (student.PhotoUrl is not null)
                 _fileManager.DeleteFile(student.PhotoUrl);
 
             student.PhotoUrl = await _fileManager.SaveFileAsync(model.StudentImage, ImageFolderName);

@@ -25,8 +25,8 @@ namespace Student.API.Repositories
 
         public async Task<StudentScience> GetStudentScienceByScienceIdAsync(Guid scienceId, Guid studentId)
         {
-          var studentScience = await _studentDbContext.StudentSciences.FirstOrDefaultAsync(s => s.ScienceId == scienceId&& s.StudentId == studentId);
-            if(studentScience == null)
+            var studentScience = await _studentDbContext.StudentSciences.FirstOrDefaultAsync(s => s.ScienceId == scienceId && s.StudentId == studentId);
+            if (studentScience == null)
             {
                 throw new StudentScienceNotFoundException();
             }

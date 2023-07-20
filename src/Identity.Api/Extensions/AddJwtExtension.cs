@@ -35,14 +35,14 @@ public static class AddJwtExtension
                         {
                             var accesToken = context.Request.Query["token"];
                             context.Token = accesToken;
-                           
-                         /* var acesToken = context.Request.Query["token"];
-                            var path = context.HttpContext.Request.Path;
-                            if(!string.IsNullOrEmpty(accesToken)
-                                                &&path.StartsWithSegments("/hubs"))
-                            {
-                                context.Token = accesToken;
-                            }*/
+
+                            /* var acesToken = context.Request.Query["token"];
+                               var path = context.HttpContext.Request.Path;
+                               if(!string.IsNullOrEmpty(accesToken)
+                                                   &&path.StartsWithSegments("/hubs"))
+                               {
+                                   context.Token = accesToken;
+                               }*/
                         }
                     }
                 };

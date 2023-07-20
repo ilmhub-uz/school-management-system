@@ -6,7 +6,7 @@ using Sciences.API.Repositories.Interfaces;
 
 namespace Sciences.API.Repositories;
 
-public class TopicRepository:ITopicRepository
+public class TopicRepository : ITopicRepository
 {
 
     private readonly ScienceDbContext _context;
@@ -29,8 +29,8 @@ public class TopicRepository:ITopicRepository
 
     public async Task UpdateTopic(Topic topic)
     {
-         _context.Topics.Update(topic);
-         await _context.SaveChangesAsync();
+        _context.Topics.Update(topic);
+        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteTopic(Topic topic)
@@ -41,7 +41,7 @@ public class TopicRepository:ITopicRepository
 
     public async Task<Topic> GetTopicById(Guid topicId)
     {
-        var topic = await _context.Topics.FirstOrDefaultAsync(t=>t.Id == topicId);
+        var topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == topicId);
         if (topic == null)
         {
             throw new TopicNotFoundException(topicId.ToString());

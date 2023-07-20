@@ -1,6 +1,5 @@
 ﻿using Chat.Api.Managers.Interfaces;
 using Chat.Api.Models.ChatModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat.Api.Controllers;
@@ -28,7 +27,7 @@ public class ChatsController : ControllerBase
     public async Task<IActionResult> GetChat(int chatId)
     {
         var chatModel = await _chatManager.GetChat(chatId);
-        if (chatModel == null) 
+        if (chatModel == null)
             return BadRequest("Chat is not found");
 
         return Ok(chatModel);

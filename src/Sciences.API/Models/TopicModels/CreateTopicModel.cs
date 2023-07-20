@@ -1,6 +1,4 @@
-﻿using Sciences.API.Entities;
-
-namespace Sciences.API.Models.TopicModels;
+﻿namespace Sciences.API.Models.TopicModels;
 
 public class CreateTopicModel
 {
