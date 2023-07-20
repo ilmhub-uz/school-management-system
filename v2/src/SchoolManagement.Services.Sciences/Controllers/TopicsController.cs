@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SchoolManagement.Services.Identity.Models;
 using SchoolManagement.Services.Sciences.Commands;
 using SchoolManagement.Services.Sciences.Entities;
 using SchoolManagement.Services.Sciences.Exceptions;

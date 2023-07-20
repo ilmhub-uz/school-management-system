@@ -1,3 +1,3 @@
-﻿namespace SchoolManagement.Services.Identity.Models;
+﻿namespace SchoolManagement.Services.Sciences.Models;
 
 public record Error(string Message);
