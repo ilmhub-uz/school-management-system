@@ -28,6 +28,9 @@ builder.Services.AddMassTransit(configurations =>
     configurations.AddConsumer<UserConsumer>();
 });
 
+builder.Services.AddScoped<IUserManager, UserManager>();
+builder.Services.AddScoped<UserConsumer>();
+
 builder.Services.AddChatServices(builder.Configuration);
 
 var app = builder.Build();
