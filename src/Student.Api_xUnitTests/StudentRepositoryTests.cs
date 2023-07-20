@@ -15,8 +15,10 @@ public class StudentRepositoryTests
 
     public StudentRepositoryTests()
     {
-        var dbContextOptions = new DbContextOptions<StudentDbContext>();
-        _studentDbContext = new StudentDbContext(dbContextOptions);
+        var dbContextOptions = new DbContextOptionsBuilder<StudentDbContext>();
+        dbContextOptions.UseInMemoryDatabase("student_test_db");
+
+        _studentDbContext = new StudentDbContext(dbContextOptions.Options);
 
         IHttpContextAccessor contextAccessor = new HttpContextAccessor();
         var contextHelper = new HttpContextHelper(contextAccessor);

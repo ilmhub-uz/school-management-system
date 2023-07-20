@@ -27,7 +27,7 @@ public class StudentsDbContext : DbContext
             entity.HasOne(e => e.Student)
                 .WithMany(s => s.TasksResults)
                 .HasForeignKey(e => e.StudentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         });
 
         modelBuilder.Entity<StudentScience>(entity =>
@@ -37,7 +37,7 @@ public class StudentsDbContext : DbContext
             entity.HasOne(e => e.Student)
                 .WithMany(s => s.Sciences)
                 .HasForeignKey(e => e.StudentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         });
 
         modelBuilder.Entity<StudentAttendance>(entity =>

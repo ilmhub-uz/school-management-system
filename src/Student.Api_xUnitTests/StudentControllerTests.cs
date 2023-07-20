@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Student.API.HelperEntities.PaginationEntities;
 using Student.API.Models.StudentModels;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Student.Api_xUnitTests;
 
@@ -39,22 +40,19 @@ public class StudentControllerTests
     public async Task AddStudent_Test()
     {
         // Arrange
-        var createStudentModel = new CreateStudentModel
-        {
-            FirstName = "FirstName",
-            LastName = "LastName",
-            PhoneNumber = "1234567",
-            Username = "Username",
-            MiddleName = "MiddleName"
-        };
-
         var request = new HttpRequestMessage(HttpMethod.Post, "api/students");
-        request.Content = JsonContent.Create(createStudentModel);
+        var content = new MultipartFormDataContent();
+        content.Add(new StringContent("ali"), "Username");
+        content.Add(new StringContent("131313"), "PhoneNumber");
+        request.Content = content;
 
         // Act
-        var response = await _httpClient.SendAsync(request);
+		var response = await _httpClient.SendAsync(request);
 
         // Assert
+
+        Assert.True(response.IsSuccessStatusCode);
+
         StudentModel? studentModel = await response.Content.ReadFromJsonAsync<StudentModel>();
 
         Assert.NotNull(studentModel);
@@ -78,11 +76,13 @@ public class StudentControllerTests
         request.Content = JsonContent.Create(updateStudentModel);
 
         // Act
-        var response = await _httpClient.SendAsync(request);
+		var response = await _httpClient.SendAsync(request);
+        //var response = await _httpClient.PutAsJsonAsync($"api/students/{studentId}", updateStudentModel);
 
-        // Assert
 
-        Assert.NotNull(response);
+		// Assert
+
+		Assert.NotNull(response);
         Assert.True(response.IsSuccessStatusCode);
 
         StudentModel? studentModel = await response.Content.ReadFromJsonAsync<StudentModel>();

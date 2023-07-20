@@ -33,7 +33,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddStudent([FromBody] CreateStudentModel model,
+    public async Task<IActionResult> AddStudent([FromForm] CreateStudentModel model,
         [FromServices] IValidator<CreateStudentModel> validator)
     {
         var result = await validator.ValidateAsync(model);

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Students.Context;
+using SchoolManagement.Services.Students.Managers;
+using SchoolManagement.Services.Students.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +11,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<StudentsDbContext>(options =>
 {
-    options.UseSnakeCaseNamingConvention()
-        .UseNpgsql(builder.Configuration.GetConnectionString("StudentsDb"));
+	options.UseSnakeCaseNamingConvention()
+		.UseInMemoryDatabase("students");
+	//.UseNpgsql(builder.Configuration.GetConnectionString("StudentsDb"));
 });
+
+builder.Services.AddScoped<IStudentManager, StudentManager>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 var app = builder.Build();
 
