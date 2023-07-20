@@ -1,6 +1,6 @@
 ﻿namespace Student.API.Exceptions;
 
-public class UpdateStudentTaskResultValidationIsNotValid : Exception
+public class UpdateStudentTaskResultValidationIsNotValidException : Exception
 {
-    public UpdateStudentTaskResultValidationIsNotValid(string message) : base(message) { }
+    public UpdateStudentTaskResultValidationIsNotValidException(string message) : base(message) { }
 }

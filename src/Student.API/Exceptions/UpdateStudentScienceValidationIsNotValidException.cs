@@ -1,6 +1,6 @@
 ﻿namespace Student.API.Exceptions;
 
-public class UpdateStudentScienceValidationIsNotValid : Exception
+public class UpdateStudentScienceValidationIsNotValidException : Exception
 {
-    public UpdateStudentScienceValidationIsNotValid(string message) : base(message) { }
+    public UpdateStudentScienceValidationIsNotValidException(string message) : base(message) { }
 }

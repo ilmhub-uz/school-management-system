@@ -1,6 +1,6 @@
 ﻿namespace Student.API.Exceptions;
 
-public class UpdateStudentAttendanceValidationInValid : Exception
+public class UpdateStudentAttendanceValidationInValidException : Exception
 {
-    public UpdateStudentAttendanceValidationInValid(string message) : base($"Update StudentAttendanceValidation InValid!: {message}") { }
+    public UpdateStudentAttendanceValidationInValidException(string message) : base($"Update StudentAttendanceValidation InValid!: {message}") { }
 }
