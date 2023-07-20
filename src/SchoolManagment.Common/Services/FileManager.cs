@@ -38,7 +38,7 @@ public class FileManager : IFileManager
 
     public void DeleteFile(string filePath)
     {
-        if(File.Exists(filePath))
-           File.Delete(filePath);
+        if (File.Exists(filePath))
+            File.Delete(filePath);
     }
 }

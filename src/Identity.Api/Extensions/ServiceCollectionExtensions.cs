@@ -9,7 +9,7 @@ namespace Identity.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();
         services.AddEndpointsApiExplorer();
@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
         });
         services.AddJwtValidation(configuration);
         services.AddSwaggerWithToken();
-        services.AddScoped<IValidator<CreateUserModel>,CreateUserModelValidator>();
+        services.AddScoped<IValidator<CreateUserModel>, CreateUserModelValidator>();
         services.AddScoped<TokenService>();
     }
 }

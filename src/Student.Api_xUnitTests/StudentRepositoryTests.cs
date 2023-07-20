@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Student.API.Context;
 using Student.API.HelperEntities.PaginationEntities;
-using Student.API.Repositories.Interfaces;
 using Student.API.Repositories;
+using Student.API.Repositories.Interfaces;
 
 namespace Student.Api_xUnitTests;
 
@@ -16,10 +16,10 @@ public class StudentRepositoryTests
     public StudentRepositoryTests()
     {
         var dbContextOptions = new DbContextOptions<StudentDbContext>();
-        _studentDbContext = new StudentDbContext(dbContextOptions); 
+        _studentDbContext = new StudentDbContext(dbContextOptions);
 
         IHttpContextAccessor contextAccessor = new HttpContextAccessor();
-        var contextHelper = new HttpContextHelper(contextAccessor); 
+        var contextHelper = new HttpContextHelper(contextAccessor);
 
         _studentRepository = new StudentRepository(_studentDbContext, contextHelper);
     }

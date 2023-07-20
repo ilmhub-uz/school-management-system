@@ -7,7 +7,7 @@ using Sciences.API.ParseHelper;
 
 namespace Sciences.API.Managers;
 
-public class TopicTaskManager:ITopicTaskManager
+public class TopicTaskManager : ITopicTaskManager
 {
     private readonly ScienceDbContext _context;
 
@@ -25,7 +25,7 @@ public class TopicTaskManager:ITopicTaskManager
         return ParseService.ParseToTopicTaskList(topicTasks);
     }
 
-    public async Task <TopicTaskModel>AddTopicTaskAsync(Guid topicId, CreateTopicTaskModel task)
+    public async Task<TopicTaskModel> AddTopicTaskAsync(Guid topicId, CreateTopicTaskModel task)
     {
         var topicTask = new TopicTask
         {
@@ -54,14 +54,14 @@ public class TopicTaskManager:ITopicTaskManager
     }
 
     public async Task DeleteTopicTaskAsync(Guid topicId)
-    { 
+    {
         var topicTask = IsExists(topicId);
         _context.TopicTasks.Remove(topicTask);
-       await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
     }
 
-    
+
     private TopicTask IsExists(Guid topicId)
     {
         var topicTask = _context.TopicTasks.FirstOrDefault(t => t.TopicId == topicId);

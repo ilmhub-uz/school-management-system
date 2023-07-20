@@ -4,7 +4,7 @@ using Sciences.API.Entities;
 
 namespace Sciences.API.Context.Configurations;
 
-public class TopicConfigurations :IEntityTypeConfiguration<Topic>
+public class TopicConfigurations : IEntityTypeConfiguration<Topic>
 {
     public void Configure(EntityTypeBuilder<Topic> builder)
     {

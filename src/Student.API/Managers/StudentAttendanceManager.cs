@@ -20,7 +20,7 @@ public class StudentAttendanceManager : IStudentAttendanceManager
         return studentAttendances.Select(MapToStudentAttendanceModel).ToList();
     }
 
-    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId,Guid topicId)
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId, Guid topicId)
     {
         var studentAttendance = new StudentAttendance()
         {

@@ -1,7 +1,7 @@
-using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Student.API.HelperEntities.PaginationEntities;
 using Student.API.Models.StudentModels;
+using System.Net.Http.Json;
 
 namespace Student.Api_xUnitTests;
 
@@ -24,7 +24,7 @@ public class StudentControllerTests
         request.Content = JsonContent.Create(studentFilter);
 
         // Act
-        var response = await _httpClient.SendAsync(request);    
+        var response = await _httpClient.SendAsync(request);
 
         // Assert
 
@@ -119,7 +119,7 @@ public class StudentControllerTests
 
         // Assert
         Assert.NotNull(response);
-       // Assert.True(response.IsSuccessStatusCode);
+        // Assert.True(response.IsSuccessStatusCode);
     }
 
     [Fact]

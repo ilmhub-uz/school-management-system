@@ -1,5 +1,4 @@
-﻿using Chat.Api.Entities;
-using Chat.Api.Models.MessageModels;
+﻿using Chat.Api.Models.MessageModels;
 
 namespace Chat.Api.Models.ChatModels;
 

@@ -7,7 +7,7 @@ namespace Student.API.Extension;
 public static class QueryableExtensions
 {
     public static async Task<IEnumerable<T>> ToPagedListAsync<T>(
-        this IQueryable<T> collection, 
+        this IQueryable<T> collection,
         HttpContextHelper contextHelper,
         PaginationParams pageParams)
     {

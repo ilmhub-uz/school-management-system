@@ -1,5 +1,4 @@
-﻿using Chat.Api.Entities;
-using Chat.Api.Managers.Interfaces;
+﻿using Chat.Api.Managers.Interfaces;
 using Chat.Api.Models.ChatModels;
 using Chat.Api.Models.MessageModels;
 using Chat.Api.Repositories.Interfaces;

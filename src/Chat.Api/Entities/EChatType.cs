@@ -1,8 +1,8 @@
 ﻿namespace Chat.Api.Entities;
 
-public enum  EChatType
+public enum EChatType
 {
     Personal,
-    Group, 
+    Group,
     Channel
 }

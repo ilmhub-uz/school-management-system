@@ -15,7 +15,7 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
     }
     public async Task<List<StudentTaskResult>> GetTaskResultsAsync()
     {
-        return await _studentDbContext.TaskResults.ToListAsync();  
+        return await _studentDbContext.TaskResults.ToListAsync();
     }
 
     public async Task AddTaskResultAsync(StudentTaskResult result)
@@ -38,7 +38,7 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
     public async Task<StudentTaskResult> GetStudentTaskResultAsync(Guid taskId, Guid studentId)
     {
         var result = await _studentDbContext.TaskResults.FirstOrDefaultAsync(r => r.TaskId == taskId && r.StudentId == studentId);
-        if(result == null)
+        if (result == null)
         {
             throw new StudentTaskResultNotFoundException();
         }
@@ -49,7 +49,7 @@ public class StudentTaskResultRepository : IStudentTaskResultRepository
 
     public async Task UpdateTaskResultAsync(StudentTaskResult result)
     {
-         _studentDbContext.TaskResults.Update(result);
-         await _studentDbContext.SaveChangesAsync();
+        _studentDbContext.TaskResults.Update(result);
+        await _studentDbContext.SaveChangesAsync();
     }
 }

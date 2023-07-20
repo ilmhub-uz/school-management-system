@@ -1,6 +1,4 @@
 using Chat.Api.Extensions;
-using Serilog.Events;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 

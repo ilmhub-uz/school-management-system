@@ -11,7 +11,7 @@ public class StudentTaskResultController : ControllerBase
     private readonly IStudentManager _studentManager;
 
     public StudentTaskResultController(
-        IStudentTaskResultManager studentTaskResultManager, 
+        IStudentTaskResultManager studentTaskResultManager,
         IStudentManager studentManager)
     {
         _studentTaskResultManager = studentTaskResultManager;
@@ -26,7 +26,7 @@ public class StudentTaskResultController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddStudentTaskResult(string username,Guid taskId,string content)
+    public async Task<IActionResult> AddStudentTaskResult(string username, Guid taskId, string content)
     {
         var student = await _studentManager.GetStudentByUserNameAsync(username);
         var studentTaskResult = await _studentTaskResultManager.AddStudentTaskResultAsync(student.Id, taskId, content);

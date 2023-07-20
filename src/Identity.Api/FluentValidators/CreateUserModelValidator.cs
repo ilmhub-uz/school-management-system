@@ -13,7 +13,7 @@ public class CreateUserModelValidator : AbstractValidator<CreateUserModel>
                     .Matches(@"[A-Z]+").WithMessage("Your password must contain at least one uppercase letter.")
                     .Matches(@"[a-z]+").WithMessage("Your password must contain at least one lowercase letter.")
                     .Matches(@"[0-9]+").WithMessage("Your password must contain at least one number.");
-        
+
         RuleFor(u => u.UserName).NotEmpty()
             .MinimumLength(6).MaximumLength(30);
     }
