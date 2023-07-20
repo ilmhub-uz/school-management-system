@@ -6,7 +6,7 @@ using Student.API.Repositories.Interfaces;
 
 namespace Student.API.Repositories;
 
-public class StudentAttendanceRepository:IStudentAttendanceRepository
+public class StudentAttendanceRepository : IStudentAttendanceRepository
 {
     private readonly StudentDbContext _studentDbContext;
     public StudentAttendanceRepository(StudentDbContext studentDbContext)
@@ -19,10 +19,10 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
         return await _studentDbContext.StudentAttendances.ToListAsync();
     }
 
-    public async Task<StudentAttendance> GetStudentAttendanceAsync(Guid studentId,Guid topicId)
+    public async Task<StudentAttendance> GetStudentAttendanceByIdAsync(Guid studentId, Guid topicId)
     {
-        var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId== topicId && s.StudentId == studentId);
-        if(studentAttendance== null)
+        var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId == topicId && s.StudentId == studentId);
+        if (studentAttendance == null)
         {
             throw new StudentAttendanceNotFoundException("Student Attendance not found");
         }
@@ -37,18 +37,24 @@ public class StudentAttendanceRepository:IStudentAttendanceRepository
 
     public async Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance)
     {
-        _studentDbContext.StudentAttendances.Update(studentAttendance);
-        await _studentDbContext.SaveChangesAsync();
+        try
+        {
+            _studentDbContext.StudentAttendances.Update(studentAttendance);
+            await _studentDbContext.SaveChangesAsync();
+        }
+        catch 
+        {
+            throw new UpdateStudentAttendanceValidationInValidException("Update repository exception!");
+        }
     }
 
     public async Task DeleteStudentAttendanceAsync(Guid studentId, Guid topicId)
     {
         var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId == topicId && s.StudentId == studentId);
-        
-        if (studentAttendance == null)
-        {
+
+        if (studentAttendance is null)
             throw new StudentAttendanceNotFoundException("Student Attendance not found");
-        }
+        
 
         _studentDbContext.StudentAttendances.Remove(studentAttendance);
         await _studentDbContext.SaveChangesAsync();

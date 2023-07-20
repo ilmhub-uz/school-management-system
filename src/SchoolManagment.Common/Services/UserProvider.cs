@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using SchoolManagement.Common.CustomExceptions;
 using SchoolManagement.Common.Interfaces;
+using System.Security.Claims;
 
 namespace SchoolManagement.Common.Services;
 
@@ -23,7 +23,7 @@ public class UserProvider : IUserProvider
 
         var userIdString = Context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (userIdString is null) 
+        if (userIdString is null)
             throw new UserIdIsNullException();
 
         if (!Guid.TryParse(userIdString, out Guid userId))

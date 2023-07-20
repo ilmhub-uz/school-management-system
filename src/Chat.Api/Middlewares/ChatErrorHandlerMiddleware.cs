@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-
-namespace Chat.Api.Middlewares;
+﻿namespace Chat.Api.Middlewares;
 
 public class ChatErrorHandlerMiddleware
 {
@@ -21,12 +17,12 @@ public class ChatErrorHandlerMiddleware
         {
             await _next(httpContext);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             _logger.LogError(e, "Chat internal server error!");
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            await httpContext.Response.WriteAsJsonAsync(new {Error = e.Message});
+            await httpContext.Response.WriteAsJsonAsync(new { Error = e.Message });
         }
     }
 }

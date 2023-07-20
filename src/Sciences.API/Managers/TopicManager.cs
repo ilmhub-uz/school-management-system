@@ -1,6 +1,4 @@
-﻿using Mapster;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Sciences.API.Entities;
+﻿using Sciences.API.Entities;
 using Sciences.API.Models.TopicModels;
 using Sciences.API.ParseHelper;
 using Sciences.API.Repositories.Interfaces;
@@ -22,9 +20,9 @@ public class TopicManager
         return ParseService.ParseToTopicList(topics);
     }
 
-    public async Task<TopicModel> AddTopicAsync(Guid scienceId,CreateTopicModel topic)
+    public async Task<TopicModel> AddTopicAsync(Guid scienceId, CreateTopicModel topic)
     {
-        var model=new Topic()
+        var model = new Topic()
         {
             Name = topic.Name,
             Title = topic.Title,
@@ -40,8 +38,8 @@ public class TopicManager
     {
         var model = await _topicRepository.GetTopicById(topicId);
 
-        model.Name=topic.Name;
-        model.Title=topic.Title;
+        model.Name = topic.Name;
+        model.Title = topic.Title;
         await _topicRepository.UpdateTopic(model);
         return ParseService.ParseToTopicModel(model);
 

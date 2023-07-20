@@ -20,7 +20,13 @@ public class StudentAttendanceManager : IStudentAttendanceManager
         return studentAttendances.Select(MapToStudentAttendanceModel).ToList();
     }
 
-    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId,Guid topicId)
+    public async Task<StudentAttendanceModel> GetStudentAttendanceByIdAsync(Guid studentId, Guid topicId)
+    {
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceByIdAsync(studentId, topicId);
+        return MapToStudentAttendanceModel(studentAttendance);
+    }
+
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId, Guid topicId)
     {
         var studentAttendance = new StudentAttendance()
         {
@@ -36,7 +42,7 @@ public class StudentAttendanceManager : IStudentAttendanceManager
 
     public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId, UpdateStudentAttendanceModel model)
     {
-        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceAsync(studentId, model.TopicId);
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceByIdAsync(studentId, model.TopicId);
 
         studentAttendance.Attend = model.Attend ?? studentAttendance.Attend;
 

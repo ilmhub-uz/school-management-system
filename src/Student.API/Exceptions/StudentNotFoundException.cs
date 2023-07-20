@@ -1,7 +1,7 @@
 ﻿namespace Student.API.Exceptions;
 
-public class StudentNotFoundException:Exception
+public class StudentNotFoundException : Exception
 {
-	public StudentNotFoundException() : base("User not found!"){ }
+    public StudentNotFoundException() : base("User not found!") { }
 
 }

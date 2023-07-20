@@ -19,22 +19,56 @@ public class StudentAttendancesController : ControllerBase
         _studentAttendanceManager = studentAttendanceManager;
         _studentManager = studentManager;
     }
-
+    
     [HttpGet]
     public async Task<IActionResult> GetStudentAttendances()
     {
-        var studentAttendance = await _studentAttendanceManager.GetStudentAttendancesAsync();
-        return Ok(studentAttendance);
+        try
+        {
+            var studentAttendance = await _studentAttendanceManager.GetStudentAttendancesAsync();
+            return Ok(studentAttendance);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("{topicId:guid}")]
+    public async Task<IActionResult> GetStudentAttendances(string username, Guid topicId)
+    {
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            var studentAttendance = await _studentAttendanceManager.GetStudentAttendanceByIdAsync(student.Id, topicId);
+            return Ok(studentAttendance);
+        }
+        catch (StudentNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost("{topicId}")]
     public async Task<IActionResult> AddStudentAttendance(string username, Guid topicId)
     {
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        var studentAttendance = await _studentAttendanceManager.AddStudentAttendanceAsync(student.Id, topicId);
-
-        return Ok(studentAttendance);
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            var studentAttendance = await _studentAttendanceManager.AddStudentAttendanceAsync(student.Id, topicId);
+            return Ok(studentAttendance);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPut]
@@ -45,22 +79,48 @@ public class StudentAttendancesController : ControllerBase
         var result = await validator.ValidateAsync(model);
 
         if (!result.IsValid)
+            return BadRequest(result.Errors);
+
+        try
         {
-            throw new UpdateStudentAttendanceValidationInValid("Invalid update input try again");
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            var studentAttendance = await _studentAttendanceManager.UpdateStudentAttendanceAsync(student.Id, model);
+            return Ok(studentAttendance);
         }
-
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
-
-        var studentAttendance = await _studentAttendanceManager.UpdateStudentAttendanceAsync(student.Id, model);
-        return Ok(studentAttendance);
+        catch (StudentNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (StudentAttendanceNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (UpdateStudentAttendanceValidationInValidException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete]
     public async Task<IActionResult> DeleteStudentAttendance(string username, Guid topicId)
     {
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
-        await _studentAttendanceManager.DeleteStudentAttendancesAsync(student.Id, topicId);
-
-        return Ok();
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            await _studentAttendanceManager.DeleteStudentAttendancesAsync(student.Id, topicId);
+            return Ok();
+        }
+        catch (StudentAttendanceNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message); 
+        }
     }
 }

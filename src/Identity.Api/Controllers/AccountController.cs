@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using FluentValidation;
+﻿using FluentValidation;
 using Identity.Api.Context;
 using Identity.Api.Entities;
 using Identity.Api.Models;
@@ -8,6 +7,7 @@ using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Identity.Api.Controllers;
 
@@ -20,7 +20,7 @@ public class AccountController : ControllerBase
     private readonly TokenService _tokenService;
 
     public AccountController(
-        AppDbContext dbContext, 
+        AppDbContext dbContext,
         ILogger<AccountController> logger,
         TokenService tokenService)
     {
