@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SchoolManagement.Services.Sciences.Entities;
 
 namespace SchoolManagement.Services.Sciences.Notifications;
 

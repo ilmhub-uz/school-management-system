@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
-    public async ValueTask<IActionResult> GetUsersAsync([FromQuery] UserFilter filter)
+    public async ValueTask<IActionResult> GetUsersAsync(UserFilter filter)
     {
         var users = await _userManager.GetUsersAsync(filter);
         return Ok(users);
@@ -33,7 +33,7 @@ public class UsersController : ControllerBase
             var user = await _userManager.GetUserAsync(username);
             return Ok(user);
         }
-        catch (NotFoundException e)
+        catch (RecordNotFoundException e)
         {
             return NotFound(new Error(e.Message));
         }
@@ -48,7 +48,7 @@ public class UsersController : ControllerBase
             var user = await _userManager.GetUserAsync(id);
             return Ok(user);
         }
-        catch (NotFoundException e)
+        catch (RecordNotFoundException e)
         {
             return NotFound(new Error(e.Message));
         }

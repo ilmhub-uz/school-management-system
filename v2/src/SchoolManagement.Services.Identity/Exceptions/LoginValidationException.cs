@@ -1,7 +1,6 @@
-﻿namespace SchoolManagement.Services.Identity.Exceptions
+﻿namespace SchoolManagement.Services.Identity.Exceptions;
+
+public class LoginValidationException : Exception
 {
-    public class LoginValidationException : Exception
-    {
-        public LoginValidationException() : base("Username or password is incorrect") { }
-    }
+    public LoginValidationException() : base("Username or password is incorrect") { }
 }

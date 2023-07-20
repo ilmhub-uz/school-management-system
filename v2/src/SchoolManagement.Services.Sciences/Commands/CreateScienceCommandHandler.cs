@@ -1,42 +1,36 @@
 ﻿using MediatR;
 using SchoolManagement.Services.Sciences.Context;
 using SchoolManagement.Services.Sciences.Entities;
+using SchoolManagement.Services.Sciences.Mappers;
 using SchoolManagement.Services.Sciences.Models;
-using SchoolManagement.Services.Sciences.Notifications;
+using SchoolManagement.Services.Sciences.Extensions;
 
 namespace SchoolManagement.Services.Sciences.Commands;
 
-public class CreateScienceCommandHandler : IRequestHandler<CreateScienceCommand, ScienceModel>
+public class CreateScienceCommandHandler : RequestHandlerBase, IRequestHandler<CreateScienceCommand, ScienceModel>
 {
-	private readonly SciencesDbContext _sciencesDbContext;
 	private readonly IMediator _mediator;
 
-	public CreateScienceCommandHandler(SciencesDbContext sciencesDbContext, IMediator mediator)
-	{
-		_sciencesDbContext = sciencesDbContext;
-		_mediator = mediator;
-	}
+    public CreateScienceCommandHandler(SciencesDbContext sciencesDbContext, IMediator mediator) : base(sciencesDbContext)
+    {
+        _mediator = mediator;
+    }
 
-	public async Task<ScienceModel> Handle(CreateScienceCommand request, CancellationToken cancellationToken)
-	{
-		var science = new Science()
+    public async Task<ScienceModel> Handle(CreateScienceCommand request, CancellationToken cancellationToken)
+    {
+        var normalizedTitle = request.Title!.ToNormalized();
+
+        var science = new Science()
 		{
-			Title = request.Title,
-			Name = request.Name,
-			Description = request.Description
+			Name = normalizedTitle,
+			Title = request.Title!,
+            Description = request.Description
 		};
 
-		_sciencesDbContext.Sciences.Add(science);
-		await _sciencesDbContext.SaveChangesAsync();
+		SciencesDb.Sciences.Add(science);
+		await SciencesDb.SaveChangesAsync(cancellationToken);
 
-		await _mediator.Publish(new ScienceCreatedNotification()
-		{
-			Id = science.Id,
-			Title = science.Title,
-			Description = science.Description,
-			CreatedAt = science.CreatedAt,
-			Name = science.Name
-		});
+		await _mediator.Publish(science.ToNotification(), cancellationToken);
 
 		return science.ToModel();
 	}

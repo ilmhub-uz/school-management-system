@@ -1,9 +1,8 @@
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Sciences.Behaviors;
-using SchoolManagement.Services.Sciences.Commands;
 using SchoolManagement.Services.Sciences.Context;
-using SchoolManagement.Services.Sciences.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +19,9 @@ builder.Services.AddDbContext<SciencesDbContext>(options =>
 
 builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
 //builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IPipelineBehavior<CreateScienceCommand, ScienceModel>, CreateScienceCommandBehavior>();
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 

@@ -29,7 +29,7 @@ public class AccountController : ControllerBase
             var user = await _signInManager.GetUserAsync();
             return Ok(user);
         }
-        catch (NotFoundException e)
+        catch (RecordNotFoundException e)
         {
             return BadRequest(new Error(e.Message));
         }
@@ -52,7 +52,7 @@ public class AccountController : ControllerBase
             var user = await _signInManager.RegisterAsync(createUserModel);
             return Ok(user);
         }
-        catch (Exception e) when (e is NotFoundException or UsernameExistsException)
+        catch (Exception e) when (e is RecordNotFoundException or UsernameExistsException)
         {
             return BadRequest(new Error(e.Message));
         }

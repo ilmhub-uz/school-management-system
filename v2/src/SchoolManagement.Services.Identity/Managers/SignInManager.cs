@@ -18,8 +18,7 @@ public class SignInManager : ISignInManager
 	public SignInManager(
 		ITokenManager tokenManager, 
 		IUserProvider userProvider, 
-		IUserProducer userProducer,
-		IdentityDbContext identityDbContext)
+		IUserProducer userProducer, IdentityDbContext identityDbContext)
 	{
 		_tokenManager = tokenManager;
 		_userProvider = userProvider;
@@ -33,7 +32,7 @@ public class SignInManager : ISignInManager
 
         if (user == null)
         {
-            throw new NotFoundException("User");
+            throw new RecordNotFoundException("User");
         }
 
         return user.ToModel();
@@ -50,6 +49,7 @@ public class SignInManager : ISignInManager
         var user = new User()
         {
             Username = createUserModel.Username,
+            PasswordHash = createUserModel.Password,
             CreatedAt = DateTime.UtcNow,
             Roles = new List<UserRole>()
         };
@@ -60,7 +60,7 @@ public class SignInManager : ISignInManager
         {
             if (!await _identityDbContext.Roles.AllAsync(r => createUserModel.Roles.Any(cr => cr == r.Id)))
             {
-                throw new NotFoundException("Role");
+                throw new RecordNotFoundException("Role");
             }
 
             foreach (var role in createUserModel.Roles)
@@ -84,14 +84,7 @@ public class SignInManager : ISignInManager
     {
         var user = await _identityDbContext.Users.FirstOrDefaultAsync(u => u.Username == loginUserModel.Username);
 
-        if (user == null)
-        {
-	        throw new LoginValidationException();
-        }
-
-		var result = new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, loginUserModel.Password);
-
-        if (result != PasswordVerificationResult.Success)
+        if (user == null || user.PasswordHash != loginUserModel.Password)
         {
             throw new LoginValidationException();
         }
