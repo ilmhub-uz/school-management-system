@@ -29,12 +29,12 @@ public static class AddJwtExtension
 
                 options.Events = new JwtBearerEvents()
                 {
-                    OnMessageReceived = async context =>
+                    OnMessageReceived = context =>
                     {
                         if (string.IsNullOrEmpty(context.Token))
                         {
-                            var accesToken = context.Request.Query["token"];
-                            context.Token = accesToken;
+                            var accessToken = context.Request.Query["token"];
+                            context.Token = accessToken;
 
                             /* var acesToken = context.Request.Query["token"];
                                var path = context.HttpContext.Request.Path;
@@ -44,6 +44,8 @@ public static class AddJwtExtension
                                    context.Token = accesToken;
                                }*/
                         }
+
+                        return Task.CompletedTask;
                     }
                 };
             });
