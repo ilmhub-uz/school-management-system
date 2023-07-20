@@ -16,15 +16,16 @@ public static class ServiceCollectionExtensions
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        services.AddScienceDbContext(configuration);
+
 
         services.AddScoped<IValidator<CreateScienceModel>, CreateScienceModelValidator>();
 
         services.AddScoped<IScienceRepository, ScienceRepository>();
+        services.AddScoped<ITopicRepository, TopicRepository>();
 
         services.AddScoped<ScienceManager>();
+        services.AddScoped<TopicTaskManager>();
+        services.AddScoped<TopicManager>();
         services.AddScoped<ParseService>();
-
-        services.AddScoped<ITopicTaskRepository, TopicTaskRepository>();
     }
 }

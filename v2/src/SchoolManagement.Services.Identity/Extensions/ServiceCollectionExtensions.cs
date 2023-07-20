@@ -1,6 +1,9 @@
 ﻿using Identity.Api.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using SchoolManagement.Services.Identity.Context;
 
 namespace SchoolManagement.Services.Identity.Extensions;
 
@@ -28,4 +31,41 @@ public static class ServiceCollectionExtensions
 				};
 			});
 	}
+
+    public static void MigrateIdentityDb(this WebApplication app)
+    {
+        if (app.Services.GetService<IdentityDbContext>() == null) return;
+        var identityDb = app.Services.GetRequiredService<IdentityDbContext>();
+        identityDb.Database.Migrate();
+    }
+
+    public static void AddSwaggerGenJwt(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Description = @"JWT Bearer. : Authorization: Bearer {token}",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+
+                    new List<string>(){}
+                }
+            });
+        });
+    }
 }

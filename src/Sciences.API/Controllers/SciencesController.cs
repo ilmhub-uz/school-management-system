@@ -37,20 +37,20 @@ public class SciencesController : ControllerBase
         return Ok(science);
     }
 
-    
+
     [HttpPut("{scienceId}")]
     public async Task<IActionResult> UpdateScience(Guid scienceId, UpdateScienceModel model)
     {
         var science = await _scienceManager.UpdateScienceAsync(scienceId, model);
         return Ok(science);
     }
-    
+
     [HttpDelete("{scienceId}")]
     public async Task<IActionResult> DeleteScience(Guid scienceId)
-    {   
+    {
         await _scienceManager.DeleteScienceAsync(scienceId);
         return Ok();
     }
-    
+
 }
 

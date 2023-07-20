@@ -1,5 +1,5 @@
-﻿using Serilog.Events;
-using Serilog;
+﻿using Serilog;
+using Serilog.Events;
 
 namespace Chat.Api.Extensions;
 

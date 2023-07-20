@@ -1,30 +1,60 @@
-﻿using SchoolManagement.Services.Identity.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Services.Identity.Context;
+using SchoolManagement.Services.Identity.Entities;
+using SchoolManagement.Services.Identity.Exceptions;
+using SchoolManagement.Services.Identity.Helpers;
+using SchoolManagement.Services.Identity.Models;
 
 namespace SchoolManagement.Services.Identity.Managers;
 
 public class UserManager : IUserManager
 {
-	private readonly ITokenManager _tokenManager;
-	private readonly IUserProvider _userProvider;
+    private readonly IdentityDbContext _identityDbContext;
 
-	public UserManager(ITokenManager tokenManager, IUserProvider userProvider)
+	public UserManager(
+        IdentityDbContext identityDbContext)
 	{
-		_tokenManager = tokenManager;
-		_userProvider = userProvider;
-	}
+        _identityDbContext = identityDbContext;
+    }
 
-	public ValueTask<IList<UserModel>> GetUsersAsync(UserFilter filter)
-	{
-		throw new NotImplementedException();
-	}
+	public async ValueTask<IEnumerable<UserModel>> GetUsersAsync(UserFilter filter)
+    {
+        var query = _identityDbContext.Users.AsQueryable().Where(u => u.Status != UserStatus.Deleted);
 
-	public ValueTask<UserModel> GetUserAsync(string username)
-	{
-		throw new NotImplementedException();
-	}
+        if (!string.IsNullOrWhiteSpace(filter.UserName)) 
+            query = query.Where(u => u.Username.Contains(filter.UserName));
 
-	public ValueTask<UserModel> GetUserAsync(Guid id)
-	{
-		throw new NotImplementedException();
-	}
+        if (filter.FromCreatedAt is not null) 
+            query = query.Where(u => u.CreatedAt > filter.FromCreatedAt);
+
+        if (filter.ToCreatedAt is not null) 
+            query = query.Where(u => u.CreatedAt < filter.ToCreatedAt);
+
+        if (filter.Role is not null)
+            query = query.Where(u => u.Roles.Any(r => r.Role.Name == filter.Role));
+
+        return await query.Select(u => u.ToModel()).ToPagedListAsync(filter);
+    }
+
+	public async ValueTask<UserModel> GetUserAsync(string username)
+    {
+        var user = await _identityDbContext.Users.SingleOrDefaultAsync(u => u.Username == username);
+        if (user is null)
+        {
+            throw new NotFoundException("User");
+        }
+
+        return user.ToModel();
+    }
+
+	public async ValueTask<UserModel> GetUserAsync(Guid id)
+    {
+        var user = await _identityDbContext.Users.SingleOrDefaultAsync(u => u.Id == id);
+        if (user is null)
+        {
+            throw new NotFoundException("User");
+        }
+
+        return user.ToModel();
+    }
 }

@@ -2,5 +2,6 @@
 
 public class UpdateStudentAttendanceModel
 {
-    public bool Attend { get; set; }
+    public Guid TopicId { get; set; }
+    public bool? Attend { get; set; }
 }

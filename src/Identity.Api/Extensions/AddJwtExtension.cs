@@ -26,7 +26,28 @@ public static class AddJwtExtension
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 };
+
+                options.Events = new JwtBearerEvents()
+                {
+                    OnMessageReceived = context =>
+                    {
+                        if (string.IsNullOrEmpty(context.Token))
+                        {
+                            var accessToken = context.Request.Query["token"];
+                            context.Token = accessToken;
+
+                            /* var acesToken = context.Request.Query["token"];
+                               var path = context.HttpContext.Request.Path;
+                               if(!string.IsNullOrEmpty(accesToken)
+                                                   &&path.StartsWithSegments("/hubs"))
+                               {
+                                   context.Token = accesToken;
+                               }*/
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
     }
-
 }

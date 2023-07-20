@@ -1,3 +1,4 @@
+using Sciences.API.Context;
 using Sciences.API.Extension;
 using Sciences.API.MiddleWares;
 using Serilog;
@@ -10,8 +11,9 @@ var logger = new LoggerConfiguration().WriteTo
     .CreateLogger();
 
 builder.Logging.AddSerilog(logger);
-builder.Services.AddScienceServices(builder.Configuration);
+builder.Services.AddScienceDbContext(builder.Configuration);
 
+builder.Services.AddScienceServices(builder.Configuration);
 var app = builder.Build();
 
 app.UseSwagger();
@@ -24,6 +26,6 @@ app.UseScienceErrorHandlerMiddleware();
 
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 app.Run();

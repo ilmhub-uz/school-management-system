@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sciences.API.Managers;
 using Sciences.API.Models.TopicTaskModels;
 
@@ -27,14 +26,14 @@ namespace Sciences.API.Controllers
         [HttpPost("{topicId}")]
         public async Task<IActionResult> AddTask(Guid topicId, CreateTopicTaskModel model)
         {
-            await _taskManager.AddTopicTaskAsync(topicId,model);
+            await _taskManager.AddTopicTaskAsync(topicId, model);
             return Ok();
         }
 
         [HttpPut("{topicId}")]
         public async Task<IActionResult> UpdateTask(Guid topicId, CreateTopicTaskModel model)
         {
-            await _taskManager.UpdateTopicTaskAsync(topicId,model); 
+            await _taskManager.UpdateTopicTaskAsync(topicId, model);
             return Ok();
         }
 

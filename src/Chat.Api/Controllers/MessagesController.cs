@@ -1,7 +1,5 @@
-﻿using Chat.Api.Entities;
-using Chat.Api.Managers.Interfaces;
+﻿using Chat.Api.Managers.Interfaces;
 using Chat.Api.Models.MessageModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat.Api.Controllers;

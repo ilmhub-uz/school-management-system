@@ -16,7 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Item", "Solution I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Api", "Chat.Api\Chat.Api.csproj", "{2B6B3CFA-7773-4CAE-B216-EBFE2EE7AD55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.Common", "SchoolManagment.Common\SchoolManagement.Common.csproj", "{9DF206E7-6466-497B-9F62-A95354457100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Common", "SchoolManagment.Common\SchoolManagement.Common.csproj", "{9DF206E7-6466-497B-9F62-A95354457100}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudentApi", "StudentApi", "{A793159C-FF52-4824-A0AB-B6E8533C29D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student.Api_xUnitTests", "Student.Api_xUnitTests\Student.Api_xUnitTests.csproj", "{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +48,17 @@ Global
 		{9DF206E7-6466-497B-9F62-A95354457100}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DF206E7-6466-497B-9F62-A95354457100}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DF206E7-6466-497B-9F62-A95354457100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D1AB982-2F17-4C83-9442-B0B15C5F8D71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1849B9DD-C8D1-43E5-8BF7-A20CDCC503B0} = {A793159C-FF52-4824-A0AB-B6E8533C29D8}
+		{0D1AB982-2F17-4C83-9442-B0B15C5F8D71} = {A793159C-FF52-4824-A0AB-B6E8533C29D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F662D0AD-9003-4B99-960E-5A52A3DB8A09}

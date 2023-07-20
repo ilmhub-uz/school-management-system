@@ -1,9 +1,7 @@
-﻿using Sciences.API.Models.TopicModels;
-
-namespace Sciences.API.Models.TopicTaskModels;
+﻿namespace Sciences.API.Models.TopicTaskModels;
 
 public class TopicTaskModel
-{ 
+{
     public required Guid Id { get; set; }
     public required DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

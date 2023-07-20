@@ -1,6 +1,4 @@
-﻿using Chat.Api.Entities;
-
-namespace Chat.Api.Models.ChatModels;
+﻿namespace Chat.Api.Models.ChatModels;
 
 public class UpdateChatModel
 {

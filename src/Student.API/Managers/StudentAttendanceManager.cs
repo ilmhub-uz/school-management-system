@@ -1,6 +1,4 @@
 ﻿using Student.API.Entities;
-using Student.API.Exceptions;
-using Student.API.FluentValidators;
 using Student.API.Managers.Interfaces;
 using Student.API.Models.StudentAttendanceModels;
 using Student.API.Repositories.Interfaces;
@@ -19,11 +17,17 @@ public class StudentAttendanceManager : IStudentAttendanceManager
     {
         var studentAttendances = await _studentAttendanceRepos.GetStudentAttendancesAsync();
 
-        return ToStudentAttendanceModels(studentAttendances);
+        return studentAttendances.Select(MapToStudentAttendanceModel).ToList();
     }
-    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId,Guid topicId)
+
+    public async Task<StudentAttendanceModel> GetStudentAttendanceByIdAsync(Guid studentId, Guid topicId)
     {
-        
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceByIdAsync(studentId, topicId);
+        return MapToStudentAttendanceModel(studentAttendance);
+    }
+
+    public async Task<StudentAttendanceModel> AddStudentAttendanceAsync(Guid studentId, Guid topicId)
+    {
         var studentAttendance = new StudentAttendance()
         {
             StudentId = studentId,
@@ -33,28 +37,26 @@ public class StudentAttendanceManager : IStudentAttendanceManager
 
         await _studentAttendanceRepos.AddStudentAttendanceAsync(studentAttendance);
 
-        return ToStudentAttendanceModel(studentAttendance);
-
+        return MapToStudentAttendanceModel(studentAttendance);
     }
 
-    public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId,Guid topicId,UpdateStudentAttendanceModel model)
+    public async Task<StudentAttendanceModel> UpdateStudentAttendanceAsync(Guid studentId, UpdateStudentAttendanceModel model)
     {
-        var validator = new UpdateStudentAttendanceValidator();
-        var result = validator.Validate(model);
-        if (!result.IsValid)
-        {
-            throw new UpdateStudentAttendanceValidationInValid("Invalid update input try again");
-        }
-        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceAsync(studentId, topicId);
+        var studentAttendance = await _studentAttendanceRepos.GetStudentAttendanceByIdAsync(studentId, model.TopicId);
 
-        studentAttendance.Attend = model.Attend;
+        studentAttendance.Attend = model.Attend ?? studentAttendance.Attend;
 
         await _studentAttendanceRepos.UpdateStudentAttendanceAsync(studentAttendance);
 
-        return ToStudentAttendanceModel(studentAttendance);
+        return MapToStudentAttendanceModel(studentAttendance);
     }
 
-    private StudentAttendanceModel ToStudentAttendanceModel(StudentAttendance studentAttendance)
+    public async Task DeleteStudentAttendancesAsync(Guid studentId, Guid topicId)
+    {
+        await _studentAttendanceRepos.DeleteStudentAttendanceAsync(studentId, topicId);
+    }
+
+    private StudentAttendanceModel MapToStudentAttendanceModel(StudentAttendance studentAttendance)
     {
         StudentAttendanceModel studentAttendanceModel = new StudentAttendanceModel()
         {
@@ -63,20 +65,5 @@ public class StudentAttendanceManager : IStudentAttendanceManager
             Attend = studentAttendance.Attend,
         };
         return studentAttendanceModel;
-    }
-    private List<StudentAttendanceModel> ToStudentAttendanceModels(List<StudentAttendance>? studentAttendances)
-    {
-        var studentAttendanceModels = new List<StudentAttendanceModel>();
-
-        if(studentAttendances == null || studentAttendances.Count==0) 
-        {
-            return new List<StudentAttendanceModel>();
-        }
-
-        foreach(var studentAttendance in studentAttendances)
-        {
-            studentAttendanceModels.Add(ToStudentAttendanceModel((StudentAttendance)studentAttendance));
-        };
-        return studentAttendanceModels;
     }
 }

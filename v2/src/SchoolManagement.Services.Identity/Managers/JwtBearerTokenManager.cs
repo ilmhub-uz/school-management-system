@@ -29,14 +29,11 @@ public class JwtBearerTokenManager : ITokenManager
 			new Claim(ClaimTypes.Name, user.Username)
 		};
 
-		if (user.Roles is not null)
+		foreach (var userRole in user.Roles)
 		{
-			foreach (var userRole in user.Roles)
+			if (userRole.Role is { } role)
 			{
-				if (userRole.Role is { } role)
-				{
-					claims.Add(new Claim(ClaimTypes.Role, role.Name));
-				}
+				claims.Add(new Claim(ClaimTypes.Role, role.Name));
 			}
 		}
 

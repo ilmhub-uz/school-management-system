@@ -1,6 +1,8 @@
-﻿namespace SchoolManagement.Services.Identity.Models;
+﻿using SchoolManagement.Services.Identity.Helpers;
 
-public class UserFilter
+namespace SchoolManagement.Services.Identity.Models;
+
+public class UserFilter : PaginationParams
 {
 	public string? UserName { get; set; }
 	public DateTime? FromCreatedAt { get; set; }

@@ -6,6 +6,8 @@ using Chat.Api.Managers;
 using Chat.Api.Managers.Interfaces;
 using Chat.Api.Consumers;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddLog();
