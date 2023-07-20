@@ -37,18 +37,24 @@ public class StudentAttendanceRepository : IStudentAttendanceRepository
 
     public async Task UpdateStudentAttendanceAsync(StudentAttendance studentAttendance)
     {
-        _studentDbContext.StudentAttendances.Update(studentAttendance);
-        await _studentDbContext.SaveChangesAsync();
+        try
+        {
+            _studentDbContext.StudentAttendances.Update(studentAttendance);
+            await _studentDbContext.SaveChangesAsync();
+        }
+        catch 
+        {
+            throw new UpdateStudentAttendanceValidationInValidException("Update repository exception!");
+        }
     }
 
     public async Task DeleteStudentAttendanceAsync(Guid studentId, Guid topicId)
     {
         var studentAttendance = await _studentDbContext.StudentAttendances.FirstOrDefaultAsync(s => s.TopicId == topicId && s.StudentId == studentId);
 
-        if (studentAttendance == null)
-        {
+        if (studentAttendance is null)
             throw new StudentAttendanceNotFoundException("Student Attendance not found");
-        }
+        
 
         _studentDbContext.StudentAttendances.Remove(studentAttendance);
         await _studentDbContext.SaveChangesAsync();
