@@ -15,22 +15,34 @@ public class GenericRepository<TEntity, TDbContext, TKey> : IGenericRepository<T
 		_entities = _dbContext.Set<TEntity>();
 	}
 
-	public async ValueTask<IEnumerable<TEntity>> Get()
-	{
-		return await _entities.ToListAsync();
-	}
+    public async ValueTask<TEntity> CreateAsync(TEntity entity)
+    {
+        _entities.Add(entity);
+        await _dbContext.SaveChangesAsync();
+        return entity;
+    }
 
-	public async ValueTask<TEntity?> Get(TKey id)
-	{
-		return await _entities.FindAsync(id);
-	}
+    public async ValueTask<IEnumerable<TEntity>> GetAllEntitiesAsync()
+    {
+        return await _entities.ToListAsync();
+    }
 
-	public async ValueTask<TEntity> CreateAsync(TEntity entity)
-	{
-		_entities.Add(entity);
-		await _dbContext.SaveChangesAsync();
-		return entity;
-	}
+    public async ValueTask<TEntity?> GetByIdAsync(TKey id)
+    {
+        return await _entities.FindAsync(id);
+    }
+
+    public async ValueTask UpdateAsync(TEntity entity)
+    {
+        _entities.Update(entity);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async ValueTask DeleteAsync(TEntity entity)
+    {
+        _entities.Remove(entity);
+        await _dbContext.SaveChangesAsync();
+    }
 }
 
 public class GenericRepository<TEntity, TKey> : GenericRepository<TEntity, StudentsDbContext, TKey>, IGenericRepository<TEntity, TKey>

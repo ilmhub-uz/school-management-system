@@ -9,6 +9,4 @@ public class StudentRepository : GenericRepository<Student, StudentsDbContext, G
 	public StudentRepository(StudentsDbContext dbContext) : base(dbContext)
 	{
 	}
-
-
 }

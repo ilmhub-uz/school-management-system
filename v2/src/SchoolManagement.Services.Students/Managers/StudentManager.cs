@@ -16,9 +16,8 @@ public class StudentManager : IStudentManager
 
 	public async ValueTask<IEnumerable<StudentModel>> GetStudents()
 	{
-		var students = await _unitOfWork.Students.Get();
-
-		return students.Select(e => e.Adapt<StudentModel>());
+		var students = await _unitOfWork.Students.GetAllEntitiesAsync();
+        return students.Select(e => e.Adapt<StudentModel>());
 	}
 
 	public async ValueTask<StudentModel> CreateAsync(CreateStudentModel model)
