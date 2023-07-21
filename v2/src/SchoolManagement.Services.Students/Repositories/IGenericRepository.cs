@@ -5,7 +5,7 @@ namespace SchoolManagement.Services.Students.Repositories;
 public interface IGenericRepository<TEntity, TDbContext, TKey>
 {
     ValueTask<TEntity> CreateAsync(TEntity entity);
-    ValueTask<IEnumerable<TEntity>> GetAllAsync();
+    ValueTask<IEnumerable<TEntity>> GetAllEntitiesAsync();
     ValueTask<TEntity?> GetByIdAsync(TKey id);
     ValueTask UpdateAsync(TEntity entity);
     ValueTask DeleteAsync(TEntity entity);
