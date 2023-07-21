@@ -60,7 +60,7 @@ services:
     container_name: students
     build:
       context: .
-      dockerfile: Dockerfile.Sciences
+      dockerfile: Dockerfile.Students
 
 volumes:
   sciences_db_data:
