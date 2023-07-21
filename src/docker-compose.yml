@@ -82,7 +82,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5435:5432"
+      - "5438:5432"
     restart: always
     volumes:
       - chat_db_data:/var/lib/postgresql/data/
