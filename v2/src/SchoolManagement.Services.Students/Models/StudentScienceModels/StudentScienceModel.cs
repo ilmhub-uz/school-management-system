@@ -9,5 +9,4 @@ public class StudentScienceModel
     public StudentScienceStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
-    public virtual StudentModel? Student { get; set; }
 }
