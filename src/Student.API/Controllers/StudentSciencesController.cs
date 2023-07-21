@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Student.API.Entities;
+using Student.API.Exceptions;
 using Student.API.Managers.Interfaces;
 
 namespace Student.API.Controllers;
@@ -19,33 +20,61 @@ public class StudentSciencesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetStudentSciences()
     {
-        var studentSciences = await _studentScienceManager.GetStudentSciencesAsync();
-        return Ok(studentSciences);
+        try
+        {
+            return Ok(await _studentScienceManager.GetStudentSciencesAsync());
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost("{scienceId}")]
     public async Task<IActionResult> AddStudentScience(string username, Guid scienceId)
     {
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
-        var studentScience = await _studentScienceManager.AddStudentScienceAsync(student.Id, scienceId);
-        return Ok(studentScience);
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            return Ok(await _studentScienceManager.AddStudentScienceAsync(student.Id, scienceId));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message); ;
+        }
     }
 
     [HttpPut("{scienceId}")]
     public async Task<IActionResult> UpdateStudentScience(string username, Guid scienceId, Status? status)
     {
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
-        await _studentScienceManager.UpdateStudentScienceAsync(student.Id, scienceId, status);
-
-        return Ok();
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            await _studentScienceManager.UpdateStudentScienceAsync(student.Id, scienceId, status);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message); ;
+        }
+     
     }
 
     [HttpGet("{scienceId}")]
     public async Task<IActionResult> GetStudentScienceByScienceId(string username, Guid scienceId)
     {
-        var student = await _studentManager.GetStudentByUserNameAsync(username);
-        var studentScience = await _studentScienceManager.GetStudentScienceByScienceIdAsync(student.Id, scienceId);
-
-        return Ok(studentScience);
+        try
+        {
+            var student = await _studentManager.GetStudentByUserNameAsync(username);
+            return Ok(await _studentScienceManager.GetStudentScienceByScienceIdAsync(student.Id, scienceId));
+        }
+        catch (StudentScienceNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message); ;
+        }
     }
 }

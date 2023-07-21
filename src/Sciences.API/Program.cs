@@ -1,4 +1,3 @@
-using Sciences.API.Context;
 using Sciences.API.Extension;
 using Sciences.API.MiddleWares;
 using Serilog;
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 var logger = new LoggerConfiguration().WriteTo
     .File("ScienceLoggerFile.txt", LogEventLevel.Error, rollingInterval: RollingInterval.Day)
     .CreateLogger();
-
 builder.Logging.AddSerilog(logger);
 builder.Services.AddScienceDbContext(builder.Configuration);
 
@@ -26,6 +24,6 @@ app.UseScienceErrorHandlerMiddleware();
 
 app.UseAuthorization();
 
-//app.MapControllers();
+app.MapControllers();
 
 app.Run();
