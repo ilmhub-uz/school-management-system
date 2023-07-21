@@ -4,7 +4,7 @@ using Sciences.API.Models.ScienceModels;
 
 namespace Sciences.API.Controllers;
 
-[Route("api/students/{username}/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class SciencesController : ControllerBase
 {

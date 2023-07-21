@@ -19,6 +19,7 @@ public class ScienceManager
     public async Task<List<ScienceModel>> GetSciencesAsync()
     {
         var sciences = await _scienceRepository.GetSciences();
+        Console.WriteLine("Hello");
         return ParseService.ParseToScienceList(sciences);
     }
 
