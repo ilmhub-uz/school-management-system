@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/Sciences.API/ScienceLoggerFile20230721.txt
