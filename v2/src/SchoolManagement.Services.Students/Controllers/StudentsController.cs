@@ -29,4 +29,16 @@ public class StudentsController : ControllerBase
 
 		return Ok(student);
 	}
+
+	[HttpPut]
+    public async ValueTask<IActionResult> UpdateStudent()
+    {
+        return Ok();
+    }
+
+	[HttpDelete]
+    public async ValueTask<IActionResult> DeleteStudent()
+    {
+        return Ok();
+    }
 }
