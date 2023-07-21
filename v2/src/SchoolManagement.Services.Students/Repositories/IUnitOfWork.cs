@@ -8,4 +8,6 @@ public interface IUnitOfWork
 	IStudentRepository Students { get; }
 	IStudentScienceRepository StudentSciences { get; }
 	IGenericRepository<StudentTaskResult> StudentTaskResults { get; }
+
+	IStudentAttendanceRepository StudentAttendances { get; }
 }
