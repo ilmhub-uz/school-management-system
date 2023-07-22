@@ -23,8 +23,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IScienceRepository, ScienceRepository>();
         services.AddScoped<ITopicRepository, TopicRepository>();
 
+        services.AddScoped<ITopicTaskManager,TopicTaskManager>();
+        
         services.AddScoped<ScienceManager>();
-        services.AddScoped<TopicTaskManager>();
         services.AddScoped<TopicManager>();
         services.AddScoped<ParseService>();
     }
