@@ -2,11 +2,11 @@
 
 namespace SchoolManagement.Services.Students.Repositories;
 
-public interface IStudentTaskResltRepository
+public interface IStudentTaskResultRepository
 {
-    ValueTask<IEnumerable<StudentTaskResult>> GetTaskResultsAsync();
-    ValueTask<StudentTaskResult> GetTaskResultByTaskIdAsync(Guid taskId);
+    ValueTask<IEnumerable<StudentTaskResult>> GetTaskResultsAsync(Guid studentId);
+    ValueTask<StudentTaskResult?> GetTaskResultByTaskIdAsync(Guid studentId, Guid taskId);
     ValueTask<StudentTaskResult> CreateTaskResultAsync(StudentTaskResult studentTaskResult);
-    ValueTask<StudentTaskResult> UpdateTaskResultAsync(StudentTaskResult studentTaskResult);
+    ValueTask UpdateTaskResultAsync(StudentTaskResult studentTaskResult);
     ValueTask DeleteTaskResultAsync(StudentTaskResult studentTaskResult);
 }
