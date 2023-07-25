@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using FluentValidation;
-using SchoolManagement.Services.Students.Models;
+using SchoolManagement.Services.Students.Models.StudentModels;
 
 namespace SchoolManagement.Services.Students.FluentValidation
 {
