@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Services.Students.Exceptions;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentModels;
 
@@ -25,29 +27,72 @@ public class StudentsController : ControllerBase
     [HttpGet("{studentId:guid}")]
     public async ValueTask<IActionResult> GetStudentById(Guid studentId)
     {
-        var student = await _studentManager.GetByIdAsync(studentId);
-        return Ok(student);
+        try
+        {
+            return Ok(await _studentManager.GetByIdAsync(studentId));
+        }
+        catch (StudentNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch
+        {
+            return NoContent();
+        }
     }
 
     [HttpPost]
-    public async ValueTask<IActionResult> CreateStudent([FromForm] CreateStudentModel model)
+    public async ValueTask<IActionResult> CreateStudent([FromServices] IValidator<CreateStudentModel> validator, 
+        [FromForm] CreateStudentModel model)
     {
-        var student = await _studentManager.CreateAsync(model);
+        try
+        {
+            var result = await validator.ValidateAsync(model);
 
-        return Ok(student);
+            if (result.IsValid)
+                return BadRequest(result.Errors);
+
+            return Ok(await _studentManager.CreateAsync(model));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPut("{studentId:guid}")]
     public async ValueTask<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model)
     {
-        await _studentManager.UpdateAsync(studentId, model);
-        return Ok();
+        try
+        {
+            await _studentManager.UpdateAsync(studentId, model);
+            return Ok();
+        }
+        catch (StudentNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch
+        {
+            return NoContent();
+        }
     }
 
     [HttpDelete("{studentId:guid}")]
     public async ValueTask<IActionResult> DeleteStudent(Guid studentId)
     {
-        await _studentManager.DeleteAsync(studentId);
-        return Ok();
+        try
+        {
+            await _studentManager.DeleteAsync(studentId);
+            return Ok();
+        }
+        catch (StudentNotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch
+        {
+            return NoContent();
+        }
     }
 }
