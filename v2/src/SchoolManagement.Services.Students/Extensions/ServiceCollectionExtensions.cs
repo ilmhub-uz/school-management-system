@@ -18,12 +18,14 @@ public static partial class ServiceCollectionExtensions
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IStudentTaskResultRepository, StudentTaskResultRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
     public static void AddManagers(this IServiceCollection services)
     {
         services.AddScoped<IStudentManager, StudentManager>();
+        services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
     }
 
     public static void AddStudentDbContext(this IServiceCollection services)
