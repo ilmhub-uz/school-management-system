@@ -12,35 +12,35 @@ namespace SchoolManagement.Services.Sciences.Controllers;
 [ApiController]
 public class SciencesController : ControllerBase
 {
-	private readonly IMediator _mediator;
+    private readonly IMediator _mediator;
 
-	public SciencesController(IMediator mediator)
-	{
-		_mediator = mediator;
-	}
+    public SciencesController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
 
-	[HttpGet]
-	[ProducesResponseType(typeof(IEnumerable<ScienceModel>), StatusCodes.Status200OK)]
-	public async ValueTask<IActionResult> GetSciences([FromQuery] GetSciencesQuery filter)
-	{
-		var sciences = await _mediator.Send<IEnumerable<ScienceModel>>(filter);
-		return Ok(sciences);
-	}
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ScienceModel>), StatusCodes.Status200OK)]
+    public async ValueTask<IActionResult> GetSciences([FromQuery] GetSciencesQuery filter)
+    {
+        var sciences = await _mediator.Send<IEnumerable<ScienceModel>>(filter);
+        return Ok(sciences);
+    }
 
-	[HttpPost]
+    [HttpPost]
     [ProducesResponseType(typeof(ScienceModel), StatusCodes.Status200OK)]
     public async ValueTask<IActionResult> CreateScience([FromBody] CreateScienceCommand createScienceCommand)
-	{
-		try
-		{
-			var science = await _mediator.Send<ScienceModel>(createScienceCommand);
-			return Ok(science);
-		}
-		catch (ValidationException e)
-		{
-			return BadRequest(e.Errors);
-		}
-	}
+    {
+        try
+        {
+            var science = await _mediator.Send<ScienceModel>(createScienceCommand);
+            return Ok(science);
+        }
+        catch (ValidationException e)
+        {
+            return BadRequest(e.Errors);
+        }
+    }
 
     [HttpGet("{scienceId:guid}")]
     [ProducesResponseType(typeof(ScienceModel), StatusCodes.Status200OK)]
@@ -62,7 +62,7 @@ public class SciencesController : ControllerBase
     public async ValueTask<IActionResult> UpdateScience(Guid scienceId, [FromBody] UpdateScienceCommand updateScienceCommand)
     {
         updateScienceCommand.Id = scienceId;
-        
+
         try
         {
             await _mediator.Send(updateScienceCommand);

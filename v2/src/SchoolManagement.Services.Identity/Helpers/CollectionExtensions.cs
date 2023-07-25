@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace SchoolManagement.Services.Identity.Helpers;
 

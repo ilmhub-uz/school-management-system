@@ -3,17 +3,17 @@ using SchoolManagement.Services.Students.Context;
 
 namespace SchoolManagement.Services.Students.Repositories;
 
-public class GenericRepository<TEntity, TDbContext, TKey> : IGenericRepository<TEntity, TDbContext, TKey> 
-	where TDbContext : DbContext where TEntity : class
+public class GenericRepository<TEntity, TDbContext, TKey> : IGenericRepository<TEntity, TDbContext, TKey>
+    where TDbContext : DbContext where TEntity : class
 {
-	private readonly DbContext _dbContext;
-	private readonly DbSet<TEntity> _entities;
+    private readonly DbContext _dbContext;
+    private readonly DbSet<TEntity> _entities;
 
-	public GenericRepository(TDbContext dbContext)
-	{
-		_dbContext = dbContext;
-		_entities = _dbContext.Set<TEntity>();
-	}
+    public GenericRepository(TDbContext dbContext)
+    {
+        _dbContext = dbContext;
+        _entities = _dbContext.Set<TEntity>();
+    }
 
     public async ValueTask<TEntity> CreateAsync(TEntity entity)
     {
@@ -46,17 +46,17 @@ public class GenericRepository<TEntity, TDbContext, TKey> : IGenericRepository<T
 }
 
 public class GenericRepository<TEntity, TKey> : GenericRepository<TEntity, StudentsDbContext, TKey>, IGenericRepository<TEntity, TKey>
-	where TEntity : class
+    where TEntity : class
 {
-	public GenericRepository(StudentsDbContext dbContext) : base(dbContext)
-	{
-	}
+    public GenericRepository(StudentsDbContext dbContext) : base(dbContext)
+    {
+    }
 }
 
 public class GenericRepository<TEntity> : GenericRepository<TEntity, StudentsDbContext, Guid>, IGenericRepository<TEntity>
-	where TEntity : class
+    where TEntity : class
 {
-	public GenericRepository(StudentsDbContext dbContext) : base(dbContext)
-	{
-	}
+    public GenericRepository(StudentsDbContext dbContext) : base(dbContext)
+    {
+    }
 }

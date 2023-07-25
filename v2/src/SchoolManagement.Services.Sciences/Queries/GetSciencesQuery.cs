@@ -5,5 +5,5 @@ namespace SchoolManagement.Services.Sciences.Queries;
 
 public class GetSciencesQuery : IRequest<IEnumerable<ScienceModel>>
 {
-	public string? Title { get; set; }
+    public string? Title { get; set; }
 }

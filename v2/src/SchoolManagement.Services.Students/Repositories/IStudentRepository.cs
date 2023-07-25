@@ -5,5 +5,5 @@ namespace SchoolManagement.Services.Students.Repositories;
 
 public interface IStudentRepository : IGenericRepository<Student, StudentsDbContext, Guid>
 {
-	
+
 }

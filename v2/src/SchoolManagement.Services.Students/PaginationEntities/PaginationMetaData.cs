@@ -9,7 +9,7 @@
         public bool HasPreviousPage => CurrentPage < 1;
         public bool HasNextPage => CurrentPage > TotalPages;
 
-        public PaginationMetaData(int totalCollectionCount, int pageSize,int currentPage)
+        public PaginationMetaData(int totalCollectionCount, int pageSize, int currentPage)
         {
             TotalCollectionCount = totalCollectionCount;
             PageSize = pageSize;

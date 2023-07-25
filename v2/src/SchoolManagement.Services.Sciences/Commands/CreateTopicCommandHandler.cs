@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Sciences.Context;
 using SchoolManagement.Services.Sciences.Entities;
 using SchoolManagement.Services.Sciences.Exceptions;
+using SchoolManagement.Services.Sciences.Extensions;
 using SchoolManagement.Services.Sciences.Mappers;
 using SchoolManagement.Services.Sciences.Models;
-using SchoolManagement.Services.Sciences.Extensions;
 
 namespace SchoolManagement.Services.Sciences.Commands;
 
@@ -25,18 +25,18 @@ public class CreateTopicCommandHandler : RequestHandlerBase, IRequestHandler<Cre
         var normalizedTitle = request.Title!.ToNormalized();
 
         var topic = new Topic()
-		{
-			Name = normalizedTitle,
-			Title = request.Title!,
+        {
+            Name = normalizedTitle,
+            Title = request.Title!,
             Description = request.Description,
             Content = request.Content,
             Date = request.Date,
             ScienceId = request.ScienceId
-		};
+        };
 
-		SciencesDb.Topics.Add(topic);
-		await SciencesDb.SaveChangesAsync(cancellationToken);
+        SciencesDb.Topics.Add(topic);
+        await SciencesDb.SaveChangesAsync(cancellationToken);
 
-		return topic.ToModel();
-	}
+        return topic.ToModel();
+    }
 }

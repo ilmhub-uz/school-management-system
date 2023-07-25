@@ -9,28 +9,28 @@ namespace SchoolManagement.Services.Identity.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
-	{
-		services.Configure<JwtOption>(configuration.GetSection("JwtBearer"));
+    public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<JwtOption>(configuration.GetSection("JwtBearer"));
 
-		services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-			.AddJwtBearer(options =>
-			{
-				var signingKey = System.Text.Encoding.UTF32.GetBytes(configuration["JwtBearer:SigningKey"]!);
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var signingKey = System.Text.Encoding.UTF32.GetBytes(configuration["JwtBearer:SigningKey"]!);
 
-				options.TokenValidationParameters = new TokenValidationParameters()
-				{
-					ValidIssuer = configuration["JwtBearer:ValidIssuer"],
-					ValidAudience = configuration["JwtBearer:ValidAudience"],
-					ValidateIssuer = true,
-					ValidateAudience = true,
-					IssuerSigningKey = new SymmetricSecurityKey(signingKey),
-					ValidateIssuerSigningKey = true,
-					ValidateLifetime = true,
-					ClockSkew = TimeSpan.Zero
-				};
-			});
-	}
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = configuration["JwtBearer:ValidIssuer"],
+                    ValidAudience = configuration["JwtBearer:ValidAudience"],
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(signingKey),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+    }
 
     public static void MigrateIdentityDb(this WebApplication app)
     {

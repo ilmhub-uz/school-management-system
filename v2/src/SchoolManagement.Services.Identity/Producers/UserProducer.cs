@@ -5,15 +5,15 @@ namespace SchoolManagement.Services.Identity.Producers;
 
 public class UserProducer : IUserProducer
 {
-	private readonly IBus _bus;
+    private readonly IBus _bus;
 
-	public UserProducer(IBus bus)
-	{
-		_bus = bus;
-	}
+    public UserProducer(IBus bus)
+    {
+        _bus = bus;
+    }
 
-	public async Task PublishUser(User user)
-	{
-		await _bus.Publish<User>(user);
-	}
+    public async Task PublishUser(User user)
+    {
+        await _bus.Publish<User>(user);
+    }
 }

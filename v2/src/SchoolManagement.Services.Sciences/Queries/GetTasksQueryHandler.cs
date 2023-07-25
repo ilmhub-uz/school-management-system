@@ -13,13 +13,13 @@ public class GetTasksQueryHandler : RequestHandlerBase, IRequestHandler<GetTasks
     }
 
     public async Task<IEnumerable<TaskModel>> Handle(GetTasksQuery request, CancellationToken cancellationToken)
-	{
-		var query = SciencesDb.TopicTasks.AsQueryable();
+    {
+        var query = SciencesDb.TopicTasks.AsQueryable();
 
-		if (!string.IsNullOrWhiteSpace(request.Title))
-		{
-			query = query.Where(s => s.Title.Contains(request.Title));
-		}
+        if (!string.IsNullOrWhiteSpace(request.Title))
+        {
+            query = query.Where(s => s.Title.Contains(request.Title));
+        }
 
         if (request.TopicId is not null)
         {
@@ -29,6 +29,6 @@ public class GetTasksQueryHandler : RequestHandlerBase, IRequestHandler<GetTasks
         var tasks = await query.Select(s => s.ToModel())
             .ToListAsync(cancellationToken);
 
-		return tasks;
-	}
+        return tasks;
+    }
 }

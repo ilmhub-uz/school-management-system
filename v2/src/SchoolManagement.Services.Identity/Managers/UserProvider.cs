@@ -4,18 +4,18 @@ namespace SchoolManagement.Services.Identity.Managers;
 
 public interface IUserProvider
 {
-	public Guid UserId { get; }
-	public string? Username { get; }
+    public Guid UserId { get; }
+    public string? Username { get; }
 }
 
 public class UserProvider : IUserProvider
 {
-	private readonly IHttpContextAccessor _contextAccessor;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-	public UserProvider(IHttpContextAccessor contextAccessor)
-	{
-		_contextAccessor = contextAccessor;
-	}
+    public UserProvider(IHttpContextAccessor contextAccessor)
+    {
+        _contextAccessor = contextAccessor;
+    }
 
     public Guid UserId
     {
@@ -36,5 +36,5 @@ public class UserProvider : IUserProvider
             return Guid.Parse(userId);
         }
     }
-	public string? Username => _contextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
+    public string? Username => _contextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
 }

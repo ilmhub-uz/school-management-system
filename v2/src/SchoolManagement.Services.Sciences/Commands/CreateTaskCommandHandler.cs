@@ -22,16 +22,16 @@ public class CreateTaskCommandHandler : RequestHandlerBase, IRequestHandler<Crea
         }
 
         var task = new TopicTask()
-		{
-			Title = request.Title!,
+        {
+            Title = request.Title!,
             Description = request.Description,
             Content = request.Content,
             TopicId = request.TopicId
-		};
+        };
 
-		SciencesDb.TopicTasks.Add(task);
-		await SciencesDb.SaveChangesAsync(cancellationToken);
+        SciencesDb.TopicTasks.Add(task);
+        await SciencesDb.SaveChangesAsync(cancellationToken);
 
-		return task.ToModel();
-	}
+        return task.ToModel();
+    }
 }
