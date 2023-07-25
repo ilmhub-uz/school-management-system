@@ -6,8 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Messages\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<Compile Remove="Messages\**" />
+	    <EmbeddedResource Remove="Messages\**" />
+	    <None Remove="Messages\**" />
+    </ItemGroup>
 
 </Project>

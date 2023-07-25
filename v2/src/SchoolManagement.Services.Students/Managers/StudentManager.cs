@@ -1,5 +1,5 @@
-﻿using System.Data;
-using Mapster;
+﻿using Mapster;
+using SchoolManagement.Core.HelperServices;
 using SchoolManagement.Services.Students.Entities;
 using SchoolManagement.Services.Students.Exceptions;
 using SchoolManagement.Services.Students.Models.StudentModels;
@@ -9,12 +9,15 @@ namespace SchoolManagement.Services.Students.Managers;
 
 public class StudentManager : IStudentManager
 {
+    private const string StudentImageFolderName = "StudentImages";
 	private readonly IUnitOfWork _unitOfWork;
+    private readonly FileManager _fileManager;
 
-	public StudentManager(IUnitOfWork unitOfWork)
-	{
-		_unitOfWork = unitOfWork;
-	}
+    public StudentManager(IUnitOfWork unitOfWork, FileManager fileManager)
+    {
+        _unitOfWork = unitOfWork;
+        _fileManager = fileManager;
+    }
 
 	public async ValueTask<IEnumerable<StudentModel>> GetStudentsAsync()
 	{
@@ -39,6 +42,9 @@ public class StudentManager : IStudentManager
 			Username = model.Username
 		};
 
+        if (model.Photo is not null)
+            student.PhotoUrl = await _fileManager.SaveFileAsync(StudentImageFolderName, model.Photo);
+        
 		await _unitOfWork.Students.CreateAsync(student);
 
 		return student.Adapt<StudentModel>();
@@ -52,7 +58,12 @@ public class StudentManager : IStudentManager
             throw new StudentNotFoundException();
 
         if (model.Photo is not null)
-            student.PhotoUrl = model.Photo.ToString();
+        {
+            if(student.PhotoUrl is not null)
+                _fileManager.DeleteFile(student.PhotoUrl);
+
+            student.PhotoUrl = await _fileManager.SaveFileAsync(StudentImageFolderName, model.Photo);
+        }
 
 		student.FirstName = model.FirstName ?? student.FirstName;
 		student.LastName = model.LastName ?? student.LastName;
@@ -69,6 +80,9 @@ public class StudentManager : IStudentManager
 
         if (student is null)
             throw new StudentNotFoundException();
+
+        if (student.PhotoUrl is not null)
+            _fileManager.DeleteFile(student.PhotoUrl);
 
         await _unitOfWork.Students.DeleteAsync(student);
     }
