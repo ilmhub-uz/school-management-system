@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Students.Managers;
-using SchoolManagement.Services.Students.Models;
+using SchoolManagement.Services.Students.Models.StudentModels;
 
 namespace SchoolManagement.Services.Students.Controllers;
 
@@ -18,11 +18,18 @@ public class StudentsController : ControllerBase
 	[HttpGet]
 	public async ValueTask<IActionResult> GetStudents()
 	{
-		var student = await _studentManager.GetStudents();
+		var student = await _studentManager.GetStudentsAsync();
 		return Ok(student);
 	}
 
-	[HttpPost]
+    [HttpGet("{studentId:guid}")]
+    public async ValueTask<IActionResult> GetStudentById(Guid studentId)
+    {
+        var student = await _studentManager.GetByIdAsync(studentId);
+        return Ok(student);
+    }
+
+    [HttpPost]
 	public async ValueTask<IActionResult> CreateStudent([FromForm] CreateStudentModel model)
 	{
 		var student = await _studentManager.CreateAsync(model);
@@ -30,15 +37,17 @@ public class StudentsController : ControllerBase
 		return Ok(student);
 	}
 
-	[HttpPut]
-    public async ValueTask<IActionResult> UpdateStudent()
+    [HttpPut("{studentId:guid}")]
+    public async ValueTask<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model)
     {
+        await _studentManager.UpdateAsync(studentId, model);
         return Ok();
     }
 
-	[HttpDelete]
-    public async ValueTask<IActionResult> DeleteStudent()
+	[HttpDelete("{studentId:guid}")]
+    public async ValueTask<IActionResult> DeleteStudent(Guid studentId)
     {
+        await _studentManager.DeleteAsync(studentId);
         return Ok();
     }
 }

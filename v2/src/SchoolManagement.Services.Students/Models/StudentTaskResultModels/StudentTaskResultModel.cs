@@ -1,4 +1,6 @@
-﻿namespace SchoolManagement.Services.Students.Models;
+﻿using SchoolManagement.Services.Students.Models.StudentModels;
+
+namespace SchoolManagement.Services.Students.Models.StudentTaskResultModels;
 
 public class StudentTaskResultModel
 {
