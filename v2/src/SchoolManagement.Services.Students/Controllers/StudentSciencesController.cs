@@ -38,7 +38,7 @@ public class StudentSciencesController : ControllerBase
         return Ok(studentScienceModels);
     }
 
-    [HttpPut]
+    [HttpPut("scienceId")]
     public async ValueTask<IActionResult> UpdateStudentScience(Guid studentId, Guid scienceId, UpdateStudentScienceModel updateStudentScience)
     {
         try
@@ -54,7 +54,7 @@ public class StudentSciencesController : ControllerBase
 
     }
 
-    [HttpDelete]
+    [HttpDelete("scienceId")]
     public async ValueTask<IActionResult> DeleteStudentScience(Guid studentId, Guid scienceId)
     {
         var isDelete = await _studentScienceManager.DeleteStudentScienceAsync(studentId, scienceId);
