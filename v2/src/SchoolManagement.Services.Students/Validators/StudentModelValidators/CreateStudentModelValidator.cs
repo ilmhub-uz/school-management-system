@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SchoolManagement.Services.Students.Models.StudentModels;
 
-namespace SchoolManagement.Services.Students.FluentValidation;
+namespace SchoolManagement.Services.Students.Validators.StudentModelValidators;
 
 public class CreateStudentModelValidation : AbstractValidator<CreateStudentModel>
 {
