@@ -34,4 +34,8 @@
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Managers\" />
+  </ItemGroup>
+
 </Project>
