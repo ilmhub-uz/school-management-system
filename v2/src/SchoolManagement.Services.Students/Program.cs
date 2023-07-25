@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.HelperServices;
 using SchoolManagement.Services.Students.Context;
+using SchoolManagement.Services.Students.Entities;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Repositories;
 
@@ -18,7 +20,7 @@ builder.Services.AddDbContext<StudentsDbContext>(options =>
 
 builder.Services.AddScoped<IStudentManager, StudentManager>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-builder.Services.AddScoped<IStudentAttendance, StudentAttendance>();
+builder.Services.AddScoped<FileManager>();
 
 var app = builder.Build();
 
@@ -29,7 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
