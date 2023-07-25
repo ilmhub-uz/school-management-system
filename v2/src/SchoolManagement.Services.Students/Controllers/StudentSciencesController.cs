@@ -41,10 +41,17 @@ public class StudentSciencesController : ControllerBase
     [HttpPut]
     public async ValueTask<IActionResult> UpdateStudentScience(Guid studentId, Guid scienceId, UpdateStudentScienceModel updateStudentScience)
     {
-        var model = await _studentScienceManager
-            .UpdateStudentScienceAsync(studentId, scienceId, updateStudentScience);
-        
-        return Ok(model);
+        try
+        {
+            var model = await _studentScienceManager
+                .UpdateStudentScienceAsync(studentId, scienceId, updateStudentScience);
+            return Ok(model);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 
     [HttpDelete]
