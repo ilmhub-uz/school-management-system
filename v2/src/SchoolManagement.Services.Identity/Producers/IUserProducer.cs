@@ -4,5 +4,5 @@ namespace SchoolManagement.Services.Identity.Producers;
 
 public interface IUserProducer
 {
-	Task PublishUser(User  user);
+    Task PublishUser(User user);
 }

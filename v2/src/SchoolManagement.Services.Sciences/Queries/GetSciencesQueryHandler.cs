@@ -13,16 +13,16 @@ public class GetSciencesQueryHandler : RequestHandlerBase, IRequestHandler<GetSc
     }
 
     public async Task<IEnumerable<ScienceModel>> Handle(GetSciencesQuery request, CancellationToken cancellationToken)
-	{
-		var query = SciencesDb.Sciences.AsQueryable();
+    {
+        var query = SciencesDb.Sciences.AsQueryable();
 
-		if (!string.IsNullOrWhiteSpace(request.Title))
-		{
-			query = query.Where(s => s.Title.Contains(request.Title));
-		}
+        if (!string.IsNullOrWhiteSpace(request.Title))
+        {
+            query = query.Where(s => s.Title.Contains(request.Title));
+        }
 
-		var sciences = await query.Select(s => s.ToModel()).ToListAsync(cancellationToken);
+        var sciences = await query.Select(s => s.ToModel()).ToListAsync(cancellationToken);
 
-		return sciences;
-	}
+        return sciences;
+    }
 }

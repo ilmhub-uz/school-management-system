@@ -13,18 +13,18 @@ public class GetTopicsQueryHandler : RequestHandlerBase, IRequestHandler<GetTopi
     }
 
     public async Task<IEnumerable<TopicModel>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)
-	{
-		var query = SciencesDb.Topics.AsQueryable();
+    {
+        var query = SciencesDb.Topics.AsQueryable();
 
-		if (!string.IsNullOrWhiteSpace(request.Title))
-		{
-			query = query.Where(s => s.Title.Contains(request.Title));
-		}
+        if (!string.IsNullOrWhiteSpace(request.Title))
+        {
+            query = query.Where(s => s.Title.Contains(request.Title));
+        }
 
-		var topics = await query.Where(t => t.ScienceId == request.ScienceId)
+        var topics = await query.Where(t => t.ScienceId == request.ScienceId)
             .Select(s => s.ToModel())
             .ToListAsync(cancellationToken);
 
-		return topics;
-	}
+        return topics;
+    }
 }

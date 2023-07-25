@@ -8,19 +8,19 @@ namespace SchoolManagement.Services.Students.Controllers;
 [ApiController]
 public class StudentsController : ControllerBase
 {
-	private readonly IStudentManager _studentManager;
+    private readonly IStudentManager _studentManager;
 
-	public StudentsController(IStudentManager studentManager)
-	{
-		_studentManager = studentManager;
-	}
+    public StudentsController(IStudentManager studentManager)
+    {
+        _studentManager = studentManager;
+    }
 
-	[HttpGet]
-	public async ValueTask<IActionResult> GetStudents()
-	{
-		var student = await _studentManager.GetStudentsAsync();
-		return Ok(student);
-	}
+    [HttpGet]
+    public async ValueTask<IActionResult> GetStudents()
+    {
+        var student = await _studentManager.GetStudentsAsync();
+        return Ok(student);
+    }
 
     [HttpGet("{studentId:guid}")]
     public async ValueTask<IActionResult> GetStudentById(Guid studentId)
@@ -30,12 +30,12 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost]
-	public async ValueTask<IActionResult> CreateStudent([FromForm] CreateStudentModel model)
-	{
-		var student = await _studentManager.CreateAsync(model);
+    public async ValueTask<IActionResult> CreateStudent([FromForm] CreateStudentModel model)
+    {
+        var student = await _studentManager.CreateAsync(model);
 
-		return Ok(student);
-	}
+        return Ok(student);
+    }
 
     [HttpPut("{studentId:guid}")]
     public async ValueTask<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model)
@@ -44,7 +44,7 @@ public class StudentsController : ControllerBase
         return Ok();
     }
 
-	[HttpDelete("{studentId:guid}")]
+    [HttpDelete("{studentId:guid}")]
     public async ValueTask<IActionResult> DeleteStudent(Guid studentId)
     {
         await _studentManager.DeleteAsync(studentId);

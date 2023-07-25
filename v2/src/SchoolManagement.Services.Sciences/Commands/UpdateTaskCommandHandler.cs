@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Sciences.Context;
 using SchoolManagement.Services.Sciences.Exceptions;
-using SchoolManagement.Services.Sciences.Extensions;
 
 namespace SchoolManagement.Services.Sciences.Commands;
 
@@ -24,7 +23,7 @@ public class UpdateTaskCommandHandler : RequestHandlerBase, IRequestHandler<Upda
         task.Title = request.Title!;
         task.Description = request.Description;
         task.Content = request.Content;
-        
+
         SciencesDb.TopicTasks.Update(task);
 
         await SciencesDb.SaveChangesAsync(cancellationToken);

@@ -12,9 +12,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SciencesDbContext>(options =>
 {
-	options.UseSnakeCaseNamingConvention()
-		.UseInMemoryDatabase("sciences_db");
-		//.UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
+    options.UseSnakeCaseNamingConvention()
+        .UseInMemoryDatabase("sciences_db");
+    //.UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
 });
 
 builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
@@ -27,8 +27,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

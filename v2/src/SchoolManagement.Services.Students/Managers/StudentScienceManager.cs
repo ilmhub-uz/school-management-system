@@ -33,14 +33,14 @@ public class StudentScienceManager : IStudentScienceManager
             return false;
 
         var result = await _studentScienceRepository.DeleteStudentScienceAsync(studentScience);
-        
+
         return result;
     }
 
     public async Task<StudentScienceModel?> GetStudentScienceAsync(Guid studentId, Guid scienceId)
     {
         var studentScience = await _studentScienceRepository.GetStudentScienceAsync(studentId, scienceId);
-        
+
         var studentScienceModel = studentScience.Adapt<StudentScienceModel>();
 
         return studentScienceModel;

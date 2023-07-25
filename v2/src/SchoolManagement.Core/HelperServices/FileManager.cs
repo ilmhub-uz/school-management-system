@@ -24,7 +24,7 @@ public class FileManager
     {
         var folderPath = CheckDirectory(folderName);
 
-        var fileName = Guid.NewGuid() + Path.GetExtension(iFormFile.Name);
+        var fileName = Guid.NewGuid() + Path.GetExtension(iFormFile.FileName);
 
         var filePath = Path.Combine(folderPath, fileName);
 
@@ -36,7 +36,7 @@ public class FileManager
 
     public void DeleteFile(string filePath)
     {
-        if(File.Exists(filePath))
+        if (File.Exists(filePath))
             File.Delete(filePath);
     }
 }

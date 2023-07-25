@@ -11,13 +11,13 @@ namespace SchoolManagement.Services.Identity.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-	private readonly ISignInManager _signInManager;
+    private readonly ISignInManager _signInManager;
 
-	public AccountController(
-		ISignInManager signInManager)
-	{
-		_signInManager = signInManager;
-	}
+    public AccountController(
+        ISignInManager signInManager)
+    {
+        _signInManager = signInManager;
+    }
 
     [HttpGet]
     [Authorize]
@@ -38,14 +38,14 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
     public async ValueTask<IActionResult> RegisterAsync(
-	    [FromBody] CreateUserModel createUserModel,
+        [FromBody] CreateUserModel createUserModel,
         [FromServices] IValidator<CreateUserModel> validator)
     {
-	    var validationResult = await validator.ValidateAsync(createUserModel);
-	    if (!validationResult.IsValid)
-	    {
-		    return BadRequest(validationResult.Errors);
-	    }
+        var validationResult = await validator.ValidateAsync(createUserModel);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
 
         try
         {

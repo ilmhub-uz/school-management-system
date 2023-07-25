@@ -20,7 +20,7 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
     AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     options.UseSnakeCaseNamingConvention()
-		.UseNpgsql(builder.Configuration.GetConnectionString("IdentityDb"));
+        .UseNpgsql(builder.Configuration.GetConnectionString("IdentityDb"));
 });
 
 builder.Services.AddMassTransit(c =>
@@ -45,8 +45,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

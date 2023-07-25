@@ -2,8 +2,8 @@
 
 public enum UserStatus
 {
-	Created,
-	Active,
-	Blocked,
-	Deleted
+    Created,
+    Active,
+    Blocked,
+    Deleted
 }

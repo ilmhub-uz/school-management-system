@@ -10,23 +10,23 @@ namespace SchoolManagement.Services.Identity.Managers;
 
 public class SignInManager : ISignInManager
 {
-	private readonly ITokenManager _tokenManager;
-	private readonly IUserProvider _userProvider;
-	private readonly IUserProducer _userProducer;
-	private readonly IdentityDbContext _identityDbContext;
+    private readonly ITokenManager _tokenManager;
+    private readonly IUserProvider _userProvider;
+    private readonly IUserProducer _userProducer;
+    private readonly IdentityDbContext _identityDbContext;
 
-	public SignInManager(
-		ITokenManager tokenManager, 
-		IUserProvider userProvider, 
-		IUserProducer userProducer, IdentityDbContext identityDbContext)
-	{
-		_tokenManager = tokenManager;
-		_userProvider = userProvider;
-		_userProducer = userProducer;
+    public SignInManager(
+        ITokenManager tokenManager,
+        IUserProvider userProvider,
+        IUserProducer userProducer, IdentityDbContext identityDbContext)
+    {
+        _tokenManager = tokenManager;
+        _userProvider = userProvider;
+        _userProducer = userProducer;
         _identityDbContext = identityDbContext;
     }
 
-	public async ValueTask<UserModel> GetUserAsync()
+    public async ValueTask<UserModel> GetUserAsync()
     {
         var user = await _identityDbContext.Users.FindAsync(_userProvider.UserId);
 
@@ -38,7 +38,7 @@ public class SignInManager : ISignInManager
         return user.ToModel();
     }
 
-	public async ValueTask<UserModel> RegisterAsync(CreateUserModel createUserModel)
+    public async ValueTask<UserModel> RegisterAsync(CreateUserModel createUserModel)
     {
         var isUsernameExists = await _identityDbContext.Users.AnyAsync(u => u.Username == createUserModel.Username);
         if (isUsernameExists)

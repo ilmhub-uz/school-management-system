@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Services.Students.Context;
+﻿using SchoolManagement.Services.Students.Context;
 using SchoolManagement.Services.Students.Entities;
 
 namespace SchoolManagement.Services.Students.Repositories;
 
-public class StudentAttendanceRepository: IStudentAttendanceRepository
+public class StudentAttendanceRepository : IStudentAttendanceRepository
 {
     private readonly StudentsDbContext _studentsDbContext;
 
@@ -35,7 +34,7 @@ public class StudentAttendanceRepository: IStudentAttendanceRepository
 
     private Student? GetStudentByUsername(string username)
     {
-        var student =  _studentsDbContext.Students.FirstOrDefault(u => u.Username == username);
+        var student = _studentsDbContext.Students.FirstOrDefault(u => u.Username == username);
         if (student == null)
             throw new Exception("Student Not Found");
         return student;

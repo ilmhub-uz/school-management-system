@@ -26,7 +26,7 @@ public class UpdateTopicCommandHandler : RequestHandlerBase, IRequestHandler<Upd
         topic.Description = request.Description;
         topic.Content = request.Content;
         topic.Date = request.Date;
-        
+
         SciencesDb.Topics.Update(topic);
 
         await SciencesDb.SaveChangesAsync(cancellationToken);

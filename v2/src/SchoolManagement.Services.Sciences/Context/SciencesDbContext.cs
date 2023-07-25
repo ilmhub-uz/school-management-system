@@ -72,9 +72,9 @@ public class SciencesDbContext : DbContext
                 .HasMaxLength(255);
 
             entity.HasOne(e => e.Topic)
-	            .WithMany(e => e.Tasks)
-	            .HasForeignKey(e => e.TopicId)
-	            .OnDelete(DeleteBehavior.NoAction);
+                .WithMany(e => e.Tasks)
+                .HasForeignKey(e => e.TopicId)
+                .OnDelete(DeleteBehavior.NoAction);
         });
     }
 
