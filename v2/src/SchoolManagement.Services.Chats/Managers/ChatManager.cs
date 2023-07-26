@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Services.Chats.Entities;
+﻿using Mapster;
+using SchoolManagement.Services.Chats.Entities;
 using SchoolManagement.Services.Chats.Models;
 using SchoolManagement.Services.Chats.Repositories;
 
@@ -12,36 +13,61 @@ public class ChatManager : IChatManager
         _chatRepository = chatRepository;
     }
 
-    public Task<ChatModel> AddChat(CreateChatModel model)
+    public async Task<ChatModel> AddChat(CreateChatModel model)
     {
         var chat = new Chat()
         {
-            ChatType= model.ChatType,
-            Identifier=model.Identifier,
-            Name=model.Name,
+            ChatType = model.ChatType,
+            Identifier = model.Identifier,
+            Name = model.Name,
             Messages = new List<Message>(),
-            Users= new List<User>(),
+            Users = new List<User>(),
         };
-        return chat.Select(e => e.Adapt<ChatModel>());
+        return chat.Adapt<ChatModel>();
     }
 
-    public Task Delete(ulong chatId)
+    public async Task Delete(ulong chatId)
     {
-        throw new NotImplementedException();
+        var chat = await _chatRepository.GetChatById(chatId);
+        if (chat == null)
+        {
+            throw new Exception("Chat not found");
+        }
+        await _chatRepository.DeleteChat(chat);
     }
 
-    public Task<List<ChatModel>> GetAllChats()
+    public async Task<List<ChatModel>> GetAllChats()
     {
-        throw new NotImplementedException();
+        var chats = await _chatRepository.GetChats();
+        if (chats == null)
+        {
+            return new List<ChatModel>();
+        }
+        var chatList = new List<ChatModel>();
+        foreach (var chat in chats)
+        {
+            chatList.Add(chat.Adapt<ChatModel>());
+        }
+        return chatList;
     }
 
-    public Task<ChatModel> GetById(ulong chatId)
+    public async Task<ChatModel> GetById(ulong chatId)
     {
-        throw new NotImplementedException();
+        var chat = await _chatRepository.GetChatById(chatId);
+        if (chat == null)
+        {
+            throw new Exception("Chat not found");
+        }
+        return chat.Adapt<ChatModel>();
     }
 
-    public Task UpdateChat(ulong chatId, UpdateChatModel model)
+    public async Task UpdateChat(ulong chatId, UpdateChatModel model)
     {
-        throw new NotImplementedException();
+        var chat = await _chatRepository.GetChatById(chatId);
+        if (chat == null)
+        {
+            throw new Exception("Chat not found");
+        }
+        await _chatRepository.UpdateChat(chat);
     }
 }
