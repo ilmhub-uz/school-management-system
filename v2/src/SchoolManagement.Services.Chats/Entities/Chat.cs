@@ -10,9 +10,4 @@ public class Chat : Entity<ulong>
     public ChatType ChatType { get; set; }
     public virtual ICollection<Message>? Messages { get; set; }
     public virtual ICollection<User>? Users { get; set; }
-
-    internal Task<ChatModel> Select(Func<object, object> value)
-    {
-        throw new NotImplementedException();
-    }
 }
