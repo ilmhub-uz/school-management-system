@@ -1,5 +1,6 @@
 using SchoolManagement.Core.HelperServices;
 using SchoolManagement.Services.Students.Extensions;
+using SchoolManagement.Services.Students.Helpers.PaginationEntities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddValidators();
 builder.Services.AddRepositories();
 builder.Services.AddManagers();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<HttpContextHelper>();
 builder.Services.AddScoped<FileManager>();
 
 var app = builder.Build();
