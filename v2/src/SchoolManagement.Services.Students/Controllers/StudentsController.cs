@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Students.Exceptions;
+using SchoolManagement.Services.Students.Helpers.PaginationEntities;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentModels;
 
@@ -18,9 +19,9 @@ public class StudentsController : ControllerBase
     }
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetStudents()
+    public async ValueTask<IActionResult> GetStudents([FromQuery] StudentFilter studentFilter)
     {
-        var student = await _studentManager.GetStudentsAsync();
+        var student = await _studentManager.GetStudentsAsync(studentFilter);
         return Ok(student);
     }
 

@@ -14,7 +14,7 @@ public class StudentRepository : GenericRepository<Student, StudentsDbContext, G
         _httpContext = httpContext;
     }
 
-    public async ValueTask<IEnumerable<Student>> GetAllEntitiesAsync(StudentFilter filter)
+    public async ValueTask<IEnumerable<Student>> GetAllWithFilterAsync(StudentFilter filter)
     {
         IQueryable<Student> query = Entities;
 
