@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Services.Students.Context;
+using SchoolManagement.Services.Students.FluentValidation;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentModels;
 using SchoolManagement.Services.Students.Repositories;
@@ -26,15 +25,5 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<IStudentManager, StudentManager>();
         services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
-    }
-
-    public static void AddStudentDbContext(this IServiceCollection services)
-    {
-        services.AddDbContext<StudentsDbContext>(options =>
-        {
-            options.UseSnakeCaseNamingConvention()
-                .UseInMemoryDatabase("students");
-            //.UseNpgsql(builder.Configuration.GetConnectionString("StudentsDb"));
-        });
     }
 }

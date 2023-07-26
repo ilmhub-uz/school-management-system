@@ -7,40 +7,40 @@ public class GenericRepository<TEntity, TDbContext, TKey> : IGenericRepository<T
     where TDbContext : DbContext where TEntity : class
 {
     private readonly DbContext _dbContext;
-    private readonly DbSet<TEntity> _entities;
+    protected readonly DbSet<TEntity> Entities;
 
     public GenericRepository(TDbContext dbContext)
     {
         _dbContext = dbContext;
-        _entities = _dbContext.Set<TEntity>();
+        Entities = _dbContext.Set<TEntity>();
     }
 
     public async ValueTask<TEntity> CreateAsync(TEntity entity)
     {
-        _entities.Add(entity);
+        Entities.Add(entity);
         await _dbContext.SaveChangesAsync();
         return entity;
     }
 
     public async ValueTask<IEnumerable<TEntity>> GetAllEntitiesAsync()
     {
-        return await _entities.ToListAsync();
+        return await Entities.ToListAsync();
     }
 
     public async ValueTask<TEntity?> GetByIdAsync(TKey id)
     {
-        return await _entities.FindAsync(id);
+        return await Entities.FindAsync(id);
     }
 
     public async ValueTask UpdateAsync(TEntity entity)
     {
-        _entities.Update(entity);
+        Entities.Update(entity);
         await _dbContext.SaveChangesAsync();
     }
 
     public async ValueTask DeleteAsync(TEntity entity)
     {
-        _entities.Remove(entity);
+        Entities.Remove(entity);
         await _dbContext.SaveChangesAsync();
     }
 }
