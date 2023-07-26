@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentScienceModels;
 
@@ -15,7 +14,6 @@ public class StudentSciencesController : ControllerBase
     {
         _studentScienceManager = studentScienceManager;
     }
-
 
     [HttpGet("{scienceId}")]
     public async ValueTask<IActionResult> GetStudentScience(Guid studentId, Guid scienceId)
@@ -38,7 +36,7 @@ public class StudentSciencesController : ControllerBase
         return Ok(studentScienceModels);
     }
 
-    [HttpPut("scienceId")]
+    [HttpPut("{scienceId}")]
     public async ValueTask<IActionResult> UpdateStudentScience(Guid studentId, Guid scienceId, UpdateStudentScienceModel updateStudentScience)
     {
         try
@@ -51,10 +49,9 @@ public class StudentSciencesController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
-
     }
 
-    [HttpDelete("scienceId")]
+    [HttpDelete("{scienceId}")]
     public async ValueTask<IActionResult> DeleteStudentScience(Guid studentId, Guid scienceId)
     {
         var isDelete = await _studentScienceManager.DeleteStudentScienceAsync(studentId, scienceId);

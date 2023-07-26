@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using SchoolManagement.Services.Students.FluentValidation;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentModels;
 using SchoolManagement.Services.Students.Repositories;
