@@ -14,13 +14,13 @@ public class ChatRepository : IChatRepository
     public async Task<List<Chat>?> GetChats()
     {
         var chats = await _context.Chats.ToListAsync();
-        if(chats is null || chats.Count==0)
+        if (chats is null || chats.Count == 0)
         {
             return new List<Chat>();
         }
         return chats;
     }
-    public async Task<Chat?> GetChatById(Gui chatId)
+    public async Task<Chat?> GetChatById(ulong chatId)
     {
         var chat = await _context.Chats.FirstOrDefaultAsync(u => u.Id == chatId);
         return chat;
