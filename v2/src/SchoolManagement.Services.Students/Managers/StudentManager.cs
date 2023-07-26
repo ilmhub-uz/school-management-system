@@ -2,6 +2,7 @@
 using SchoolManagement.Core.HelperServices;
 using SchoolManagement.Services.Students.Entities;
 using SchoolManagement.Services.Students.Exceptions;
+using SchoolManagement.Services.Students.Helpers.PaginationEntities;
 using SchoolManagement.Services.Students.Models.StudentModels;
 using SchoolManagement.Services.Students.Repositories;
 
@@ -19,9 +20,9 @@ public class StudentManager : IStudentManager
         _fileManager = fileManager;
     }
 
-    public async ValueTask<IEnumerable<StudentModel>> GetStudentsAsync()
+    public async ValueTask<IEnumerable<StudentModel>> GetStudentsAsync(StudentFilter studentFilter)
     {
-        var students = await _unitOfWork.Students.GetAllEntitiesAsync();
+        var students = await _unitOfWork.Students.GetAllWithFilterAsync(studentFilter);
         return students.Select(e => e.Adapt<StudentModel>());
     }
 

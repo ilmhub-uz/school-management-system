@@ -1,10 +1,11 @@
-﻿using SchoolManagement.Services.Students.Models.StudentModels;
+﻿using SchoolManagement.Services.Students.Helpers.PaginationEntities;
+using SchoolManagement.Services.Students.Models.StudentModels;
 
 namespace SchoolManagement.Services.Students.Managers;
 
 public interface IStudentManager
 {
-    ValueTask<IEnumerable<StudentModel>> GetStudentsAsync();
+    ValueTask<IEnumerable<StudentModel>> GetStudentsAsync(StudentFilter studentFilter);
     ValueTask<StudentModel> GetByIdAsync(Guid studentId);
     ValueTask<StudentModel> CreateAsync(CreateStudentModel model);
     ValueTask UpdateAsync(Guid studentId, UpdateStudentModel model);
