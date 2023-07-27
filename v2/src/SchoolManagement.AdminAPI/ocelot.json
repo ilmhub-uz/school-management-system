@@ -54,7 +54,14 @@
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/api/sciences"
+            "UpstreamPathTemplate": "/api/sciences",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            },
+            "RouteClaimsRequirement": {
+                "Role": "admin"
+            }
         },
         {
             "DownstreamPathTemplate": "/swagger/v1/swagger.json",

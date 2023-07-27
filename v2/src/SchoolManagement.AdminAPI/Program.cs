@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenJwt();
+
+builder.Services.AddJwt(builder.Configuration);
 
 builder.Configuration.AddJsonFile("ocelot.json", false, false);
 builder.Services.AddOcelot(builder.Configuration);
@@ -22,6 +24,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
