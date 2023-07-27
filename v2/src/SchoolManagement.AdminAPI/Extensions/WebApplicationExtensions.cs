@@ -8,26 +8,25 @@ public static class WebApplicationExtensions
     {
         webApplication.UseSwaggerUI(c =>
         {
+            //c.SwaggerEndpoint("/swag/student", "Student api swagger");
+
             var endPoints = configuration.GetSection(
-                    SwaggerEndPointOptions.ConfigurationSectionName
+                    SwaggerEndPoint.ConfigurationSectionName
                 )
-                .Get<IEnumerable<SwaggerEndPointOptions>>();
+                .Get<IEnumerable<SwaggerEndPoint>>();
 
             if (endPoints is null)
             {
                 throw new InvalidOperationException(
-                    $"{SwaggerEndPointOptions.ConfigurationSectionName} configuration section is missing or empty."
+                    $"{SwaggerEndPoint.ConfigurationSectionName} configuration section is missing or empty."
                 );
             }
 
             foreach (var endPoint in endPoints)
             {
-                foreach (var config in endPoint.Config!)
-                {
-                    c.SwaggerEndpoint($"{config.Url}", $"{config.Name} - {config.Version}");
-                    c.RoutePrefix = "swagger";
-                }
-            }
+				c.SwaggerEndpoint($"{endPoint.Url}", $"{endPoint.Name} - {endPoint.Version}");
+				c.RoutePrefix = "swagger";
+			}
         });
     }
 }

@@ -4,7 +4,10 @@
             "DownstreamPathTemplate": "/api/account/{everything}",
             "DownstreamScheme": "http",
             "UpstreamHttpMethod": [
-                "Get", "Post", "Put", "Delete"
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
             ],
             "DownstreamHostAndPorts": [
                 {
@@ -18,7 +21,10 @@
             "DownstreamPathTemplate": "/api/sciences/{everything}",
             "DownstreamScheme": "http",
             "UpstreamHttpMethod": [
-                "Get", "Post", "Put", "Delete"
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
             ],
             "DownstreamHostAndPorts": [
                 {
@@ -32,7 +38,10 @@
             "DownstreamPathTemplate": "/api/account",
             "DownstreamScheme": "http",
             "UpstreamHttpMethod": [
-                "Get", "Post", "Put", "Delete"
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
             ],
             "DownstreamHostAndPorts": [
                 {
@@ -46,7 +55,10 @@
             "DownstreamPathTemplate": "/api/sciences",
             "DownstreamScheme": "http",
             "UpstreamHttpMethod": [
-                "Get", "Post", "Put", "Delete"
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
             ],
             "DownstreamHostAndPorts": [
                 {
@@ -61,6 +73,47 @@
             },
             "RouteClaimsRequirement": {
                 "Role": "admin"
+            }
+        },
+        {
+            "DownstreamPathTemplate": "/api/students",
+            "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
+            ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "students",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/students"
+        },
+        {
+            "DownstreamPathTemplate": "/api/students/{everthing}",
+            "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get",
+                "Post",
+                "Put",
+                "Delete"
+            ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "students",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/students/{everthing}",
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            },
+            "AddHeadersToRequest": {
+                "Username": "Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name] > value[1] > |"
             }
         },
         {
@@ -84,6 +137,17 @@
                 }
             ],
             "UpstreamPathTemplate": "/swagger/sciences"
+        },
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "students",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger/students"
         }
     ],
     "GlobalConfiguration": {}

@@ -96,4 +96,10 @@ public class StudentsController : ControllerBase
             return NoContent();
         }
     }
+
+    [HttpGet("header")]
+    public IActionResult GetHeaderValue()
+    {
+	    return Ok(HttpContext.Request.Headers["Username"]);
+    }
 }

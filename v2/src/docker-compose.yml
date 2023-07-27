@@ -13,6 +13,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - main
+      - internal_network 
 
   chats:
     image: chats
@@ -28,13 +29,15 @@ services:
   identity:
     image: identity
     container_name: identity
+    depends_on:
+      - rabbitmq
     build:
       context: .
       dockerfile: Dockerfile.Identity
     ports:
       - "8032:80"
     networks:
-      - main
+      - internal_network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
   
@@ -67,6 +70,19 @@ services:
     networks:
       - main
 
+  identity_db:
+    image: postgres:latest
+    container_name: identity_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - identity_db_data:/var/lib/postgresql/data/
+    networks:
+      - internal_network
+
   student-api:
     image: student-api
     container_name: student-api
@@ -86,11 +102,29 @@ services:
       dockerfile: Dockerfile.Students
     ports:
       - "8035:80"
+    networks:
+      - internal_network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 
+  rabbitmq:
+   image: rabbitmq:3-management
+   container_name: 'rabbitmq'
+   ports:
+     - 5672:5672
+     - 15672:15672
+   volumes:
+     - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+     - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+   networks:
+     - main
+     - internal_network
+
 volumes:
   sciences_db_data:
+  identity_db_data:
 
 networks:
+  internal_network:
+    internal: true
   main:
