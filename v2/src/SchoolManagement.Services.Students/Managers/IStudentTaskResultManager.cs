@@ -4,7 +4,7 @@ namespace SchoolManagement.Services.Students.Managers;
 
 public interface IStudentTaskResultManager
 {
-    public ValueTask<IEnumerable<StudentTaskResultModel>> GetStudentTaskResults(Guid stuentId);
+    public ValueTask<IEnumerable<StudentTaskResultModel>> GetStudentTaskResults(Guid studentId);
     public ValueTask<StudentTaskResultModel?> GetStudentTaskResult(Guid studentId, Guid taskId);
     public ValueTask<StudentTaskResultModel> CreateStudentTaskResult(Guid studentId, CreateStudentTaskResultModel model);
     public ValueTask UpdateStudentTaskResult(Guid studentId, Guid taskId, UpdateStudentTaskResultModel model);
