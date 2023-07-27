@@ -43,6 +43,7 @@ services:
     container_name: sciences
     environment:
       - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
+      - ASPNETCORE_ENVIRONMENT=Development
     build:
       context: .
       dockerfile: Dockerfile.Sciences
@@ -52,8 +53,6 @@ services:
       - sciences_db
     networks:
       - main
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
   
   sciences_db:
     image: postgres:latest
