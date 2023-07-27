@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<UserModel>), StatusCodes.Status200OK)]
-    public async ValueTask<IActionResult> GetUsersAsync(UserFilter filter)
+    public async ValueTask<IActionResult> GetUsersAsync([FromQuery] UserFilter filter)
     {
         var users = await _userManager.GetUsersAsync(filter);
         return Ok(users);

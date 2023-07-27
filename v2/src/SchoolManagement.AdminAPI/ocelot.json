@@ -1,26 +1,60 @@
 ﻿{
     "Routes": [
         {
-            "DownstreamPathTemplate": "/account/{everything}",
+            "DownstreamPathTemplate": "/api/account/{everything}",
             "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get", "Post", "Put", "Delete"
+            ],
             "DownstreamHostAndPorts": [
                 {
                     "Host": "identity",
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/account/{everything}"
+            "UpstreamPathTemplate": "/api/account/{everything}"
         },
         {
-            "DownstreamPathTemplate": "/sciences/{everything}",
+            "DownstreamPathTemplate": "/api/sciences/{everything}",
             "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get", "Post", "Put", "Delete"
+            ],
             "DownstreamHostAndPorts": [
                 {
                     "Host": "sciences",
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/sciences/{everything}"
+            "UpstreamPathTemplate": "/api/sciences/{everything}"
+        },
+        {
+            "DownstreamPathTemplate": "/api/account",
+            "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get", "Post", "Put", "Delete"
+            ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "identity",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/account"
+        },
+        {
+            "DownstreamPathTemplate": "/api/sciences",
+            "DownstreamScheme": "http",
+            "UpstreamHttpMethod": [
+                "Get", "Post", "Put", "Delete"
+            ],
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "sciences",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/sciences"
         },
         {
             "DownstreamPathTemplate": "/swagger/v1/swagger.json",
@@ -31,7 +65,7 @@
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/swagger/identity/{catchAll}"
+            "UpstreamPathTemplate": "/swagger/identity"
         },
         {
             "DownstreamPathTemplate": "/swagger/v1/swagger.json",
@@ -42,7 +76,7 @@
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/swagger/sciences/{catchAll}"
+            "UpstreamPathTemplate": "/swagger/sciences"
         }
     ],
     "GlobalConfiguration": {}
