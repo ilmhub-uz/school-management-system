@@ -5,7 +5,9 @@ using SchoolManagement.StudentAPI.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenJwt();
+
+builder.Services.AddJwt(builder.Configuration);
 
 builder.Configuration.AddJsonFile("ocelot.json", false, false);
 builder.Services.AddOcelot(builder.Configuration);

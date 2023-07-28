@@ -55,7 +55,7 @@ services:
     depends_on:
       - sciences_db
     networks:
-      - public_network
+      - internal_network
   
   sciences_db:
     image: postgres:latest
@@ -131,4 +131,3 @@ networks:
   internal_network:
     internal: true
   public_network:
-    internal: false
