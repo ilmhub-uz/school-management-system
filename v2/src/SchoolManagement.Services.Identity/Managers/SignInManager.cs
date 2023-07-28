@@ -84,7 +84,9 @@ public class SignInManager : ISignInManager
     {
         var user = await _identityDbContext.Users.FirstOrDefaultAsync(u => u.Username == loginUserModel.Username);
 
-        if (user == null || user.PasswordHash != loginUserModel.Password)
+        var Password = new PasswordHasher<LoginUserModel>().HashPassword(loginUserModel, loginUserModel.Password);
+
+        if (user == null || user.PasswordHash == Password)
         {
             throw new LoginValidationException();
         }
