@@ -1,0 +1,38 @@
+﻿{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "identity",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger/identity"
+        },
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "sciences",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger/sciences"
+        },
+        {
+            "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "students",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/swagger/students"
+        }
+    ],
+    "GlobalConfiguration": {}
+}

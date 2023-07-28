@@ -12,7 +12,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
-      - main
+      - public_network
       - internal_network 
 
   chats:
@@ -55,7 +55,7 @@ services:
     depends_on:
       - sciences_db
     networks:
-      - main
+      - public_network
   
   sciences_db:
     image: postgres:latest
@@ -68,7 +68,7 @@ services:
     volumes:
       - sciences_db_data:/var/lib/postgresql/data/
     networks:
-      - main
+      - public_network
 
   identity_db:
     image: postgres:latest
@@ -93,6 +93,9 @@ services:
       - "8034:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - public_network
+      - internal_network 
 
   students:
     image: students
@@ -117,7 +120,7 @@ services:
      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
    networks:
-     - main
+     - public_network
      - internal_network
 
 volumes:
@@ -127,4 +130,5 @@ volumes:
 networks:
   internal_network:
     internal: true
-  main:
+  public_network:
+    internal: false

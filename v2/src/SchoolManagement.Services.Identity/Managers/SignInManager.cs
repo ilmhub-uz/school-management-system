@@ -83,10 +83,13 @@ public class SignInManager : ISignInManager
     public async ValueTask<TokenResultModel> LoginAsync(LoginUserModel loginUserModel)
     {
         var user = await _identityDbContext.Users.FirstOrDefaultAsync(u => u.Username == loginUserModel.Username);
+        if (user == null)
+        {
+	        throw new LoginValidationException();
+        }
 
-        var Password = new PasswordHasher<LoginUserModel>().HashPassword(loginUserModel, loginUserModel.Password);
-
-        if (user == null || user.PasswordHash == Password)
+		var result = new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, loginUserModel.Password);
+        if (result == PasswordVerificationResult.Success)
         {
             throw new LoginValidationException();
         }
