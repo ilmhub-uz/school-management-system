@@ -19,9 +19,10 @@ public class StudentTaskResultManager : IStudentTaskResultManager
             StudentId = studentId,
             Content = model.Content,
             CreatedAt = DateTime.UtcNow,
-
-
         };
+
+        await _studentTaskTaskRepos.CreateTaskResultAsync(studentTaskResult);
+
         var studentTaskResultModel = studentTaskResult.Adapt<StudentTaskResultModel>();
         return studentTaskResultModel;
     }
@@ -30,10 +31,9 @@ public class StudentTaskResultManager : IStudentTaskResultManager
     {
         var studentTaskResult = await _studentTaskTaskRepos.GetTaskResultByTaskIdAsync(studentId, taskId);
         if (studentTaskResult == null)
-        {
             throw new Exception("Not Found");
-        }
 
+        await _studentTaskTaskRepos.DeleteTaskResultAsync(studentTaskResult);
     }
 
     public async ValueTask<StudentTaskResultModel?> GetStudentTaskResult(Guid studentId, Guid taskId)
@@ -45,7 +45,6 @@ public class StudentTaskResultManager : IStudentTaskResultManager
         }
         var studentTaskResultModel = studentTaskResult.Adapt<StudentTaskResultModel>();
         return studentTaskResultModel;
-
     }
 
     public async ValueTask<IEnumerable<StudentTaskResultModel>> GetStudentTaskResults(Guid studentId)
@@ -58,10 +57,10 @@ public class StudentTaskResultManager : IStudentTaskResultManager
     public async ValueTask UpdateStudentTaskResult(Guid studentId, Guid taskId, UpdateStudentTaskResultModel model)
     {
         var studentTaskResult = await _studentTaskTaskRepos.GetTaskResultByTaskIdAsync(studentId, taskId);
+
         if (studentTaskResult == null)
-        {
             throw new Exception("Not Found");
-        }
+        
         studentTaskResult.Content = model.Content;
         studentTaskResult.UpdatedAt = DateTime.UtcNow;
         await _studentTaskTaskRepos.UpdateTaskResultAsync(studentTaskResult);

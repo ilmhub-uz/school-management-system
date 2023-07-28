@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentTaskResultModels;
 
@@ -35,7 +34,7 @@ public class StudentTaskResultController : ControllerBase
         return Ok(studentTaskResult);
     }
 
-    [HttpPut("{taskId}")]
+    [HttpPut("{taskId:guid}")]
     public async Task<IActionResult> UpdateStudentTaskResult(Guid studentId, Guid taskId, UpdateStudentTaskResultModel model)
     {
         var student = await _studentManager.GetByIdAsync(studentId);
@@ -43,7 +42,7 @@ public class StudentTaskResultController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{taskId}")]
+    [HttpDelete("{taskId:guid}")]
     public async Task<IActionResult> DeleteStudentTaskResultAsync(Guid studentId, Guid taskId)
     {
         var student = await _studentManager.GetByIdAsync(studentId);

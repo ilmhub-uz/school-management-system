@@ -4,7 +4,7 @@ using SchoolManagement.Services.Students.Models.StudentScienceModels;
 
 namespace SchoolManagement.Services.Students.Controllers;
 
-[Route("students/{studentId}/studentsciences")]
+[Route("api/students/{studentId}/sciences")]
 [ApiController]
 public class StudentSciencesController : ControllerBase
 {
@@ -15,14 +15,12 @@ public class StudentSciencesController : ControllerBase
         _studentScienceManager = studentScienceManager;
     }
 
-    [HttpGet("{scienceId}")]
-    public async ValueTask<IActionResult> GetStudentScience(Guid studentId, Guid scienceId)
+    [HttpPost]
+    public async ValueTask<IActionResult> AddStudentScience(Guid studentId, CreateStudentScienceModel createStudentScience)
     {
-        var studentScienceModel = await _studentScienceManager.GetStudentScienceAsync(studentId, scienceId);
-        if (studentScienceModel == null)
-        {
-            return NotFound("Object is not found");
-        }
+        createStudentScience.StudentId = studentId;
+        var studentScienceModel = await _studentScienceManager.CreateStudentScienceAsync(createStudentScience);
+
         return Ok(studentScienceModel);
     }
 
@@ -36,6 +34,18 @@ public class StudentSciencesController : ControllerBase
         return Ok(studentScienceModels);
     }
 
+    [HttpGet("{scienceId}")]
+    public async ValueTask<IActionResult> GetStudentScience(Guid studentId, Guid scienceId)
+    {
+        var studentScienceModel = await _studentScienceManager.GetStudentScienceAsync(studentId, scienceId);
+        if (studentScienceModel == null)
+        {
+            return NotFound("Object is not found");
+        }
+        return Ok(studentScienceModel);
+    }
+
+   
     [HttpPut("{scienceId}")]
     public async ValueTask<IActionResult> UpdateStudentScience(Guid studentId, Guid scienceId, UpdateStudentScienceModel updateStudentScience)
     {
@@ -59,14 +69,5 @@ public class StudentSciencesController : ControllerBase
             return BadRequest("Delete was not completed");
 
         return Ok();
-    }
-
-    [HttpPost]
-    public async ValueTask<IActionResult> AddStudentScience(Guid studentId, CreateStudentScienceModel createStudentScience)
-    {
-        createStudentScience.StudentId = studentId;
-        var studentScienceModel = await _studentScienceManager.CreateStudentScienceAsync(createStudentScience);
-
-        return Ok(studentScienceModel);
     }
 }
