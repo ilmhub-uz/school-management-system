@@ -89,7 +89,7 @@ public class SignInManager : ISignInManager
         }
 
 		var result = new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, loginUserModel.Password);
-        if (result == PasswordVerificationResult.Success)
+        if (result != PasswordVerificationResult.Success)
         {
             throw new LoginValidationException();
         }
