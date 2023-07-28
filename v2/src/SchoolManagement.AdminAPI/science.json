@@ -1,0 +1,47 @@
+{
+  "Routes": [
+
+    {
+      "DownstreamPathTemplate": "/api/sciences/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sciences",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sciences/{everything}"
+    },
+    {
+      "DownstreamPathTemplate": "/api/sciences",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sciences",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sciences",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "admin"
+      }
+    }
+  ]
+
+}
