@@ -4,6 +4,7 @@ using SchoolManagement.Services.Students.Entities;
 using SchoolManagement.Services.Students.Exceptions;
 using SchoolManagement.Services.Students.Helpers.PaginationEntities;
 using SchoolManagement.Services.Students.Models.StudentModels;
+using SchoolManagement.Services.Students.Producers;
 using SchoolManagement.Services.Students.Repositories;
 
 namespace SchoolManagement.Services.Students.Managers;
@@ -13,11 +14,13 @@ public class StudentManager : IStudentManager
     private const string StudentImageFolderName = "StudentImages";
     private readonly IUnitOfWork _unitOfWork;
     private readonly FileManager _fileManager;
+    private readonly IStudentProducer _studentProducer;
 
-    public StudentManager(IUnitOfWork unitOfWork, FileManager fileManager)
+    public StudentManager(IUnitOfWork unitOfWork, FileManager fileManager,IStudentProducer studentProducer)
     {
         _unitOfWork = unitOfWork;
         _fileManager = fileManager;
+        _studentProducer = studentProducer;
     }
 
     public async ValueTask<IEnumerable<StudentModel>> GetStudentsAsync(StudentFilter studentFilter)
@@ -48,6 +51,7 @@ public class StudentManager : IStudentManager
 
         await _unitOfWork.Students.CreateAsync(student);
 
+        await _studentProducer.PublishStudent(student);
         return student.Adapt<StudentModel>();
     }
 

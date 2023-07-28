@@ -50,7 +50,7 @@ public class StudentsController : ControllerBase
         {
             var result = await validator.ValidateAsync(model);
 
-            if (result.IsValid)
+            if (!result.IsValid)
                 return BadRequest(result.Errors);
 
             return Ok(await _studentManager.CreateAsync(model));
