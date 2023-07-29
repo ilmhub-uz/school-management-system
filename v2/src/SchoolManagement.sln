@@ -11,10 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Services.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Services.Chats", "SchoolManagement.Services.Chats\SchoolManagement.Services.Chats.csproj", "{591D4BA6-46BC-4A2B-85FF-F0FEB35FA09C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.AdminAPI", "SchoolManagement.AdminAPI\SchoolManagement.AdminAPI.csproj", "{ACFED8C0-5AE0-4C85-8611-03B942781E42}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.StudentAPI", "SchoolManagement.StudentAPI\SchoolManagement.StudentAPI.csproj", "{B51E3F75-1DB7-48E1-A343-5D528B5D4E15}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C7C7D0C9-C5BF-4527-BC8B-64E30EC0E194}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Core", "SchoolManagement.Core\SchoolManagement.Core.csproj", "{C7AE4365-CA98-4B31-9683-175C5A1C020C}"
@@ -23,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{157C4D
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Science.Api.Tests", "..\..\tests\Science.Api.Tests\Science.Api.Tests.csproj", "{8D8AF3F1-52FC-4383-B717-374E627E2468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,22 +42,10 @@ Global
 		{591D4BA6-46BC-4A2B-85FF-F0FEB35FA09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{591D4BA6-46BC-4A2B-85FF-F0FEB35FA09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{591D4BA6-46BC-4A2B-85FF-F0FEB35FA09C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACFED8C0-5AE0-4C85-8611-03B942781E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACFED8C0-5AE0-4C85-8611-03B942781E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACFED8C0-5AE0-4C85-8611-03B942781E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACFED8C0-5AE0-4C85-8611-03B942781E42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B51E3F75-1DB7-48E1-A343-5D528B5D4E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B51E3F75-1DB7-48E1-A343-5D528B5D4E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B51E3F75-1DB7-48E1-A343-5D528B5D4E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B51E3F75-1DB7-48E1-A343-5D528B5D4E15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7AE4365-CA98-4B31-9683-175C5A1C020C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7AE4365-CA98-4B31-9683-175C5A1C020C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7AE4365-CA98-4B31-9683-175C5A1C020C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7AE4365-CA98-4B31-9683-175C5A1C020C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D8AF3F1-52FC-4383-B717-374E627E2468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D8AF3F1-52FC-4383-B717-374E627E2468}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D8AF3F1-52FC-4383-B717-374E627E2468}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D8AF3F1-52FC-4383-B717-374E627E2468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
