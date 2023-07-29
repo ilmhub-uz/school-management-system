@@ -1,4 +1,4 @@
-﻿namespace SchoolManagement.AdminAPI.Options;
+﻿namespace SchoolManagement.StudentAPI.Options;
 
 public class JwtOption
 {
