@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using SchoolManagement.Services.Students.Managers;
 using SchoolManagement.Services.Students.Models.StudentModels;
+using SchoolManagement.Services.Students.Producers;
 using SchoolManagement.Services.Students.Repositories;
 using SchoolManagement.Services.Students.Validators.StudentModelValidators;
 
@@ -24,5 +25,9 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<IStudentManager, StudentManager>();
         services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
+    }
+    public static void AddProducer(this IServiceCollection services)
+    {
+        services.AddScoped<IStudentProducer,StudentProducer>();
     }
 }
