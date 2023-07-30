@@ -75,7 +75,7 @@ public class SignInManager : ISignInManager
         _identityDbContext.Users.Add(user);
         await _identityDbContext.SaveChangesAsync();
 
-        await _userProducer.PublishUser(user);
+        //await _userProducer.PublishUser(user);
 
         return user.ToModel();
     }
