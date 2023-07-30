@@ -14,10 +14,10 @@ namespace SchoolManagement.Services.Chats.Repositories
         }
 
 
-        public async Task<List<Message>?> GetMessages()
+        public async Task<List<Message>?> GetMessages(int chatId)
         {
-            var messages = await _context.Messages.ToListAsync();
-            if (messages is null || messages.Count==0)
+            var messages = await _context.Messages.Where(m => m.ChatId == chatId).ToListAsync();
+            if (messages is null || messages.Count == 0)
             {
                 return new List<Message>();
             }
