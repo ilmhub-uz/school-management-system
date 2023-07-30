@@ -65,3 +65,5 @@ app.MapControllers();
 app.Run();
 
 app.MigrateIdentityDb();
+
+public partial class Program { }
