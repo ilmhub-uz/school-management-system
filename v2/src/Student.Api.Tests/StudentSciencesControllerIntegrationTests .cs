@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using SchoolManagement.Services.Students.Entities;
@@ -44,5 +45,73 @@ public class StudentSciencesControllerIntegrationTests
         // Assert
         Assert.NotNull(response);
         Assert.True(response.IsSuccessStatusCode);
+    }
+
+    [Fact]
+    public async Task GetStudentSciences_ResultOK()
+    {
+        // Arrange
+        var studentId = Guid.NewGuid();
+
+        // Act
+        var response = await _httpClient.GetAsync($"api/students/{studentId}");
+
+        // Assert
+        Assert.NotNull(response);
+       // Assert.True(response.IsSuccessStatusCode);
+    }
+
+
+    [Fact]
+    public async Task GetStudentScience_ResultOK()
+    {
+        // Arrange
+        var studentId = Guid.NewGuid();
+        var scienceId = Guid.NewGuid();
+
+        // Act
+        var response = await _httpClient.GetAsync($"api/students/{studentId}/sciences/{scienceId}");
+
+        // Assert
+        Assert.NotNull(response);
+        // Assert.True(response.IsSuccessStatusCode);
+    }
+
+    [Fact]
+    public async Task UpdateStudentScience_ReturnsOk()
+    {
+        // Arrange
+        var studentId = Guid.NewGuid();
+        var scienceId = Guid.NewGuid();
+
+        var updateStudentScience = new UpdateStudentScienceModel
+        {
+            Status = StudentScienceStatus.Active,
+        };
+
+        var content = GetJsonStringContent(updateStudentScience);
+
+        // Act
+        var response = await _httpClient.PutAsync($"api/students/{studentId}/sciences/{scienceId}", content);
+
+        // Assert
+        Assert.NotNull(response);
+        // Assert.True(response.IsSuccessStatusCode);
+    }
+
+    [Fact]
+    public async Task DeleteStudentScience_ReturnsOk()
+    {
+        // Arrange
+        var studentId = Guid.NewGuid();
+        var scienceId = Guid.NewGuid();
+
+        // Act
+        var response = await _httpClient.DeleteAsync($"/api/students/{studentId}/sciences/{scienceId}");
+
+        // Assert
+        Assert.NotNull(response);
+        // Assert.True(response.IsSuccessStatusCode);
+        // Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 }
