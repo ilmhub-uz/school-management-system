@@ -90,6 +90,25 @@ public class AccountControllerTests
         //Assert
         Assert.True(response.IsSuccessStatusCode);
     }
+
+    [Fact]
+    public async Task GetUser_ReturnsSuccessStatusAndUserModel()
+    {
+        //Arrange
+        var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImI2N2NiNzA3LWE5NDEtNDg4Yi1iMmE1LTg0Y2VmMmY1YTJhZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJUZXN0IiwiZXhwIjoxNjkwODIwMTcyLCJpc3MiOiJJZGVudGl0eS5BcGkiLCJhdWQiOiJJZGVudGl0eS5TZXJ2aWNlcyJ9.LqWbCAIytcspR0M1woE7orj1tRs94JEhWWjXw9nTmmw";
+
+        //Act
+        var request = new HttpRequestMessage(HttpMethod.Get, "api/Account");
+        request.Headers.Add("Authorization", $"Bearer {token}");
+
+        var response = await _httpClient.SendAsync(request);
+
+        //Assert
+        Assert.True(response.IsSuccessStatusCode);
+        var userModel = response.Content.ReadFromJsonAsync<UserModel>();
+
+        Assert.NotNull(userModel);
+    }
 }
 
 public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
@@ -104,11 +123,9 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
             var mockSignInManager = new Mock<ISignInManager>();
 
-            mockSignInManager.Setup(s => s.RegisterAsync(It.IsAny<CreateUserModel>()))
-                .ReturnsAsync(new UserModel(Guid.NewGuid(), "test", DateTime.UtcNow, null, UserStatus.Active, new List<string>()));
-            
-            mockSignInManager.Setup(s => s.LoginAsync(It.IsNotNull<LoginUserModel>()))
-                .ReturnsAsync(new TokenResultModel("token", 1200, DateTime.UtcNow));
+            mockSignInManager.Setup(s => s.RegisterAsync(It.IsAny<CreateUserModel>())).ReturnsAsync(new UserModel(Guid.NewGuid(), "test", DateTime.UtcNow, null, UserStatus.Active, new List<string>()));
+            mockSignInManager.Setup(s => s.LoginAsync(It.IsNotNull<LoginUserModel>())).ReturnsAsync(new TokenResultModel("token", 1200, DateTime.UtcNow));
+            mockSignInManager.Setup(s => s.GetUserAsync()).ReturnsAsync(new UserModel(Guid.NewGuid(), "Test", DateTime.UtcNow, null, UserStatus.Active, new List<string>()));
 
             services.AddScoped(s => mockSignInManager.Object);
         });
