@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Managers;
 using SchoolManagement.Services.Identity.Models;

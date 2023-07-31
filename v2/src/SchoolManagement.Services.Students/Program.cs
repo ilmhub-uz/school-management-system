@@ -1,5 +1,6 @@
 using MassTransit;
 using SchoolManagement.Core.HelperServices;
+using SchoolManagement.Services.Students.Consumers;
 using SchoolManagement.Services.Students.Extensions;
 using SchoolManagement.Services.Students.Helpers.PaginationEntities;
 
@@ -12,6 +13,7 @@ builder.Services.AddMassTransit(c =>
 {
     c.UsingRabbitMq((context, cfg) =>
     {
+        c.AddConsumer<UserConsumer>();
         cfg.ConfigureEndpoints(context);
     });
 });

@@ -1,4 +1,4 @@
-﻿namespace SchoolManagement.Services.Identity.Entities;
+﻿namespace SchoolManagement.Core.Models;
 
 public enum UserStatus
 {

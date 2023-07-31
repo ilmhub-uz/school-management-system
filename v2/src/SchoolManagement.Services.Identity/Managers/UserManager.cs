@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Services.Identity.Context;
+using SchoolManagement.Services.Identity.Entities;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Helpers;
 using SchoolManagement.Services.Identity.Models;

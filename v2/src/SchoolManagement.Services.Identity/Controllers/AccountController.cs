@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Services.Identity.Exceptions;
 using SchoolManagement.Services.Identity.Managers;
 using SchoolManagement.Services.Identity.Models;
@@ -12,11 +14,12 @@ namespace SchoolManagement.Services.Identity.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly ISignInManager _signInManager;
-
+    private readonly IBus _bus;
     public AccountController(
-        ISignInManager signInManager)
+        ISignInManager signInManager, IBus bus)
     {
         _signInManager = signInManager;
+        _bus = bus;
     }
 
     [HttpGet]
@@ -50,6 +53,9 @@ public class AccountController : ControllerBase
         try
         {
             var user = await _signInManager.RegisterAsync(createUserModel);
+
+            await _bus.Publish(user);
+
             return Ok(user);
         }
         catch (Exception e) when (e is RecordNotFoundException or UsernameExistsException)

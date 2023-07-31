@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Services.Identity.Models;
+﻿using SchoolManagement.Core.Models;
+using SchoolManagement.Services.Identity.Models;
 
 namespace SchoolManagement.Services.Identity.Managers;
 
