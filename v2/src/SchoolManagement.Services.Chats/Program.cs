@@ -1,3 +1,5 @@
+using System.Reflection;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Services.Chats.Context;
 using SchoolManagement.Services.Chats.Hubs;
@@ -13,7 +15,19 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ChatsDbContext>(options =>
 {
     options.UseSnakeCaseNamingConvention()
-        .UseNpgsql(builder.Configuration.GetConnectionString("ChatsDb"));
+        .UseInMemoryDatabase("ChatsDb");
+    //.UseNpgsql(builder.Configuration.GetConnectionString("ChatsDb"));
+});
+
+builder.Services.AddMassTransit(c =>
+{
+    var entryAssembly = Assembly.GetEntryAssembly();
+    c.AddConsumers(entryAssembly);
+
+    c.UsingRabbitMq((context, config) =>
+    {
+        config.ConfigureEndpoints(context);
+    });
 });
 
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
