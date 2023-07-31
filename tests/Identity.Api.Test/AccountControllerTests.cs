@@ -122,9 +122,11 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
                 services.Remove(signInManager);
 
             var mockSignInManager = new Mock<ISignInManager>();
+
             mockSignInManager.Setup(s => s.RegisterAsync(It.IsAny<CreateUserModel>())).ReturnsAsync(new UserModel(Guid.NewGuid(), "test", DateTime.UtcNow, null, UserStatus.Active, new List<string>()));
             mockSignInManager.Setup(s => s.LoginAsync(It.IsNotNull<LoginUserModel>())).ReturnsAsync(new TokenResultModel("token", 1200, DateTime.UtcNow));
             mockSignInManager.Setup(s => s.GetUserAsync()).ReturnsAsync(new UserModel(Guid.NewGuid(), "Test", DateTime.UtcNow, null, UserStatus.Active, new List<string>()));
+
             services.AddScoped(s => mockSignInManager.Object);
         });
 
