@@ -38,4 +38,5 @@
     <ProjectReference Include="..\SchoolManagement.Services.Identity\SchoolManagement.Services.Identity.csproj" />
   </ItemGroup>
 
+
 </Project>

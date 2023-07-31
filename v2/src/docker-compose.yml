@@ -15,6 +15,20 @@ services:
       - public_network
       - internal_network 
 
+  student-api:
+    image: student-api
+    container_name: student-api
+    build:
+      context: .
+      dockerfile: Dockerfile.StudentApi
+    ports:
+      - "8034:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - public_network
+      - internal_network 
+
   chats:
     image: chats
     container_name: chats
@@ -41,21 +55,34 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
   
-  sciences:
-    image: sciences
-    container_name: sciences
-    environment:
-      - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
-      - ASPNETCORE_ENVIRONMENT=Development
+  #sciences:
+  #  image: sciences
+  #  container_name: sciences
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #  #  - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
+  #  build:  
+  #    context: .
+  #    dockerfile: Dockerfile.Sciences
+  #  ports:
+  #    - "8033:80"
+  #  depends_on:
+  #    - sciences_db
+  #  networks:
+  #    - internal_network
+
+  students:
+    image: students
+    container_name: students
     build:
       context: .
-      dockerfile: Dockerfile.Sciences
+      dockerfile: Dockerfile.Students
     ports:
-      - "8033:80"
-    depends_on:
-      - sciences_db
+      - "8035:80"
     networks:
       - internal_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
   
   sciences_db:
     image: postgres:latest
@@ -82,33 +109,6 @@ services:
       - identity_db_data:/var/lib/postgresql/data/
     networks:
       - internal_network
-
-  student-api:
-    image: student-api
-    container_name: student-api
-    build:
-      context: .
-      dockerfile: Dockerfile.StudentApi
-    ports:
-      - "8034:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    networks:
-      - public_network
-      - internal_network 
-
-  students:
-    image: students
-    container_name: students
-    build:
-      context: .
-      dockerfile: Dockerfile.Students
-    ports:
-      - "8035:80"
-    networks:
-      - internal_network
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
 
   rabbitmq:
    image: rabbitmq:3-management

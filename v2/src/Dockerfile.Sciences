@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["SchoolManagement.Services.Sciences/SchoolManagement.Services.Sciences.csproj", "SchoolManagement.Services.Sciences/"]
+COPY ["SchoolManagement.Core/SchoolManagement.Core.csproj", "SchoolManagement.Core/"]
+COPY ["SchoolManagement.Services.Identity/SchoolManagement.Services.Identity.csproj", "SchoolManagement.Services.Identity/"]
 RUN dotnet restore "SchoolManagement.Services.Sciences/SchoolManagement.Services.Sciences.csproj"
 COPY . .
 WORKDIR "/src/SchoolManagement.Services.Sciences"
