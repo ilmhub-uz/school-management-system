@@ -10,11 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<SciencesDbContext>(options =>
 {
     options.UseSnakeCaseNamingConvention()
-        .UseInMemoryDatabase("sciences_db");
-    //.UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
+       // .UseInMemoryDatabase("sciences_db");
+    .UseNpgsql(builder.Configuration.GetConnectionString("SciencesDb"));
 });
 
 builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(Program).Assembly));

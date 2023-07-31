@@ -18,6 +18,7 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<IStudentRepository, StudentRepository>();
         services.AddScoped<IStudentTaskResultRepository, StudentTaskResultRepository>();
+        services.AddScoped<IStudentScienceRepository, StudentScienceRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
@@ -25,6 +26,7 @@ public static partial class ServiceCollectionExtensions
     {
         services.AddScoped<IStudentManager, StudentManager>();
         services.AddScoped<IStudentTaskResultManager, StudentTaskResultManager>();
+        services.AddScoped<IStudentScienceManager, StudentScienceManager>();
     }
     public static void AddProducer(this IServiceCollection services)
     {
