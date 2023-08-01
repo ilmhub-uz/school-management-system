@@ -10,7 +10,7 @@ public class Message : Entity<ulong>, IAuditable
     public ulong? ParentMessageId { get; set; }
     public virtual Message? ParentMessage { get; set; }
     public virtual ICollection<Message>? Replies { get; set; }
-    public int ChatId { get; set; }
+    public ulong ChatId { get; set; }
     public virtual Chat? Chat { get; set; }
     public Guid UserId { get; set; }
     public virtual User? User { get; set; }

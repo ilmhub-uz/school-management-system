@@ -9,5 +9,5 @@ public class Chat : Entity<ulong>
     public string? Name { get; set; }
     public ChatType ChatType { get; set; }
     public virtual ICollection<Message>? Messages { get; set; }
-    public virtual ICollection<User>? Users { get; set; }
+    public virtual ICollection<UserChat>? UserChats { get; set; }
 }

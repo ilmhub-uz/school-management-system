@@ -10,5 +10,5 @@ public class User : Entity
     public required string UserName { get; set; }
     public string? PhotoUrl { get; set; }
     public virtual ICollection<Message>? Messages { get; set; }
-    public virtual ICollection<Chat>? Chats { get; set; }
+    public virtual ICollection<UserChat>? UserChats { get; set; }
 }
