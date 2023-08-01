@@ -1,5 +1,7 @@
-﻿using SchoolManagement.Services.Students.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Services.Students.Context;
 using SchoolManagement.Services.Students.Entities;
+using System.Runtime.CompilerServices;
 
 namespace SchoolManagement.Services.Students.Repositories;
 
@@ -11,32 +13,27 @@ public class StudentAttendanceRepository : IStudentAttendanceRepository
     {
         _studentsDbContext = studentsDbContext;
     }
-
-    public async Task<List<StudentAttendance>> GetAttendances(string username)
+    public async Task<List<StudentAttendance>> GetAttendances(Guid studentId)
     {
-        var student = GetStudentByUsername(username);
-        return student.Attendances.ToList();
+       var students = await _studentsDbContext.StudentAttendances.Where(s => s.StudentId == studentId).ToListAsync();
+       return students;
     }
 
-    public async Task AddStudentAttendance(string username, StudentAttendance studentAttendance)
+    public async Task AddStudentAttendance(StudentAttendance studentAttendance)
     {
-        var student = GetStudentByUsername(username);
         _studentsDbContext.StudentAttendances.Add(studentAttendance);
         await _studentsDbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateStudentAttendance(string username, StudentAttendance studentAttendance)
+    public async Task UpdateStudentAttendance(StudentAttendance studentAttendance)
     {
-        var student = GetStudentByUsername(username);
         _studentsDbContext.StudentAttendances.Update(studentAttendance);
         await _studentsDbContext.SaveChangesAsync();
     }
 
-    private Student? GetStudentByUsername(string username)
+    public async Task<StudentAttendance> GetAttendance(Guid studentId, Guid topicId)
     {
-        var student = _studentsDbContext.Students.FirstOrDefault(u => u.Username == username);
-        if (student == null)
-            throw new Exception("Student Not Found");
-        return student;
+        return await _studentsDbContext.StudentAttendances.Where(s => s.StudentId == studentId && s.TopicId == topicId).FirstOrDefaultAsync();
+
     }
 }
