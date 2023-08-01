@@ -27,7 +27,7 @@ public class ChatManager : IChatManager
 
         return chat.Adapt<ChatModel>();
     }
-    public async Task<ChatModel> CreatePersonalChat()
+    public async Task<ChatModel> CreatePersonalChat(Guid currentUserId, Guid secondUserId)
     {
         var chat = new Chat()
         {
@@ -35,6 +35,21 @@ public class ChatManager : IChatManager
         };
         await _chatRepository.AddChat(chat);
 
+        chat.UserChats = new List<UserChat>()
+        {
+            new UserChat()
+            {
+                ChatId = chat.Id,
+                UserId = currentUserId,
+            },
+            new UserChat()
+            {
+                ChatId = chat.Id,
+                UserId = secondUserId,
+            }
+        };
+        await _chatRepository.UpdateChat(chat);
+        
         return chat.Adapt<ChatModel>();
     }
 

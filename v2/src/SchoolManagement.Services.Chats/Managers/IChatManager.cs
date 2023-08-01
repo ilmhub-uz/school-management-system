@@ -6,7 +6,7 @@ public interface IChatManager
 {
     Task<List<ChatModel>> GetAllChats();
     Task<ChatModel> CreateAnotherChat(CreateChatModel model);
-    Task<ChatModel> CreatePersonalChat();
+    Task<ChatModel> CreatePersonalChat(Guid currentUserId, Guid secondUserId);
     Task<ChatModel?> GetPersonalChatByUserId(Guid userId);
     Task<ChatModel> GetById(ulong chatId);
     Task<ChatModel?> GetByIdentifier(string chatIdentifier);
