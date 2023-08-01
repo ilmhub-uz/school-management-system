@@ -2,15 +2,18 @@
 using SchoolManagement.Services.Chats.Entities;
 using SchoolManagement.Services.Chats.Models;
 using SchoolManagement.Services.Chats.Repositories;
+using System.Security.Claims;
 
 namespace SchoolManagement.Services.Chats.Managers;
 
 public class ChatManager : IChatManager
 {
     private readonly IChatRepository _chatRepository;
-    public ChatManager(IChatRepository chatRepository)
+    private readonly IHttpContextAccessor _contextAccessor;
+    public ChatManager(IChatRepository chatRepository, IHttpContextAccessor contextAccessor)
     {
         _chatRepository = chatRepository;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<ChatModel> CreateAnotherChat(CreateChatModel model)
@@ -99,7 +102,8 @@ public class ChatManager : IChatManager
 
     public async Task<ChatModel?> GetPersonalChatByUserId(Guid secondUserId)
     {
-        //claim dan olib berish kerak
+        var userId = Guid.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
         var chat = await _chatRepository.GetPersonalChatByUserIds(Guid.NewGuid(), secondUserId);
         if (chat == null)
             chat = new Chat();

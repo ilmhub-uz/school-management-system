@@ -4,6 +4,7 @@ using SchoolManagement.Services.Chats.Entities;
 using SchoolManagement.Services.Chats.Hubs;
 using SchoolManagement.Services.Chats.Models;
 using SchoolManagement.Services.Chats.Repositories;
+using System.Security.Claims;
 
 namespace SchoolManagement.Services.Chats.Managers;
 
@@ -12,23 +13,26 @@ public class MessageManager : IMessageManager
     private readonly IMessageRepository _messageRepository;
     private readonly IChatManager _chatManager;
     private readonly IHubContext<ChatHub> _hubContext;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public MessageManager(IMessageRepository messageRepository, IChatManager chatManager, IHubContext<ChatHub> hubContext)
+    public MessageManager(IMessageRepository messageRepository, IChatManager chatManager, IHubContext<ChatHub> hubContext, IHttpContextAccessor contextAccessor)
     {
         _messageRepository = messageRepository;
         _chatManager = chatManager;
         _hubContext = hubContext;
+        _contextAccessor = contextAccessor;
     }
 
     public async ValueTask CreatePersonalMessage(CreateMessageModel createMessage)
     {
+        var userId = Guid.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
         var message = new Message() 
         {
             Content = createMessage.Content,
             CreatedAt = DateTime.UtcNow,
             ParentMessageId = createMessage.ParentMessageId,
-            //Claimdan olish kerak
-            UserId = Guid.NewGuid(),
+            UserId = userId,
         };
 
         var chat = await _chatManager.GetPersonalChatByUserId(createMessage.ToUserId!.Value);
@@ -43,13 +47,14 @@ public class MessageManager : IMessageManager
 
     public async ValueTask CreateAnotherMessage(CreateMessageModel createMessage)
     {
+        var userId = Guid.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
         var message = new Message()
         {
             Content = createMessage.Content,
             CreatedAt = DateTime.UtcNow,
             ParentMessageId = createMessage.ParentMessageId,
-            //Claimdan olish kerak
-            UserId = Guid.NewGuid(),
+            UserId = userId,
         }; 
 
         var chatModel = await _chatManager.GetByIdentifier(createMessage.ChatIdentifier);
@@ -81,7 +86,9 @@ public class MessageManager : IMessageManager
     public async ValueTask<List<MessageModel>?> GetMessages(int chatId)
     {
         var messages = await _messageRepository.GetMessages(chatId);
-        
+        if (messages == null)
+            messages = new List<Message>();
+
         return messages.Adapt<List<MessageModel>>();
     }
 
