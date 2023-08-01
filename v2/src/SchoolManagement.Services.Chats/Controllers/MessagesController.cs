@@ -29,8 +29,16 @@ public class MessagesController : ControllerBase
     {
         try
         {
-            await _messageManager.CreateMessage(createMessage);
-            return Ok();
+            if (createMessage.ToUserId != null)
+            {
+                await _messageManager.CreatePersonalMessage(createMessage);
+                return Ok();
+            }
+            else
+            {
+                await _messageManager.CreateAnotherMessage(createMessage);
+                return Ok();
+            }
         }
         catch (Exception ex)
         {

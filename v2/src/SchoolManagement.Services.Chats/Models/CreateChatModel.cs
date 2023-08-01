@@ -8,6 +8,5 @@ namespace SchoolManagement.Services.Chats.Models
         public string? Identifier { get; set; }
         public string? Name { get; set; }
         public ChatType ChatType { get; set; }
-        
     }
 }

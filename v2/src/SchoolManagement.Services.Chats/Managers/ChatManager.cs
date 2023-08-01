@@ -13,7 +13,7 @@ public class ChatManager : IChatManager
         _chatRepository = chatRepository;
     }
 
-    public async Task<ChatModel> AddChat(CreateChatModel model)
+    public async Task<ChatModel> CreateAnotherChat(CreateChatModel model)
     {
         var chat = new Chat()
         {
@@ -21,8 +21,20 @@ public class ChatManager : IChatManager
             Identifier = model.Identifier,
             Name = model.Name,
             Messages = new List<Message>(),
-            Users = new List<User>(),
         };
+
+        await _chatRepository.AddChat(chat);
+
+        return chat.Adapt<ChatModel>();
+    }
+    public async Task<ChatModel> CreatePersonalChat()
+    {
+        var chat = new Chat()
+        {
+            ChatType = ChatType.Personal,
+        };
+        await _chatRepository.AddChat(chat);
+
         return chat.Adapt<ChatModel>();
     }
 
@@ -56,8 +68,27 @@ public class ChatManager : IChatManager
         var chat = await _chatRepository.GetChatById(chatId);
         if (chat == null)
         {
-            throw new Exception("Chat not found");
+            throw new Exception("Chat is not found");
         }
+        return chat.Adapt<ChatModel>();
+    }
+
+    public async Task<ChatModel?> GetByIdentifier(string chatIdentifier)
+    {
+        var chat = await _chatRepository.GetChatByIdentifier(chatIdentifier);
+        if (chat == null)
+            chat = new Chat();
+
+        return chat.Adapt<ChatModel>();
+    }
+
+    public async Task<ChatModel?> GetPersonalChatByUserId(Guid secondUserId)
+    {
+        //claim dan olib berish kerak
+        var chat = await _chatRepository.GetPersonalChatByUserIds(Guid.NewGuid(), secondUserId);
+        if (chat == null)
+            chat = new Chat();
+
         return chat.Adapt<ChatModel>();
     }
 
@@ -66,7 +97,7 @@ public class ChatManager : IChatManager
         var chat = await _chatRepository.GetChatById(chatId);
         if (chat == null)
         {
-            throw new Exception("Chat not found");
+            throw new Exception("Chat is not found");
         }
         await _chatRepository.UpdateChat(chat);
     }

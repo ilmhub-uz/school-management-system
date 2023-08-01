@@ -25,6 +25,11 @@ public class ChatRepository : IChatRepository
         var chat = await _context.Chats.FirstOrDefaultAsync(u => u.Id == chatId);
         return chat;
     }
+    public async Task<Chat?> GetChatByIdentifier(string chatIdentifier)
+    {
+        var chat = await _context.Chats.FirstOrDefaultAsync(u => u.Identifier == chatIdentifier);
+        return chat;
+    }
 
     public async Task AddChat(Chat chat)
     {
@@ -41,5 +46,15 @@ public class ChatRepository : IChatRepository
     {
         _context.Chats.Update(chat);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<Chat?> GetPersonalChatByUserIds(Guid userId, Guid secondUserId)
+    {
+        var chat = await _context.Chats
+            .Include(c => c.UserChats)
+            .Where(c => c.ChatType == ChatType.Personal)
+            .FirstOrDefaultAsync(c => c.UserChats.Any(u => u.UserId == userId && u.UserId == secondUserId));
+
+        return chat;
     }
 }

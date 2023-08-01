@@ -7,6 +7,8 @@ namespace SchoolManagement.Services.Chats.Repositories
     {
         Task<List<Chat>?> GetChats();
         Task<Chat?> GetChatById(ulong chatId);
+        Task<Chat?> GetChatByIdentifier(string chatIdentifier);
+        Task<Chat?> GetPersonalChatByUserIds(Guid userId, Guid secondUserId);
         Task AddChat(Chat chat);
         Task DeleteChat(Chat chat);
         Task UpdateChat(Chat chat);
