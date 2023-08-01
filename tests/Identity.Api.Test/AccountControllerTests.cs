@@ -8,6 +8,7 @@ using SchoolManagement.Services.Identity.Entities;
 using SchoolManagement.Services.Identity.Managers;
 using SchoolManagement.Services.Identity.Models;
 using System.Net.Http.Json;
+using SchoolManagement.Core.Models;
 
 namespace Identity.Api.Test;
 

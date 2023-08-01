@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Services.Identity.Context;
 using SchoolManagement.Services.Identity.Entities;
 using SchoolManagement.Services.Identity.Exceptions;
