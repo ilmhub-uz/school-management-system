@@ -18,23 +18,6 @@
       "UpstreamPathTemplate": "/api/account/{everything}"
     },
     {
-      "DownstreamPathTemplate": "/api/sciences/{everything}",
-      "DownstreamScheme": "http",
-      "UpstreamHttpMethod": [
-        "Get",
-        "Post",
-        "Put",
-        "Delete"
-      ],
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "sciences",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/api/sciences/{everything}"
-    },
-    {
       "DownstreamPathTemplate": "/api/account",
       "DownstreamScheme": "http",
       "UpstreamHttpMethod": [
@@ -50,6 +33,27 @@
         }
       ],
       "UpstreamPathTemplate": "/api/account"
+    },
+    {
+      "DownstreamPathTemplate": "/api/sciences/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sciences",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sciences/{everything}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/sciences",
@@ -76,23 +80,6 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/students",
-      "DownstreamScheme": "http",
-      "UpstreamHttpMethod": [
-        "Get",
-        "Post",
-        "Put",
-        "Delete"
-      ],
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "students",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/api/students"
-    },
-    {
       "DownstreamPathTemplate": "/api/students/{everthing}",
       "DownstreamScheme": "http",
       "UpstreamHttpMethod": [
@@ -117,38 +104,26 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamPathTemplate": "/api/students",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "identity",
-          "Port": 80
-        }
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
       ],
-      "UpstreamPathTemplate": "/swagger/identity"
-    },
-    {
-      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "sciences",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/swagger/sciences"
-    },
-    {
-      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
-      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "students",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/students"
+      "UpstreamPathTemplate": "/api/students",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ],
-    "GlobalConfiguration": {}
+  "GlobalConfiguration": {}
 }

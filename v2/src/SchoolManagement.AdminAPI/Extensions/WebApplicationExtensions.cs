@@ -10,9 +10,7 @@ public static class WebApplicationExtensions
         {
             //c.SwaggerEndpoint("/swag/student", "Student api swagger");
 
-            var endPoints = configuration.GetSection(
-                    SwaggerEndPoint.ConfigurationSectionName
-                )
+            var endPoints = configuration.GetSection(SwaggerEndPoint.ConfigurationSectionName)
                 .Get<IEnumerable<SwaggerEndPoint>>();
 
             if (endPoints is null)

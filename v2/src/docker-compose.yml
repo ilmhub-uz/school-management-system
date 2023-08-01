@@ -37,6 +37,8 @@ services:
       dockerfile: Dockerfile.Chats
     ports:
       - "8031:80"
+    networks:
+      - internal_network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 

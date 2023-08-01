@@ -8,9 +8,7 @@ public static class WebApplicationExtensions
     {
         webApplication.UseSwaggerUI(c =>
         {
-            var endPoints = configuration.GetSection(
-                    SwaggerEndPoint.ConfigurationSectionName
-                )
+            var endPoints = configuration.GetSection(SwaggerEndPoint.ConfigurationSectionName)
                 .Get<IEnumerable<SwaggerEndPoint>>();
 
             if (endPoints is null)
