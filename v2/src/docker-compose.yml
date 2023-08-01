@@ -22,25 +22,12 @@ services:
       context: .
       dockerfile: Dockerfile.StudentApi
     ports:
-      - "8034:80"
+      - "8031:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - public_network
       - internal_network 
-
-  chats:
-    image: chats
-    container_name: chats
-    build:
-      context: .
-      dockerfile: Dockerfile.Chats
-    ports:
-      - "8031:80"
-    networks:
-      - internal_network
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
 
   identity:
     image: identity
@@ -57,21 +44,21 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
   
-  #sciences:
-  #  image: sciences
-  #  container_name: sciences
-  #  environment:
-  #    - ASPNETCORE_ENVIRONMENT=Development
-  #  #  - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
-  #  build:  
-  #    context: .
-  #    dockerfile: Dockerfile.Sciences
-  #  ports:
-  #    - "8033:80"
-  #  depends_on:
-  #    - sciences_db
-  #  networks:
-  #    - internal_network
+  sciences:
+    image: sciences
+    container_name: sciences
+    build:
+      context: .
+      dockerfile: Dockerfile.Sciences
+    ports:
+      - "8033:80"
+    depends_on:
+      - sciences_db
+    networks:
+      - internal_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SciencesDb=Server=sciences_db;Port=5432;Database=sciences_db;User Id=postgres;Password=postgres;
 
   students:
     image: students
@@ -80,24 +67,25 @@ services:
       context: .
       dockerfile: Dockerfile.Students
     ports:
-      - "8035:80"
+      - "8034:80"
     networks:
       - internal_network
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
   
-  sciences_db:
-    image: postgres:latest
-    container_name: sciences_db
-    environment:
-      - POSTGRES_PASSWORD=postgres
+  chats:
+    image: chats
+    container_name: chats
+    build:
+      context: .
+      dockerfile: Dockerfile.Chats
     ports:
-      - "5432:5432"
-    restart: always
-    volumes:
-      - sciences_db_data:/var/lib/postgresql/data/
+      - "8035:80"
     networks:
+      - internal_network
       - public_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
 
   identity_db:
     image: postgres:latest
@@ -105,29 +93,70 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     restart: always
     volumes:
       - identity_db_data:/var/lib/postgresql/data/
     networks:
-      - internal_network
+      - public_network
+
+  sciences_db:
+    image: postgres:latest
+    container_name: sciences_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - sciences_db_data:/var/lib/postgresql/data/
+    networks:
+      - public_network
+
+  student_db:
+    image: postgres:latest
+    container_name: student_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5434:5432"
+    restart: always
+    volumes:
+      - student_db_data:/var/lib/postgresql/data/
+    networks:
+      - public_network
+
+  chat_db:
+    image: postgres:latest
+    container_name: chat_db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5435:5432"
+    restart: always
+    volumes:
+      - chat_db_data:/var/lib/postgresql/data/
+    networks:
+      - public_network
 
   rabbitmq:
-   image: rabbitmq:3-management
-   container_name: 'rabbitmq'
-   ports:
-     - 5672:5672
-     - 15672:15672
-   volumes:
-     - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-     - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-   networks:
-     - public_network
-     - internal_network
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - public_network
+        - internal_network
 
 volumes:
   sciences_db_data:
   identity_db_data:
+  student_db_data:
+  chat_db_data:
 
 networks:
   internal_network:
