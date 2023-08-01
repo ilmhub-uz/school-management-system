@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SchoolManagement.AdminAPI.Options;
 
 namespace SchoolManagement.AdminAPI.Extensions;
 

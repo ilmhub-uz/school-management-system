@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGenJwt();
 builder.Services.AddJwt(builder.Configuration);
 
 builder.Configuration.AddJsonFile("ocelot.json", false, false);
+builder.Configuration.AddJsonFile("swagger_configuration.json", false, false);
 builder.Services.AddOcelot(builder.Configuration);
 
 var configuration = builder.Configuration;
@@ -25,7 +26,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 await app.UseOcelot();
