@@ -4,15 +4,11 @@ namespace SchoolManagement.Services.Students.Repositories;
 
 public interface IStudentAttendanceRepository
 {
-    Task<List<Entities.StudentAttendance>> GetAttendances(string username);
+    Task<List<StudentAttendance>> GetAttendances(Guid studentId);
 
-    Task AddStudentAttendance(string username, StudentAttendance studentAttendance);
+    Task AddStudentAttendance( StudentAttendance studentAttendance);
 
-    Task UpdateStudentAttendance(string username, StudentAttendance studentAttendance);
+    Task UpdateStudentAttendance(StudentAttendance studentAttendance);
+    Task<StudentAttendance> GetAttendance(Guid studentId, Guid topicId);
 }
 
-/*
-    GET	 students/{username}/attendances
-    POST students/{username}/attendances
-    PUT	 students/{username}/attendances
- */
