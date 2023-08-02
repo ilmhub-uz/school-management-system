@@ -35,7 +35,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
-    <ProjectReference Include="..\SchoolManagement.Services.Identity\SchoolManagement.Services.Identity.csproj" />
   </ItemGroup>
 
 

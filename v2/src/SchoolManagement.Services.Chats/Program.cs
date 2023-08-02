@@ -36,6 +36,8 @@ builder.Services.AddScoped<IChatManager, ChatManager>();
 builder.Services.AddScoped<IChatRepository, ChatRepository>();
 builder.Services.AddSignalR();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

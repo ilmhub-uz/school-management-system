@@ -5,7 +5,7 @@ namespace Science.Api.Tests
         [Fact]
         public void Test1()
         {
-
+	        //var client = Refit.RestService.For<ISiencesClient>(client:http);
         }
     }
 }

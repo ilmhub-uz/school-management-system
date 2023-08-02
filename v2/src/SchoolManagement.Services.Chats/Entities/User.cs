@@ -11,4 +11,13 @@ public class User : Entity
     public string? PhotoUrl { get; set; }
     public virtual ICollection<Message>? Messages { get; set; }
     public virtual ICollection<UserChat>? UserChats { get; set; }
+
+    public User Copy() => new User()
+    {
+	    Id = Id,
+	    FirstName = FirstName,
+	    LastName = LastName,
+	    MiddleName = MiddleName,
+        UserName = UserName
+    };
 }
