@@ -4,7 +4,7 @@ namespace SchoolManagement.Services.Chats.Managers;
 
 public interface IMessageManager
 {
-    public ValueTask<List<MessageModel>?> GetMessages(int chatId);
+    public ValueTask<List<MessageModel>?> GetMessages(ulong chatId);
     public ValueTask CreatePersonalMessage(CreateMessageModel createMessage);
     public ValueTask CreateAnotherMessage(CreateMessageModel createMessage);
     public ValueTask UpdateMessage(UpdateMessageModel updateMessage, ulong messageId);

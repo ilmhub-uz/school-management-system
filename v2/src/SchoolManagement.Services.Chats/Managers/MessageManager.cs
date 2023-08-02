@@ -83,7 +83,7 @@ public class MessageManager : IMessageManager
         await _messageRepository.DeleteMessage(message);
     }
 
-    public async ValueTask<List<MessageModel>?> GetMessages(int chatId)
+    public async ValueTask<List<MessageModel>?> GetMessages(ulong chatId)
     {
         var messages = await _messageRepository.GetMessages(chatId);
         if (messages == null)

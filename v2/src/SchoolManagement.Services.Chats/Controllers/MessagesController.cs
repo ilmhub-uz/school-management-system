@@ -17,7 +17,7 @@ public class MessagesController : ControllerBase
     }
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetMessages(int chatId)
+    public async ValueTask<IActionResult> GetMessages(ulong chatId)
     {
         var messages = await _messageManager.GetMessages(chatId);
         
