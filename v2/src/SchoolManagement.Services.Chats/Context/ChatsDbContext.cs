@@ -18,8 +18,8 @@ public class ChatsDbContext : DbContext
     {
         modelBuilder.Entity<Chat>(entity =>
         {
-            entity.HasMany(e => e.Users)
-                .WithMany(e => e.Chats);
+            entity.HasMany(e => e.UserChats)
+                .WithOne(e => e.Chat);
         });
     }
 }

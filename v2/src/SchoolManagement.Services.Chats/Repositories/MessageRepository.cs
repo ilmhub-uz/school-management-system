@@ -13,15 +13,9 @@ namespace SchoolManagement.Services.Chats.Repositories
             _context = context;
         }
 
-
-        public async Task<List<Message>?> GetMessages(int chatId)
+        public async Task<List<Message>?> GetMessages(ulong chatId)
         {
-            var messages = await _context.Messages.Where(m => m.ChatId == chatId).ToListAsync();
-            if (messages is null || messages.Count == 0)
-            {
-                return new List<Message>();
-            }
-            return messages;
+            return await _context.Messages.Where(m => m.ChatId == chatId).ToListAsync();
         }
 
         public async Task<Message?> GetMessageById(ulong messageId)

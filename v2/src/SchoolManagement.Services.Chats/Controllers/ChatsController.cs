@@ -26,7 +26,7 @@ namespace SchoolManagement.Services.Chats.Controllers
         {
             try
             {
-                var chat = await _chatManager.AddChat(model);
+                var chat = await _chatManager.CreateAnotherChat(model);
                 return Ok(chat);
             }
             catch (Exception ex)
