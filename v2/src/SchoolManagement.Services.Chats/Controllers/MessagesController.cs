@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Chats.Managers;
 using SchoolManagement.Services.Chats.Models;
 
 namespace SchoolManagement.Services.Chats.Controllers;
 
-[Route("chats/{chatId}/[controller]")]
+[Route("api/chats/{chatId}/[controller]")]
 [ApiController]
 public class MessagesController : ControllerBase
 {

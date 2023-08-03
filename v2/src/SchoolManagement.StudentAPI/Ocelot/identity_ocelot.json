@@ -1,0 +1,94 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/account/{everthing}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "account",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account/{everthing}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name] > value[1] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/account",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "account",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{everthing}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/users/{everthing}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name] > value[1] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/users",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ] 
+}
