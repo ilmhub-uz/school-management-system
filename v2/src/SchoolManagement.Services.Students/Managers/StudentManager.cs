@@ -35,26 +35,7 @@ public class StudentManager : IStudentManager
         return student is null ? throw new StudentNotFoundException() : student.Adapt<StudentModel>();
     }
 
-    public async ValueTask<StudentModel> CreateAsync(CreateStudentModel model)
-    {
-        var student = new Student()
-        {
-            FirstName = model.FirstName,
-            LastName = model.LastName,
-            MiddleName = model.MiddleName,
-            PhoneNumber = model.PhoneNumber,
-            Username = model.Username
-        };
-
-        if (model.Photo is not null)
-            student.PhotoUrl = await _fileManager.SaveFileAsync(StudentImageFolderName, model.Photo);
-
-        await _unitOfWork.Students.CreateAsync(student);
-
-        await _studentProducer.PublishStudent(student);
-        return student.Adapt<StudentModel>();
-    }
-
+   
     public async ValueTask UpdateAsync(Guid studentId, UpdateStudentModel model)
     {
         var student = await _unitOfWork.Students.GetByIdAsync(studentId);
@@ -77,6 +58,7 @@ public class StudentManager : IStudentManager
         student.Username = model.Username ?? student.Username;
 
         await _unitOfWork.Students.UpdateAsync(student);
+        await _studentProducer.PublishStudent(student);
     }
 
     public async ValueTask DeleteAsync(Guid studentId)

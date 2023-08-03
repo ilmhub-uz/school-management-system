@@ -42,24 +42,7 @@ public class StudentsController : ControllerBase
         }
     }
 
-    [HttpPost]
-    public async ValueTask<IActionResult> CreateStudent([FromServices] IValidator<CreateStudentModel> validator, 
-        [FromForm] CreateStudentModel model)
-    {
-        try
-        {
-            var result = await validator.ValidateAsync(model);
-
-            if (!result.IsValid)
-                return BadRequest(result.Errors);
-
-            return Ok(await _studentManager.CreateAsync(model));
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
-    }
+    
 
     [HttpPut("{studentId:guid}")]
     public async ValueTask<IActionResult> UpdateStudent(Guid studentId, [FromForm] UpdateStudentModel model)
