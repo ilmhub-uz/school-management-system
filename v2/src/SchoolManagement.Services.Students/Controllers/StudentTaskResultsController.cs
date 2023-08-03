@@ -4,7 +4,7 @@ using SchoolManagement.Services.Students.Models.StudentTaskResultModels;
 
 namespace SchoolManagement.Services.Students.Controllers;
 
-[Route("api/students/{studentId}/task_results")]
+[Route("api/students/{studentId}/task-results")]
 [ApiController]
 public class StudentTaskResultController : ControllerBase
 {

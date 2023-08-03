@@ -1,0 +1,94 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/sciences/{everthing}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sciences",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sciences/{everthing}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name] > value[1] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/sciences",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "sciences",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sciences",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/tasks/{everthing}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tasks",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tasks/{everthing}",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "Username": "Claims[http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name] > value[1] > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/tasks",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "tasks",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tasks",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ] 
+}
