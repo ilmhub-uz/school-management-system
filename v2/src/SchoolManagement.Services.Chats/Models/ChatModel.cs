@@ -9,6 +9,6 @@ namespace SchoolManagement.Services.Chats.Models
         public string? Name { get; set; }
         public ChatType ChatType { get; set; }
         public virtual ICollection<MessageModel>? Messages { get; set; }
-        public virtual ICollection<UserChat>? UserChats { get; set; }
+        public virtual ICollection<Guid>? UsersId { get; set; }
     }
 }

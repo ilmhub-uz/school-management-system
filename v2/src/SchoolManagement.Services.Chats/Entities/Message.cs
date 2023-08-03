@@ -13,5 +13,4 @@ public class Message : Entity<ulong>, IAuditable
     public ulong ChatId { get; set; }
     public virtual Chat? Chat { get; set; }
     public Guid UserId { get; set; }
-    public virtual User? User { get; set; }
 }
