@@ -11,7 +11,7 @@ public static partial class ServiceCollectionExtensions
 {
     public static void AddValidators(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<CreateStudentModel>, CreateStudentModelValidation>();
+       
     }
 
     public static void AddRepositories(this IServiceCollection services)
