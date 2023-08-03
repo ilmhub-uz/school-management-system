@@ -9,15 +9,10 @@ public class ChatsDbContext : DbContext
     { }
 
     public DbSet<Chat> Chats => Set<Chat>();
-    public DbSet<User> Users => Set<User>();
     public DbSet<Message> Messages => Set<Message>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Chat>(entity =>
-        {
-            entity.HasMany(e => e.UserChats)
-                .WithOne(e => e.Chat);
-        });
+
     }
 }

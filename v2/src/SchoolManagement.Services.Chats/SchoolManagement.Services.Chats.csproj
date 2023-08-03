@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Consumers\**" />
+    <Content Remove="Consumers\**" />
+    <EmbeddedResource Remove="Consumers\**" />
+    <None Remove="Consumers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -36,10 +43,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Consumers\" />
   </ItemGroup>
 
 </Project>

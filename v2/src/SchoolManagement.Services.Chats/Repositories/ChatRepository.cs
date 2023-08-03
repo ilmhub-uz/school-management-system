@@ -51,9 +51,8 @@ public class ChatRepository : IChatRepository
     public async Task<Chat?> GetPersonalChatByUserIds(Guid userId, Guid secondUserId)
     {
         var chat = await _context.Chats
-            .Include(c => c.UserChats)
             .Where(c => c.ChatType == ChatType.Personal)
-            .FirstOrDefaultAsync(c => c.UserChats.Any(u => u.UserId == userId && u.UserId == secondUserId));
+            .FirstOrDefaultAsync(c => c.UsersId.Contains(userId) && c.UsersId.Contains(secondUserId));
 
         return chat;
     }

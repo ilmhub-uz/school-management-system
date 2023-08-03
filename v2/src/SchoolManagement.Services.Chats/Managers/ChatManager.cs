@@ -38,18 +38,10 @@ public class ChatManager : IChatManager
         };
         await _chatRepository.AddChat(chat);
 
-        chat.UserChats = new List<UserChat>()
+        chat.UsersId = new List<Guid>()
         {
-            new UserChat()
-            {
-                ChatId = chat.Id,
-                UserId = currentUserId,
-            },
-            new UserChat()
-            {
-                ChatId = chat.Id,
-                UserId = secondUserId,
-            }
+            currentUserId,
+            secondUserId,
         };
         await _chatRepository.UpdateChat(chat);
         
