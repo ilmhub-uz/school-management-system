@@ -42,7 +42,7 @@ public class MessageManager : IMessageManager
         message.ChatId = chat.Id;
 
         await _messageRepository.AddMessage(message);
-        await _hubContext.Clients.Users(chat.UserChats.Select(u => u.UserId).ToString()).SendAsync("NewMessage", message.Adapt<MessageModel>());
+        await _hubContext.Clients.Users(chat.UsersId.Select(u => u.ToString())).SendAsync("NewMessage", message.Adapt<MessageModel>());
     }
 
     public async ValueTask CreateAnotherMessage(CreateMessageModel createMessage)
