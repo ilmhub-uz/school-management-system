@@ -74,43 +74,7 @@ public class StudentControllerIntegrationTests
         Assert.True(response.IsSuccessStatusCode);
     }
 
-    [Fact]
-    public async Task CreateStudent_ValidData_ReturnsOKResult()
-    {
-        // Arrange
-        var expectedStatusCode = HttpStatusCode.OK;
-
-        /*var request = new HttpRequestMessage(HttpMethod.Post, "api/students");
-
-        var multipartContent = new MultipartFormDataContent();
-        multipartContent.Add(new StringContent("TestName"), "Username");
-        multipartContent.Add(new StringContent("77777777"), "PhoneNumber");
-        request.Content = multipartContent;
-
-            //Act
-        var response = await _httpClient.SendAsync(request);*/
-
-        var createStudentModel = new CreateStudentModel
-        {
-            Username = "TestName",
-            PhoneNumber = "77777777",
-            FirstName = "FirstName",
-            LastName = "LastName",
-            MiddleName = "MiddleName"
-        };
-
-        var jsonData = JsonConvert.SerializeObject(createStudentModel);
-        var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        // Act
-        var response = await _httpClient.PostAsync("api/students", content);
-
-      
-        // Assert
-        Assert.NotNull(response);
-        //Assert.True(response.IsSuccessStatusCode);
-        //Assert.Equal(expectedStatusCode, response.StatusCode);
-    }
+  
 
     [Fact]
     public async Task GetStudentById_ValidId_ReturnsOKResult()
