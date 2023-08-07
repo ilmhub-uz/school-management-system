@@ -1,9 +1,12 @@
-﻿namespace SchoolManagement.Services.Identity.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SchoolManagement.Services.Identity.Models;
 
 public class CreateUserModel
 {
     public required string Username { get; set; }
     public required string Password { get; set; }
+    [Compare("Password")]
     public required string ConfirmPassword { get; set; }
     public IEnumerable<Guid>? Roles { get; set; }
 }
