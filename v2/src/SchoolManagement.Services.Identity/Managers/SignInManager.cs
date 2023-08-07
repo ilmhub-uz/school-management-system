@@ -50,7 +50,6 @@ public class SignInManager : ISignInManager
         var user = new User()
         {
             Username = createUserModel.Username,
-            PasswordHash = createUserModel.Password,
             CreatedAt = DateTime.UtcNow,
             Roles = new List<UserRole>()
         };
