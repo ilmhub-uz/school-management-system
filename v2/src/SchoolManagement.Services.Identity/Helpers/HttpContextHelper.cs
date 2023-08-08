@@ -13,12 +13,12 @@ public static class HttpContextHelper
 
     public static void AddResponseHeader(string key, string value)
     {
-        if (Current == null || Current.Response.Headers.Keys.Contains(key))
-        {
+        if (Current == null  )
             return;
-        }
+        
+        if(Current.Response.Headers.Keys.Contains(key))
+              Current.Response.Headers.Remove(key);
 
-        Current.Response.Headers.Remove(key);
         Current.Response.Headers.Add("Access-Control-Expose-Headers", key);
         Current.Response.Headers.Add(key, value);
     }
