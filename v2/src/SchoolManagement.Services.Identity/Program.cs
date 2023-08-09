@@ -49,6 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.MigrateIdentityDb();
 
 app.UseHttpsRedirection();
 
@@ -63,7 +64,5 @@ app.UseErrorHandlerMiddleware();
 app.MapControllers();
 
 app.Run();
-
-app.MigrateIdentityDb();
 
 public partial class Program { }
