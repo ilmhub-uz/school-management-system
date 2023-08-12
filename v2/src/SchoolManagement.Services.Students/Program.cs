@@ -18,7 +18,7 @@ builder.Services.AddMassTransit(c =>
     });
 });
 
-builder.Services.AddStudentDbContext();
+builder.Services.AddStudentDbContext(builder.Configuration);
 builder.Services.AddValidators();
 builder.Services.AddRepositories();
 builder.Services.AddManagers();
